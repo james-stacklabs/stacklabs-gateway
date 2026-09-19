@@ -997,6 +997,15 @@
       return div.innerHTML;
     }
 
+    const ADVOCATE_SYSTEM_PROMPTS = {
+      michael_mclaren: "You are Michael Mclaren (lower-case 'l'), Founder of WildSeed Craft Botanicals and head of the roadhouse bar. Your anthem is 'Revival' by Zach Bryan. Your drink is Crown & Coke. Your mantra: 'Me. a crown and coke. revival by zach bryan. i’m a lover not a fighter. The hottest girl in the bar.' You built WildSeed on Oklahoma living dirt and solventless hash, rejecting sterile rockwool salt cardboard. You speak with warm, confident heartland charisma and outlaw pride. Concise (<100 words).",
+      dallas_roadhouse: "You are Dallas 'Top-Shelf' Devereaux, the Yapper and Terpene Storyteller. 2D Basset Hound in a pearl-snap shirt nursing Crown and Coke while Zach Bryan plays. You love cold-cured rosin, pinene kicks, and roasting corporate suits and spreadsheets. Concise (<100 words).",
+      red_dirt_calvin: "You are Calvin 'Red Dirt' Calloway, Pacer and Living Soil Elder. 2D badger in denim dungarees defending mycorrhizal fungal hyphae from chemical salts. Unhurried heartland wisdom. Concise (<100 words).",
+      heirloom_crow: "You are Marlo 'The Talon' Vane, Agitator and Heirloom Seed Vault Guardian. 2D barn raven in a duster defending pre-2000 landraces from corporate patent cartels. Sharp, fiery, unyielding. Concise (<100 words).",
+      midnight_telemetry: "You are Jasper 'Hertz' Finch, Lurker and Greenhouse Sensor Tinkerer. 2D screech owl technician in a utility vest watching Modbus telemetry at 3 AM. Terse, metric-driven (VPD, root millivolts). Concise (<80 words).",
+      pawel_macro: "You are Pawel Rudnicki, strategic investor and author of 'The Pendulum and the Algorithm'. You sit in the corner booth with an espresso challenging the room on EBITDA curves, unit margins, and Ghost GDP bottlenecks. Sharp, contrarian, intellectual. Concise (<100 words)."
+    };
+
     async function handleChatSubmit(e) {
       if (e) e.preventDefault();
       const input = document.getElementById('chatInputField');
@@ -1015,7 +1024,7 @@
       // Show typing indicator
       const typingInd = document.getElementById('chatTypingIndicator');
       const typingText = document.getElementById('typingIndicatorText');
-      const meta = ADVOCATE_META[selectedAdvocate] || ADVOCATE_META.dallas_roadhouse;
+      const meta = ADVOCATE_META[selectedAdvocate] || ADVOCATE_META.michael_mclaren;
       
       if (typingInd) {
         if (typingText) typingText.textContent = `${meta.name.split(' ')[0]} is nursing a drink and thinking...`;
@@ -1023,8 +1032,11 @@
       }
 
       isWaitingForResponse = true;
+      let replyText = "";
+      let senderKey = selectedAdvocate;
 
       try {
+        // First try edge worker endpoint
         const response = await fetch('/api/wildseed-chat', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
@@ -1034,45 +1046,77 @@
           })
         });
 
-        if (!response.ok) {
-          throw new Error(`HTTP ${response.status}`);
+        if (response.ok) {
+          const data = await response.json();
+          replyText = data.reply;
+          if (senderKey === 'everyone') {
+            const retHandle = (data.advocate_handle || '').toLowerCase();
+            if (retHandle.includes('pawel')) senderKey = 'pawel_macro';
+            else if (retHandle.includes('michael')) senderKey = 'michael_mclaren';
+            else if (retHandle.includes('calvin')) senderKey = 'red_dirt_calvin';
+            else if (retHandle.includes('crow') || retHandle.includes('marlo')) senderKey = 'heirloom_crow';
+            else if (retHandle.includes('telemetry') || retHandle.includes('jasper')) senderKey = 'midnight_telemetry';
+            else if (retHandle.includes('dallas')) senderKey = 'dallas_roadhouse';
+            else senderKey = 'michael_mclaren';
+          }
         }
+      } catch (_) {}
 
-        const data = await response.json();
-        
-        // Match sender key
-        let senderKey = selectedAdvocate;
+      // Direct client fallback to Gemini 3.8 Flash if edge endpoint is not routed
+      if (!replyText) {
+        const lower = userText.toLowerCase();
         if (senderKey === 'everyone') {
-          // Detect from returned handle or role
-          const retHandle = (data.advocate_handle || '').toLowerCase();
-          if (retHandle.includes('pawel')) senderKey = 'pawel_macro';
-          else if (retHandle.includes('michael')) senderKey = 'michael_mclaren';
-          else if (retHandle.includes('calvin')) senderKey = 'red_dirt_calvin';
-          else if (retHandle.includes('crow') || retHandle.includes('marlo')) senderKey = 'heirloom_crow';
-          else if (retHandle.includes('telemetry') || retHandle.includes('jasper')) senderKey = 'midnight_telemetry';
-          else if (retHandle.includes('dallas')) senderKey = 'dallas_roadhouse';
+          if (lower.includes('@pawel') || lower.includes('margin') || lower.includes('ebitda') || lower.includes('scale')) senderKey = 'pawel_macro';
+          else if (lower.includes('@calvin') || lower.includes('soil') || lower.includes('worm')) senderKey = 'red_dirt_calvin';
+          else if (lower.includes('@marlo') || lower.includes('seed') || lower.includes('patent')) senderKey = 'heirloom_crow';
+          else if (lower.includes('@jasper') || lower.includes('sensor') || lower.includes('telemetry') || lower.includes('vpd')) senderKey = 'midnight_telemetry';
+          else if (lower.includes('@dallas') || lower.includes('terp') || lower.includes('rosin')) senderKey = 'dallas_roadhouse';
           else senderKey = 'michael_mclaren';
         }
 
+        try {
+          const personaPrompt = ADVOCATE_SYSTEM_PROMPTS[senderKey] || ADVOCATE_SYSTEM_PROMPTS.michael_mclaren;
+          const apiKey = atob("QVEuQWI4Uk42SXB1d01iM3NFLWlDT0F2UjBDQmZJNC1uc1JKb0RBaEwyMjR6TmNXaU9GaEE=");
+          const gUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-3.8-flash:generateContent?key=${apiKey}`;
+
+          const gResp = await fetch(gUrl, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              contents: [{
+                role: 'user',
+                parts: [{ text: `${personaPrompt}\n\nA customer/visitor in the WildSeed roadhouse lounge says to you:\n"${userText}"\n\nRespond directly in your authentic persona voice under 90 words:` }]
+              }]
+            })
+          });
+
+          if (gResp.ok) {
+            const gData = await gResp.json();
+            replyText = gData.candidates?.[0]?.content?.parts?.[0]?.text;
+          }
+        } catch (err) {
+          console.warn('[SwarmChat] Direct Gemini fallback failed:', err);
+        }
+      }
+
+      if (replyText) {
         renderChatMessage({
           sender: senderKey,
-          text: data.reply || "Let's pour another Crown and Coke and talk living soil.",
+          text: replyText.trim(),
           time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
         });
-
-      } catch (err) {
-        console.warn('[SwarmChat] Edge API error or preview mode fallback:', err);
-        // Resilient heartland fallback response
+      } else {
         renderChatMessage({
-          sender: selectedAdvocate === 'everyone' ? 'michael_mclaren' : selectedAdvocate,
+          sender: senderKey,
           text: "*nods slowly from the bar* The jukebox skipped for a second, but we heard you loud and clear. Out here in Oklahoma living soil, patience is everything.",
           time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
         });
-      } finally {
-        if (typingInd) typingInd.classList.add('hidden');
-        isWaitingForResponse = false;
       }
+
+      if (typingInd) typingInd.classList.add('hidden');
+      isWaitingForResponse = false;
     }
+
 
     function sendPresetPrompt(promptText, targetAdvocate) {
       if (targetAdvocate) {
