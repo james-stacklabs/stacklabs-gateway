@@ -114,6 +114,7 @@
         <a href="#menu" class="hover:text-wsAccent transition-colors">Living Soil Menu</a>
         <a href="#advocates" class="hover:text-wsAccent transition-colors">The Swarm</a>
         <a href="#telemetry" class="hover:text-wsAccent transition-colors">Canopy Telemetry</a>
+        <a href="#field-notes" class="hover:text-wsAccent transition-colors">Field Notes</a>
         <a href="#manifesto" class="hover:text-wsAccent transition-colors">Outlaw Manifesto</a>
       </nav>
 
@@ -375,6 +376,8 @@
               <button onclick="openSwarmDrawer('midnight_telemetry')" class="w-full py-2 px-3 rounded-lg bg-wsSurface hover:bg-[#2F231D] border border-sky-400/30 hover:border-sky-400 text-[11px] font-mono text-sky-400 hover:text-white flex items-center justify-center gap-1.5 transition-all cursor-pointer">
                 <span>💬 Query Telemetry with Jasper</span>
               </button>
+            </div>
+          </div>
           <!-- Advocate 5: 420 Linda (Real-Life Human Advocate) -->
           <div class="bg-charred rounded-2xl p-5 flex flex-col justify-between space-y-4 border border-emerald-500/40 hover:border-emerald-400 transition-all duration-300 relative overflow-hidden group">
             <div class="absolute top-0 right-0 bg-emerald-500/20 text-emerald-400 text-[9px] font-mono font-bold px-2 py-0.5 rounded-bl-lg border-b border-l border-emerald-500/30">
@@ -586,6 +589,138 @@
       </div>
     </section>
 
+    <!-- ================================================================= -->
+    <!-- 4. FOUNDER'S FIELD NOTES: THE LIVING SOIL CHRONICLES              -->
+    <!-- ================================================================= -->
+    <section id="field-notes" class="px-4 lg:px-12 py-20 bg-[#140E0B] border-t border-wsBorder relative">
+      <div class="max-w-7xl mx-auto space-y-12 text-left">
+        
+        <!-- Section Header & Author Lockup -->
+        <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-8 pb-8 border-b border-white/10">
+          <div class="flex items-center gap-5">
+            <div class="relative shrink-0">
+              <img src="michael_mclaren_anchor.jpg" alt="Michael Mclaren" class="w-20 h-20 sm:w-24 sm:h-24 rounded-2xl object-cover border-2 border-wsAccent shadow-xl ring-2 ring-wsAccent/20">
+              <span class="absolute -bottom-2 -right-2 bg-wsAccent text-black text-[9px] font-mono font-bold px-2 py-0.5 rounded-md uppercase tracking-wider shadow">
+                FOUNDER
+              </span>
+            </div>
+            <div class="space-y-1.5">
+              <div class="flex flex-wrap items-center gap-2.5">
+                <span class="font-mono text-xs uppercase tracking-widest text-wsAccent font-bold">FOUNDER & MASTER CRAFTSMAN</span>
+                <span class="text-white/20">•</span>
+                <span class="font-mono text-[10px] text-emerald-400 uppercase tracking-wider bg-emerald-500/10 border border-emerald-500/30 px-2 py-0.5 rounded-full">
+                  100% OKLAHOMA NO-TILL
+                </span>
+              </div>
+              <h2 class="font-serif text-3xl sm:text-4xl lg:text-5xl text-wsText font-bold tracking-tight">
+                Founder's Field Notes
+              </h2>
+              <p class="font-mono text-xs sm:text-sm text-wsAccent/90 italic max-w-2xl">
+                "Lover, not a fighter. In the corner booth talking living soil with the prettiest girl in the room."
+              </p>
+            </div>
+          </div>
+
+          <div class="flex items-center gap-3 shrink-0">
+            <button onclick="openSwarmChatWithAdvocate('michael_mclaren', 'Living Soil Philosophy')" class="rust-glow-btn text-white text-xs font-mono uppercase tracking-wider font-bold py-3 px-5 rounded-xl flex items-center gap-2 cursor-pointer">
+              <span>💬 Talk Soil With Michael</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Section Lead Statement -->
+        <div class="max-w-4xl space-y-3">
+          <p class="text-base sm:text-lg text-wsMuted font-light leading-relaxed">
+            The modern cannabis supply chain is addicted to synthetic salt flushes, inert rockwool cubes, and Wall Street margin spreadsheets. Here are the unvarnished principles of true Oklahoma living soil biology, cold-cure rosin physics, and biological equity written directly from our grow beds.
+          </p>
+        </div>
+
+        <!-- 3 Editorial Essay Cards Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
+          
+          <!-- Essay Card 1: The Salt Debt -->
+          <article class="bg-charred rounded-2xl p-6 lg:p-7 border border-wsAccent/20 flex flex-col justify-between hover:border-wsAccent/60 hover:shadow-2xl transition-all duration-300 group">
+            <div class="space-y-4">
+              <div class="flex items-center justify-between text-[11px] font-mono text-wsMuted">
+                <span class="text-amber-400 font-bold uppercase tracking-wider">ESSAY 01 // METABOLISM</span>
+                <span>6 MIN READ</span>
+              </div>
+              <h3 class="font-serif text-2xl lg:text-[26px] text-wsText group-hover:text-wsAccent transition-colors leading-snug">
+                The Salt Debt: Why Synthetic Rockwool is a Credit Card for Plants
+              </h3>
+              <p class="text-sm text-wsMuted line-clamp-4 leading-relaxed font-light">
+                Explains why force-feeding plants with chemical salts creates artificial osmotic pressure, strips monoterpenes during the required heavy flush, and yields tasteless cardboard ash. Living soil is permanent equity, not chemical debt.
+              </p>
+            </div>
+            
+            <div class="pt-6 mt-6 border-t border-white/5 flex items-center justify-between gap-3">
+              <button onclick="readEssay('salt-debt')" class="text-xs font-mono font-bold text-wsAccent hover:text-white uppercase tracking-wider flex items-center gap-1.5 transition-colors cursor-pointer">
+                <span>Read Essay</span>
+                <span class="text-sm">→</span>
+              </button>
+              <button onclick="openSwarmChatWithAdvocate('michael_mclaren', 'The Salt Debt: Why Synthetic Rockwool is a Credit Card for Plants')" class="text-[11px] font-mono bg-wsSurface hover:bg-wsSurfaceHover border border-white/10 hover:border-wsAccent/50 text-wsMuted hover:text-white py-1.5 px-3 rounded-lg transition-all flex items-center gap-1.5 cursor-pointer">
+                <span>💬 Discuss with Michael</span>
+              </button>
+            </div>
+          </article>
+
+          <!-- Essay Card 2: The Red Dirt Rhizosphere -->
+          <article class="bg-charred rounded-2xl p-6 lg:p-7 border border-wsAccent/20 flex flex-col justify-between hover:border-wsAccent/60 hover:shadow-2xl transition-all duration-300 group">
+            <div class="space-y-4">
+              <div class="flex items-center justify-between text-[11px] font-mono text-wsMuted">
+                <span class="text-emerald-400 font-bold uppercase tracking-wider">ESSAY 02 // BIOLOGY</span>
+                <span>8 MIN READ</span>
+              </div>
+              <h3 class="font-serif text-2xl lg:text-[26px] text-wsText group-hover:text-wsAccent transition-colors leading-snug">
+                The Red Dirt Rhizosphere: 100 Million Microbes in Every Thumbprint
+              </h3>
+              <p class="text-sm text-wsMuted line-clamp-4 leading-relaxed font-light">
+                Walking Oklahoma no-till soil beds with a Crown & Coke, inspecting mycorrhizal fungal networks, worm castings, and cover crops. Plants don't eat salts; they feed the biology, and the biology feeds the plant.
+              </p>
+            </div>
+            
+            <div class="pt-6 mt-6 border-t border-white/5 flex items-center justify-between gap-3">
+              <button onclick="readEssay('red-dirt-rhizosphere')" class="text-xs font-mono font-bold text-wsAccent hover:text-white uppercase tracking-wider flex items-center gap-1.5 transition-colors cursor-pointer">
+                <span>Read Essay</span>
+                <span class="text-sm">→</span>
+              </button>
+              <button onclick="openSwarmChatWithAdvocate('michael_mclaren', 'The Red Dirt Rhizosphere: 100 Million Microbes in Every Thumbprint')" class="text-[11px] font-mono bg-wsSurface hover:bg-wsSurfaceHover border border-white/10 hover:border-wsAccent/50 text-wsMuted hover:text-white py-1.5 px-3 rounded-lg transition-all flex items-center gap-1.5 cursor-pointer">
+                <span>💬 Discuss with Michael</span>
+              </button>
+            </div>
+          </article>
+
+          <!-- Essay Card 3: Cold-Cure Rosin Doesn't Lie -->
+          <article class="bg-charred rounded-2xl p-6 lg:p-7 border border-wsAccent/20 flex flex-col justify-between hover:border-wsAccent/60 hover:shadow-2xl transition-all duration-300 group">
+            <div class="space-y-4">
+              <div class="flex items-center justify-between text-[11px] font-mono text-wsMuted">
+                <span class="text-amber-400 font-bold uppercase tracking-wider">ESSAY 03 // SOLVENTLESS</span>
+                <span>7 MIN READ</span>
+              </div>
+              <h3 class="font-serif text-2xl lg:text-[26px] text-wsText group-hover:text-wsAccent transition-colors leading-snug">
+                Cold-Cure Rosin Doesn't Lie: What Solventless Pressure Reveals
+              </h3>
+              <p class="text-sm text-wsMuted line-clamp-4 leading-relaxed font-light">
+                The unfiltered physics of ice-water hash pressed at 160°F through 73-micron mesh. Cheating with chemical fungicides or synthetic feeds shows up immediately on the press. Real living resin coats the glass like aged bourbon.
+              </p>
+            </div>
+            
+            <div class="pt-6 mt-6 border-t border-white/5 flex items-center justify-between gap-3">
+              <button onclick="readEssay('cold-cure-rosin')" class="text-xs font-mono font-bold text-wsAccent hover:text-white uppercase tracking-wider flex items-center gap-1.5 transition-colors cursor-pointer">
+                <span>Read Essay</span>
+                <span class="text-sm">→</span>
+              </button>
+              <button onclick="openSwarmChatWithAdvocate('michael_mclaren', 'Cold-Cure Rosin Doesn\'t Lie: What Solventless Pressure Reveals')" class="text-[11px] font-mono bg-wsSurface hover:bg-wsSurfaceHover border border-white/10 hover:border-wsAccent/50 text-wsMuted hover:text-white py-1.5 px-3 rounded-lg transition-all flex items-center gap-1.5 cursor-pointer">
+                <span>💬 Discuss with Michael</span>
+              </button>
+            </div>
+          </article>
+
+        </div>
+
+      </div>
+    </section>
+
     <!-- Outlaw Manifesto Section -->
     <section id="manifesto" class="px-4 lg:px-12 py-20 max-w-5xl mx-auto text-left space-y-8">
       <div class="bg-charred rounded-3xl p-8 lg:p-12 border border-wsAccent/20 space-y-6 relative overflow-hidden">
@@ -623,6 +758,7 @@
         <a href="#menu" class="hover:text-wsAccent transition-colors">Menu</a>
         <a href="#advocates" class="hover:text-wsAccent transition-colors">Swarm</a>
         <a href="#telemetry" class="hover:text-wsAccent transition-colors">Telemetry</a>
+        <a href="#field-notes" class="hover:text-wsAccent transition-colors">Field Notes</a>
         <a href="wildseed_lookbook.pdf" target="_blank" class="text-wsAccent hover:underline font-bold">Lookbook (PDF)</a>
         <span class="text-wsPrimary">21+ ONLY • STATE COMPLIANT</span>
       </div>
@@ -645,19 +781,17 @@
     <span class="text-xs text-wsMuted group-hover:text-wsAccent group-hover:translate-x-0.5 transition-all">▶</span>
   </button>
 
-  <!-- Floating Bottom Action Pill (Mobile: Non-intrusive thumb trigger) -->
-  <button id="swarmNavToggleMobile" onclick="toggleSwarmDrawer(true)" class="flex sm:hidden fixed bottom-5 left-1/2 -translate-x-1/2 z-40 bg-[#1A120E]/95 backdrop-blur-md hover:bg-[#251A14] border border-wsAccent/60 text-wsAccent px-4 py-2.5 rounded-full shadow-2xl items-center gap-2.5 transition-all duration-200 cursor-pointer active:scale-95" title="Open Roadhouse Swarm Lounge">
-    <div class="flex -space-x-1.5 overflow-hidden">
-      <img src="dallas_roadhouse_avatar.jpg" alt="Dallas" class="inline-block h-5 w-5 rounded-full ring-1 ring-[#1A120E] object-cover">
-      <img src="red_dirt_calvin_avatar.jpg" alt="Calvin" class="inline-block h-5 w-5 rounded-full ring-1 ring-[#1A120E] object-cover">
-      <img src="heirloom_marlo_avatar.jpg" alt="Marlo" class="inline-block h-5 w-5 rounded-full ring-1 ring-[#1A120E] object-cover">
-      <img src="jasper_hertz_avatar.jpg" alt="Jasper" class="inline-block h-5 w-5 rounded-full ring-1 ring-[#1A120E] object-cover">
-      <img src="420_linda.png" alt="Linda" class="inline-block h-5 w-5 rounded-full ring-1 ring-[#1A120E] object-cover">
-    </div>
-    <span class="inline-block w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
-    <span class="text-[11px] font-mono font-bold tracking-wider uppercase text-wsText">Chat with Swarm</span>
-    <span class="text-xs text-wsAccent font-bold">💬</span>
-  </button>
+  <!-- Mobile Bottom Navigation Bar (sm:hidden) -->
+  <nav class="flex sm:hidden fixed bottom-3 left-1/2 -translate-x-1/2 z-40 bg-[#140F0C]/95 backdrop-blur-md border border-wsAccent/50 rounded-full py-2 px-4 shadow-2xl items-center gap-3.5 text-[11px] font-mono uppercase tracking-wider text-wsMuted max-w-[95vw]">
+    <a href="#menu" class="hover:text-wsAccent transition-colors">Menu</a>
+    <a href="#field-notes" class="hover:text-wsAccent text-wsAccent font-bold transition-colors">Field Notes</a>
+    <button id="swarmNavToggleMobile" onclick="toggleSwarmDrawer(true)" class="bg-[#241710] hover:bg-wsSurfaceHover border border-wsAccent/60 text-wsAccent px-3 py-1 rounded-full flex items-center gap-1.5 font-bold transition-colors cursor-pointer shadow">
+      <span class="inline-block w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+      <span class="text-[10px]">Swarm</span>
+      <span class="text-xs">💬</span>
+    </button>
+    <a href="#telemetry" class="hover:text-wsAccent transition-colors">Telemetry</a>
+  </nav>
 
   <!-- Left Collapsible Swarm Lounge Drawer Backdrop -->
   <div id="swarmBackdrop" onclick="toggleSwarmDrawer(false)" class="fixed inset-0 bg-black/70 backdrop-blur-sm z-50 opacity-0 pointer-events-none transition-opacity duration-300"></div>
@@ -848,6 +982,45 @@
     </div>
 
   </aside>
+
+  <!-- ================================================================= -->
+  <!-- 5. ESSAY READER MODAL (DM Serif Display & Work Sans)               -->
+  <!-- ================================================================= -->
+  <!-- Essay Reader Modal Backdrop -->
+  <div id="essayModalBackdrop" onclick="closeEssayModal()" class="fixed inset-0 bg-black/85 backdrop-blur-md z-50 opacity-0 pointer-events-none transition-opacity duration-300"></div>
+
+  <!-- Essay Reader Modal Dialog -->
+  <div id="essayModal" class="fixed inset-3 sm:inset-6 md:inset-y-8 md:inset-x-auto md:left-1/2 md:-translate-x-1/2 md:w-[820px] lg:w-[880px] bg-[#150F0C] border border-wsAccent/40 rounded-2xl shadow-2xl z-50 flex flex-col transform scale-95 opacity-0 pointer-events-none transition-all duration-300 overflow-hidden text-left">
+    
+    <!-- Modal Top Header -->
+    <div class="px-5 py-4 sm:px-6 sm:py-4 bg-[#1C1410] border-b border-white/10 flex items-center justify-between shrink-0">
+      <div class="flex items-center gap-3">
+        <img src="michael_mclaren_anchor.jpg" alt="Michael Mclaren" class="w-10 h-10 rounded-full object-cover border border-wsAccent shadow-sm">
+        <div>
+          <span class="font-serif text-base text-wsText font-bold block leading-tight">Michael Mclaren</span>
+          <span class="font-mono text-[10px] text-wsAccent uppercase tracking-widest">FOUNDER & MASTER CRAFTSMAN • FIELD NOTES</span>
+        </div>
+      </div>
+      <button onclick="closeEssayModal()" class="text-wsMuted hover:text-white p-2 rounded-lg hover:bg-white/5 transition-colors cursor-pointer text-lg leading-none" title="Close essay (ESC)">
+        ✕
+      </button>
+    </div>
+
+    <!-- Modal Body (Scrollable Essay Reader) -->
+    <div id="essayModalContent" class="flex-grow p-6 sm:p-10 overflow-y-auto space-y-6">
+      <!-- Injected dynamically by readEssay(id) -->
+    </div>
+
+    <!-- Modal Footer -->
+    <div class="px-5 py-3.5 sm:px-6 sm:py-4 bg-[#1A120E] border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-3 shrink-0">
+      <button onclick="closeEssayModal()" class="w-full sm:w-auto text-xs font-mono uppercase tracking-wider text-wsMuted hover:text-white py-2 px-3 rounded-lg hover:bg-white/5 transition-colors cursor-pointer">
+        ← Close Reader
+      </button>
+      <button id="modalDiscussBtn" onclick="openSwarmChatWithAdvocate('michael_mclaren', activeEssayTopic)" class="w-full sm:w-auto rust-glow-btn text-white text-xs font-mono uppercase tracking-wider font-bold py-2.5 px-5 rounded-lg flex items-center justify-center gap-2 cursor-pointer shadow">
+        <span>💬 Discuss this Essay with Michael</span>
+      </button>
+    </div>
+  </div>
 
   <!-- WildSeed Roadhouse Swarm Chat Engine (FanStack Integration) -->
   <script>
@@ -1202,11 +1375,216 @@
         handleChatSubmit();
       }
     }
+    // =================================================================
+    // MICHAEL MCLAREN FIELD NOTES & ESSAY READER ENGINE
+    // =================================================================
+    const ESSAYS_DATA = {
+      'salt-debt': {
+        id: 'salt-debt',
+        num: '01',
+        title: "The Salt Debt: Why Synthetic Rockwool is a Credit Card for Plants",
+        category: "SOIL METABOLISM & BIOCHEMISTRY",
+        readTime: "6 MIN READ • OKLAHOMA LIVING SOIL",
+        quote: "When you feed a plant synthetic mineral salts, you aren't cultivating vitality. You are extending an unsecured chemical loan that the plant must repay with its own essential oils.",
+        subtitle: "How industrial salt force-feeding creates artificial osmotic pressure, strips monoterpenes during the panic flush, and leaves consumers smoking mineral cardboard.",
+        body: `
+          <h4 class="font-serif text-xl sm:text-2xl text-wsAccent font-bold">The Osmotic Illusion of Speed</h4>
+          <p>
+            Walk into any multi-state operator's commercial warehouse and you will see the same depressing sight: thousands of uniform plastic-wrapped rockwool cubes fed four to six times daily through automated drip emitters dripping clear, mineral-heavy synthetic salt solutions. The plant has no choice. Because the ionic salts create artificial osmotic pressure in the root zone, the roots are forced to drink continuously just to keep from desiccating.
+          </p>
+          <p>
+            On paper, corporate finance and spreadsheet analysts love this. The vegetative cells gorge on water and simple ionic nitrogen, blowing up biomass and wet weight at record velocity. But high water weight is not cannabinoid density. The plant is bloated, waterlogged, and biochemically frail—lacking the complex micronutrients, silica, trace minerals, and amino acids that can only be unlocked by living soil fungi.
+          </p>
+
+          <h4 class="font-serif text-xl sm:text-2xl text-wsAccent font-bold pt-2">The Panic Flush: Starving the Terpenes</h4>
+          <p>
+            Because synthetic salts are inorganic mineral ions that the plant cannot fully metabolize or integrate into complex organic compounds, they accumulate directly in the leaf and floral bract tissue. If harvested directly off the salt drip, the flower crackles like fourth-of-July sparklers, burns into harsh black charcoal, and gives the consumer an instant, throat-scorching headache.
+          </p>
+          <p>
+            To disguise this corporate defect, commercial growers mandate a brutal 10-to-14-day "heavy flush" with plain reverse-osmosis water. They shock the root zone, starving the plant and forcing it to cannibalize its own stored cellular reserves. But under that intense physiological stress, the most delicate monoterpenes—the volatile citrusy limonenes, beta-myrcenes, and sweet alpha-pinenes that deliver authentic nose and euphoric entourage—evaporate into the carbon exhaust filters. The final product might hit 28% on a dry-weight THC lab test, but it burns like cardboard ash and tastes like sterile dust.
+          </p>
+
+          <h4 class="font-serif text-xl sm:text-2xl text-wsAccent font-bold pt-2">Living Soil: Permanent Equity</h4>
+          <p>
+            At WildSeed, we don't hold our plants in chemical debt. In our Oklahoma raised beds, the plant controls its own diet. The rhizosphere is populated with billions of active aerobic bacteria, endomycorrhizal fungi, protozoa, and red wiggler worms. When the plant enters bloom and demands phosphorus or potassium, it exudes carbon sugars to signal the fungal hyphae network, which mines and delivers the exact mineral in bio-available organic form.
+          </p>
+          <p>
+            There is no salt accumulation, so there is never a need for a panic flush. Our cultivars ripen gracefully under living biology, finishing with swollen, resinous amber trichome heads that burn down to pure snow-white ash. Living soil is permanent equity—for the soil bed, the plant, and the human being who smokes it.
+          </p>
+        `
+      },
+      'red-dirt-rhizosphere': {
+        id: 'red-dirt-rhizosphere',
+        num: '02',
+        title: "The Red Dirt Rhizosphere: 100 Million Microbes in Every Thumbprint",
+        category: "NO-TILL BIOLOGY & MICROBIOLOGY",
+        readTime: "8 MIN READ • RHIZOSPHERE REVOLUTION",
+        quote: "Press your thumb into a true living-soil bed. Beneath that nail is a civilization of one hundred million living organisms working thirty million years before humans invented bottled fertilizer.",
+        subtitle: "Walking Oklahoma no-till soil beds with a Crown & Coke, inspecting mycorrhizal fungal networks, and realizing plants don't eat salts—they feed the biology, and the biology feeds the plant.",
+        body: `
+          <h4 class="font-serif text-xl sm:text-2xl text-wsAccent font-bold">Nightfall in the Oklahoma Greenhouse</h4>
+          <p>
+            Around 9:30 PM, after the high-pressure fans cycle down to their low nighttime hum, I like to pour a Crown and Coke over ice and take a slow walk through the beds. Zach Bryan or Sturgill Simpson playing softly on the shop speaker. You kneel down by Bed #4 and pull back the heavy mulch layer of barley straw and cover crops.
+          </p>
+          <p>
+            The first thing that hits you is the scent: rich, sweet, forest humus with the distinct, earthen petrichor of geosmin produced by healthy actinomycetes. You see white webs of saprophytic fungal hyphae knitting the straw directly into the dark Oklahoma loam. Red wiggler worms are gliding through the top three inches, converting composted alfalfa, kelp meal, and crustacean shell into casting gold.
+          </p>
+
+          <h4 class="font-serif text-xl sm:text-2xl text-wsAccent font-bold pt-2">The Biological Marketplace</h4>
+          <p>
+            The corporate pesticide salesman wants you to believe that dirt is a passive sponge and that plants are helpless victims that need twenty different plastic jugs from Holland to survive. That is biological nonsense.
+          </p>
+          <p>
+            In an authentic no-till living bed, the plant is the master of an underground stock exchange. Up to forty percent of the carbohydrates manufactured by the plant during photosynthesis are pumped directly down through the roots as exudates—sugars, amino acids, and organic acids. The plant isn't leaking; it is trading.
+          </p>
+          <p>
+            It hires specific bacteria to fix atmospheric nitrogen. It hires mycorrhizal fungi to venture dozens of yards into the subsoil to dissolve insoluble mineral rock dust into bio-available trace silica, calcium, and magnesium. The plant feeds the soil biology, and the biology feeds the plant. It is an intelligent, self-regulating biological loop that no chemist in a laboratory can replicate.
+          </p>
+
+          <h4 class="font-serif text-xl sm:text-2xl text-wsAccent font-bold pt-2">Generational Dirt</h4>
+          <p>
+            When an MSO finishes a harvest in rockwool, they dump tons of toxic non-biodegradable fiberglass slag into municipal landfills. When we harvest a living bed at WildSeed, we cut the stem flush at the soil surface, leave the root system in place to aerate the bed and feed the worms, top-dress with composted worm castings, and plant the next seedling directly beside the old stalk.
+          </p>
+          <p>
+            Every cycle makes our soil richer, more biologically complex, and more immune to pests. Our beds have been active for years without being tilled, thrown away, or sterilized. That isn't an input cost. That is generational equity stamped into Oklahoma red dirt.
+          </p>
+        `
+      },
+      'cold-cure-rosin': {
+        id: 'cold-cure-rosin',
+        num: '03',
+        title: "Cold-Cure Rosin Doesn't Lie: What Solventless Pressure Reveals",
+        category: "SOLVENTLESS EXTRACTION & PHYSICS",
+        readTime: "7 MIN READ • 160°F MECHANICAL TRUTH",
+        quote: "A hydrocarbon extraction column is an eraser for bad farming. A solventless rosin press is a high-definition mirror.",
+        subtitle: "The unfiltered physics of ice-water hash pressed at 160°F through 73-micron mesh. Cheating with chemical fungicides or synthetic feeds shows up immediately on the press. Real living resin coats the glass like aged bourbon.",
+        body: `
+          <h4 class="font-serif text-xl sm:text-2xl text-wsAccent font-bold">Nowhere to Hide on the Heat Plates</h4>
+          <p>
+            In the mass-market extract game, corporate processors use closed-loop hydrocarbon butane and propane systems. If the flower they bought was covered in powdery mildew, sprayed with synthetic systemic fungicides, or overfed with synthetic bloom boosters, the hydrocarbon wash strips everything out indiscriminately. Then they run it through bleaching clays, magnesol, and silica chromatography columns to scrub the foul odor and dark green color until they get a clear, flavorless distillate oil. They add synthetic botanical terpenes back in and sell it in colorful vape carts.
+          </p>
+          <p>
+            Solventless extraction cannot be faked. It is pure mechanical physics: pure ice, reverse-osmosis water, 304 stainless steel wash vessels, and pure pneumatic pressure. If the farmer cut a single corner in the garden, the press will expose him within three seconds of plate contact.
+          </p>
+
+          <h4 class="font-serif text-xl sm:text-2xl text-wsAccent font-bold pt-2">The 73-to-120 Micron Golden Spectrum</h4>
+          <p>
+            We harvest whole live plants and immediately fresh-freeze them at -20°F within ninety minutes of cutting. We wash in circulating 32°F ice water, gently dislodging the swollen glandular trichome heads while leaving the plant leaves intact. We catch only the prime 73μ to 120μ heads—the absolute sweet spot where the plant stored its deepest monoterpene and cannabinoid profiles.
+          </p>
+          <p>
+            After freeze-drying the hash into pure loose blonde trichome powder, we double-bag it in medical-grade monofilament mesh and load it onto the plates. We press at 160°F under slow, ramped hydraulic pressure.
+          </p>
+          <p>
+            If the plant was force-fed synthetic salts, the rosin emerges dark, tarry, and cloudy, carrying a burned sulfur odor. But when you press true Oklahoma living-soil trichomes, the resin flows out in liquid golden ribbons, glowing like wildflower honey under the shop lights.
+          </p>
+
+          <h4 class="font-serif text-xl sm:text-2xl text-wsAccent font-bold pt-2">The Cold-Cure Finish</h4>
+          <p>
+            We seal that fresh-pressed resin into airtight borosilicate glass jars and cure them in darkness at 55°F for twenty-one days. We don't whip it with heat guns to artificially lighten the color. We let the natural terpene fractions rise to the surface, creating an oily, shimmering terpene layer that blankets the crystalline cannabinoid butter.
+          </p>
+          <p>
+            When you open that jar, it doesn't smell like perfume or candy chemicals. It smells like gasoline, crushed pine needles, overripe tropical melon, and rich damp earth. That is the honest truth of the plant, preserved without a single drop of chemical solvent.
+          </p>
+        `
+      }
+    };
+
+    // Aliases for numerical index support
+    ESSAYS_DATA['1'] = ESSAYS_DATA['salt-debt'];
+    ESSAYS_DATA['2'] = ESSAYS_DATA['red-dirt-rhizosphere'];
+    ESSAYS_DATA['3'] = ESSAYS_DATA['cold-cure-rosin'];
+
+    let activeEssayTopic = "Living Soil Biology";
+
+    function readEssay(id) {
+      const essay = ESSAYS_DATA[id] || ESSAYS_DATA['salt-debt'];
+      activeEssayTopic = essay.title;
+
+      const container = document.getElementById('essayModalContent');
+      if (container) {
+        container.innerHTML = `
+          <div class="space-y-6">
+            <div class="flex flex-wrap items-center justify-between gap-3 text-xs font-mono pb-4 border-b border-white/10">
+              <span class="text-wsAccent font-bold uppercase tracking-widest">${essay.category}</span>
+              <span class="text-wsMuted">${essay.readTime}</span>
+            </div>
+            
+            <h2 class="font-serif text-3xl sm:text-4xl text-wsText font-bold leading-tight">
+              ${essay.title}
+            </h2>
+
+            <p class="font-mono text-xs sm:text-sm text-wsAccent/90 italic leading-relaxed">
+              "${essay.quote}"
+            </p>
+
+            <div class="p-4 rounded-xl bg-[#1C1410] border-l-2 border-wsAccent text-xs sm:text-sm text-stone-300">
+              <strong>Thesis:</strong> ${essay.subtitle}
+            </div>
+
+            <div class="pt-2 text-stone-300 space-y-4">
+              ${essay.body}
+            </div>
+
+            <div class="pt-6 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-4">
+              <div class="flex items-center gap-3">
+                <img src="michael_mclaren_anchor.jpg" alt="Michael" class="w-10 h-10 rounded-full object-cover border border-wsAccent">
+                <div class="text-left">
+                  <div class="font-serif text-sm text-wsText font-bold">Michael Mclaren</div>
+                  <div class="font-mono text-[10px] text-wsMuted">Founder & Master Craftsman • WildSeed</div>
+                </div>
+              </div>
+              <button onclick="openSwarmChatWithAdvocate('michael_mclaren', '${essay.title.replace(/'/g, "\\'")}')" class="rust-glow-btn text-white text-xs font-mono uppercase tracking-wider font-bold py-2.5 px-4 rounded-lg flex items-center gap-2 cursor-pointer shadow">
+                <span>💬 Discuss with Michael</span>
+              </button>
+            </div>
+          </div>
+        `;
+        container.scrollTop = 0;
+      }
+
+      // Show modal
+      const backdrop = document.getElementById('essayModalBackdrop');
+      const modal = document.getElementById('essayModal');
+      if (backdrop && modal) {
+        backdrop.classList.remove('opacity-0', 'pointer-events-none');
+        backdrop.classList.add('opacity-100', 'pointer-events-auto');
+        modal.classList.remove('scale-95', 'opacity-0', 'pointer-events-none');
+        modal.classList.add('scale-100', 'opacity-100', 'pointer-events-auto');
+      }
+    }
+
+    function closeEssayModal() {
+      const backdrop = document.getElementById('essayModalBackdrop');
+      const modal = document.getElementById('essayModal');
+      if (backdrop && modal) {
+        backdrop.classList.remove('opacity-100', 'pointer-events-auto');
+        backdrop.classList.add('opacity-0', 'pointer-events-none');
+        modal.classList.remove('scale-100', 'opacity-100', 'pointer-events-auto');
+        modal.classList.add('scale-95', 'opacity-0', 'pointer-events-none');
+      }
+    }
+
+    function openSwarmChatWithAdvocate(advocateKey, topic) {
+      closeEssayModal();
+      openSwarmDrawer(advocateKey || 'michael_mclaren');
+      if (topic) {
+        const input = document.getElementById('chatInputField');
+        if (input) {
+          input.value = `Michael, let's talk about ${topic}: `;
+          input.focus();
+        }
+      }
+    }
 
     // Keyboard Shortcuts: ESC to close, ENTER to send
     document.addEventListener('keydown', (e) => {
       if (e.key === 'Escape') {
-        toggleSwarmDrawer(false);
+        const modal = document.getElementById('essayModal');
+        if (modal && !modal.classList.contains('pointer-events-none')) {
+          closeEssayModal();
+        } else {
+          toggleSwarmDrawer(false);
+        }
       }
     });
 
