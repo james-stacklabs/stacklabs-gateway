@@ -118,12 +118,12 @@
       </nav>
 
       <!-- CTAs -->
-      <div class="flex items-center gap-2.5">
-        <button onclick="toggleSwarmDrawer(true)" class="bg-[#1C1512] hover:bg-[#2A1E19] border border-wsAccent/50 hover:border-wsAccent text-wsAccent hover:text-white text-xs font-mono uppercase tracking-wider font-bold px-3.5 py-2.5 rounded-lg flex items-center gap-2 transition-all cursor-pointer shadow-sm group">
+      <div class="flex items-center gap-2">
+        <button onclick="toggleSwarmDrawer(true)" class="hidden sm:flex bg-[#1C1512] hover:bg-[#2A1E19] border border-wsAccent/50 hover:border-wsAccent text-wsAccent hover:text-white text-xs font-mono uppercase tracking-wider font-bold px-3.5 py-2.5 rounded-lg items-center gap-2 transition-all cursor-pointer shadow-sm group">
           <span class="inline-block w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
           <span>💬 Chat with Swarm</span>
         </button>
-        <a href="#menu" class="rust-glow-btn text-white text-xs font-mono uppercase tracking-wider font-bold px-4 py-2.5 rounded-lg flex items-center gap-2">
+        <a href="#menu" class="rust-glow-btn text-white text-[11px] sm:text-xs font-mono uppercase tracking-wider font-bold px-3.5 py-2 sm:px-4 sm:py-2.5 rounded-lg flex items-center gap-1.5 whitespace-nowrap">
           <span>Tailgate Menu</span>
           <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
         </a>
@@ -599,8 +599,8 @@
         <span class="text-wsPrimary">21+ ONLY • STATE COMPLIANT</span>
       </div>
     </div>
-  <!-- Floating Left Nav Quick-Toggle (KI-096 Sovereign Shell Standard) -->
-  <button id="swarmNavToggle" onclick="toggleSwarmDrawer(true)" class="fixed left-0 top-1/2 -translate-y-1/2 z-40 bg-[#1A120E]/95 hover:bg-[#251A14] border-r-2 border-y border-wsAccent/50 rounded-r-2xl p-2.5 shadow-2xl flex flex-col items-center gap-2 transition-all duration-200 group cursor-pointer" title="Open Roadhouse Swarm Lounge">
+  <!-- Floating Left Nav Quick-Toggle (Desktop: KI-096 Sovereign Shell Standard) -->
+  <button id="swarmNavToggleDesktop" onclick="toggleSwarmDrawer(true)" class="hidden sm:flex fixed left-0 top-1/2 -translate-y-1/2 z-40 bg-[#1A120E]/95 hover:bg-[#251A14] border-r-2 border-y border-wsAccent/50 rounded-r-2xl p-2.5 shadow-2xl flex-col items-center gap-2 transition-all duration-200 group cursor-pointer" title="Open Roadhouse Swarm Lounge">
     <div class="flex -space-x-2 overflow-hidden py-1">
       <img src="dallas_roadhouse_avatar.jpg" alt="Dallas" class="inline-block h-6 w-6 rounded-full ring-2 ring-[#1A120E] object-cover">
       <img src="red_dirt_calvin_avatar.jpg" alt="Calvin" class="inline-block h-6 w-6 rounded-full ring-2 ring-[#1A120E] object-cover">
@@ -612,6 +612,19 @@
       <span>TALK WITH ADVOCATES</span>
     </div>
     <span class="text-xs text-wsMuted group-hover:text-wsAccent group-hover:translate-x-0.5 transition-all">▶</span>
+  </button>
+
+  <!-- Floating Bottom Action Pill (Mobile: Non-intrusive thumb trigger) -->
+  <button id="swarmNavToggleMobile" onclick="toggleSwarmDrawer(true)" class="flex sm:hidden fixed bottom-5 left-1/2 -translate-x-1/2 z-40 bg-[#1A120E]/95 backdrop-blur-md hover:bg-[#251A14] border border-wsAccent/60 text-wsAccent px-4 py-2.5 rounded-full shadow-2xl items-center gap-2.5 transition-all duration-200 cursor-pointer active:scale-95" title="Open Roadhouse Swarm Lounge">
+    <div class="flex -space-x-1.5 overflow-hidden">
+      <img src="dallas_roadhouse_avatar.jpg" alt="Dallas" class="inline-block h-5 w-5 rounded-full ring-1 ring-[#1A120E] object-cover">
+      <img src="red_dirt_calvin_avatar.jpg" alt="Calvin" class="inline-block h-5 w-5 rounded-full ring-1 ring-[#1A120E] object-cover">
+      <img src="heirloom_marlo_avatar.jpg" alt="Marlo" class="inline-block h-5 w-5 rounded-full ring-1 ring-[#1A120E] object-cover">
+      <img src="jasper_hertz_avatar.jpg" alt="Jasper" class="inline-block h-5 w-5 rounded-full ring-1 ring-[#1A120E] object-cover">
+    </div>
+    <span class="inline-block w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+    <span class="text-[11px] font-mono font-bold tracking-wider uppercase text-wsText">Chat with Swarm</span>
+    <span class="text-xs text-wsAccent font-bold">💬</span>
   </button>
 
   <!-- Left Collapsible Swarm Lounge Drawer Backdrop -->
