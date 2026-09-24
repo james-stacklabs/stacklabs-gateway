@@ -1,707 +1,279 @@
 <!DOCTYPE html>
-<html lang="en" class="scroll-smooth">
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>StackLabs LLC — Programmatic Edge Search Authority & Algorithmic Reclamation</title>
-  <meta name="description" content="StackLabs builds sovereign edge infrastructure and multi-agent reasoning networks that capture high-ticket local search volume and displace private equity aggregators." />
-  
-  <!-- Modern Typography -->
+  <title>StackLabs // Scheduled Maintenance</title>
+  <meta name="description" content="StackLabs Enterprise Edge Systems — Scheduled Maintenance in Progress." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
-
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet" />
   <style>
-    :root {
-      --bg-base: #05070A;
-      --bg-surface: #0B0F17;
-      --bg-card: #101622;
-      --border-subtle: rgba(255, 255, 255, 0.08);
-      --border-focus: rgba(0, 212, 255, 0.35);
-      --cyan-accent: #00D4FF;
-      --emerald-accent: #10B981;
-      --amber-accent: #F59E0B;
-      --text-main: #F8FAFC;
-      --text-muted: #94A3B8;
-      --text-dim: #64748B;
-    }
-
     * {
       box-sizing: border-box;
       margin: 0;
       padding: 0;
     }
-
     body {
-      background-color: var(--bg-base);
-      color: var(--text-main);
+      background-color: #05070A;
+      color: #F8FAFC;
       font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
       min-height: 100vh;
-      overflow-x: hidden;
-      line-height: 1.6;
+      width: 100vw;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      position: relative;
     }
-
-    .font-mono {
-      font-family: 'JetBrains Mono', monospace;
-    }
-
-    .font-heading {
-      font-family: 'Outfit', sans-serif;
-    }
-
-    /* Ambient Background Effects */
-    .ambient-glow-cyan {
-      position: absolute;
-      width: 600px;
-      height: 600px;
-      border-radius: 50%;
-      background: radial-gradient(circle, rgba(0, 212, 255, 0.08) 0%, rgba(0, 212, 255, 0) 70%);
-      pointer-events: none;
-      z-index: 0;
-    }
-
-    .ambient-glow-emerald {
+    /* Subtle ambient lighting */
+    .ambient-glow {
       position: absolute;
       width: 500px;
       height: 500px;
       border-radius: 50%;
-      background: radial-gradient(circle, rgba(16, 185, 129, 0.06) 0%, rgba(16, 185, 129, 0) 70%);
+      background: radial-gradient(circle, rgba(0, 212, 255, 0.12) 0%, rgba(0, 212, 255, 0) 70%);
       pointer-events: none;
-      z-index: 0;
+      z-index: 1;
+      animation: pulse 6s ease-in-out infinite;
     }
-
-    .grid-pattern {
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); opacity: 0.7; }
+      50% { transform: scale(1.15); opacity: 1; }
+    }
+    .grid-bg {
       position: absolute;
       inset: 0;
-      background-size: 48px 48px;
+      background-size: 40px 40px;
       background-image: 
         linear-gradient(to right, rgba(255, 255, 255, 0.02) 1px, transparent 1px),
         linear-gradient(to bottom, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
       pointer-events: none;
       z-index: 0;
     }
-
-    /* Glass Panels */
-    .glass-card {
-      background: rgba(16, 22, 34, 0.7);
-      backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
-      border: 1px solid var(--border-subtle);
-      border-radius: 16px;
-      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-    }
-
-    .glass-card:hover {
-      border-color: rgba(255, 255, 255, 0.16);
-      transform: translateY(-2px);
-    }
-
-    .glass-card-interactive:hover {
-      border-color: var(--border-focus);
-      box-shadow: 0 12px 32px -8px rgba(0, 212, 255, 0.12);
-    }
-
-    /* Buttons & Pills */
-    .btn-primary {
-      background: linear-gradient(135deg, #00D4FF 0%, #0099FF 100%);
-      color: #05070A;
-      font-weight: 700;
-      letter-spacing: 0.02em;
-      border: none;
-      border-radius: 10px;
-      padding: 12px 24px;
-      cursor: pointer;
-      transition: all 0.2s ease;
-      display: inline-flex;
+    .container {
+      position: relative;
+      z-index: 10;
+      display: flex;
+      flex-direction: column;
       align-items: center;
-      gap: 8px;
-      text-decoration: none;
-      font-size: 14px;
+      justify-content: center;
+      text-align: center;
+      padding: 2rem;
     }
-
-    .btn-primary:hover {
-      box-shadow: 0 0 24px rgba(0, 212, 255, 0.4);
-      transform: translateY(-1px);
+    .logo-wrapper {
+      width: 280px;
+      height: 280px;
+      position: relative;
+      margin-bottom: 2rem;
     }
-
-    .btn-secondary {
-      background: rgba(255, 255, 255, 0.05);
-      border: 1px solid var(--border-subtle);
-      color: var(--text-main);
-      font-weight: 600;
-      border-radius: 10px;
-      padding: 12px 24px;
-      cursor: pointer;
-      transition: all 0.2s ease;
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      text-decoration: none;
-      font-size: 14px;
+    @media (min-width: 640px) {
+      .logo-wrapper {
+        width: 340px;
+        height: 340px;
+      }
     }
-
-    .btn-secondary:hover {
-      background: rgba(255, 255, 255, 0.08);
-      border-color: rgba(255, 255, 255, 0.2);
+    svg {
+      width: 100%;
+      height: 100%;
+      contain: strict;
+      shape-rendering: geometricPrecision;
     }
-
-    .status-pill {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      padding: 4px 10px;
-      border-radius: 9999px;
-      font-size: 11px;
-      font-weight: 600;
+    .title {
+      font-size: 1.5rem;
+      font-weight: 800;
+      letter-spacing: 0.35em;
       text-transform: uppercase;
-      letter-spacing: 0.05em;
+      color: #FFFFFF;
+      margin-bottom: 0.75rem;
+      text-shadow: 0 0 20px rgba(0, 212, 255, 0.4);
     }
-
-    .pill-cyan {
-      background: rgba(0, 212, 255, 0.1);
-      border: 1px solid rgba(0, 212, 255, 0.3);
-      color: #00D4FF;
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.4rem 1rem;
+      border-radius: 9999px;
+      background: rgba(0, 212, 255, 0.08);
+      border: 1px solid rgba(0, 212, 255, 0.25);
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: #38BDF8;
+      box-shadow: 0 0 15px rgba(0, 212, 255, 0.15);
     }
-
-    .pill-emerald {
-      background: rgba(16, 185, 129, 0.1);
-      border: 1px solid rgba(16, 185, 129, 0.3);
-      color: #10B981;
-    }
-
-    .pulse-dot {
+    .badge-dot {
       width: 6px;
       height: 6px;
       border-radius: 50%;
-      background-color: currentColor;
-      box-shadow: 0 0 8px currentColor;
-      animation: pulse-dot 2s infinite;
+      background-color: #00E5FF;
+      box-shadow: 0 0 8px #00E5FF;
+      animation: blink 2s infinite;
     }
-
-    @keyframes pulse-dot {
-      0%, 100% { opacity: 1; transform: scale(1); }
-      50% { opacity: 0.4; transform: scale(0.85); }
+    @keyframes blink {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.3; }
     }
-
-    /* Terminal Input Fields */
-    .terminal-input {
-      background: rgba(5, 7, 10, 0.8);
-      border: 1px solid var(--border-subtle);
-      border-radius: 8px;
-      color: var(--text-main);
-      padding: 12px 16px;
-      font-size: 14px;
-      width: 100%;
-      outline: none;
-      transition: all 0.2s ease;
-    }
-
-    .terminal-input:focus {
-      border-color: var(--cyan-accent);
-      box-shadow: 0 0 12px rgba(0, 212, 255, 0.15);
-    }
-
-    .terminal-input option {
-      background: #0B0F17;
-      color: #F8FAFC;
-    }
-
-    /* Responsive Layout */
-    .container {
-      max-width: 1240px;
-      margin: 0 auto;
-      padding: 0 24px;
-      position: relative;
+    .footer {
+      position: absolute;
+      bottom: 2rem;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.7rem;
+      color: #475569;
+      letter-spacing: 0.08em;
       z-index: 10;
-    }
-
-    /* Custom Scrollbar */
-    ::-webkit-scrollbar {
-      width: 6px;
-    }
-    ::-webkit-scrollbar-track {
-      background: var(--bg-base);
-    }
-    ::-webkit-scrollbar-thumb {
-      background: rgba(255, 255, 255, 0.12);
-      border-radius: 3px;
-    }
-    ::-webkit-scrollbar-thumb:hover {
-      background: rgba(255, 255, 255, 0.25);
     }
   </style>
 </head>
 <body>
+  <div class="grid-bg"></div>
+  <div class="ambient-glow"></div>
 
-  <!-- Ambient Glow Elements -->
-  <div class="ambient-glow-cyan" style="top: 0; left: 15%;"></div>
-  <div class="ambient-glow-emerald" style="top: 800px; right: 10%;"></div>
-  <div class="grid-pattern"></div>
-
-  <!-- NAVIGATION BAR -->
-  <header style="border-bottom: 1px solid var(--border-subtle); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); position: sticky; top: 0; z-index: 50; background: rgba(5,7,10,0.85);">
-    <div class="container" style="display: flex; align-items: center; justify-content: space-between; height: 72px;">
-      <div style="display: flex; align-items: center; gap: 14px;">
-        <!-- StackLabs Stylized Hex Logo -->
-        <div style="width: 38px; height: 38px; border-radius: 10px; background: linear-gradient(135deg, rgba(0,212,255,0.2) 0%, rgba(16,185,129,0.1) 100%); border: 1px solid rgba(0,212,255,0.4); display: flex; align-items: center; justify-content: center; font-weight: 800; font-family: 'JetBrains Mono'; font-size: 16px; color: var(--cyan-accent);">
-          SL
-        </div>
-        <div>
-          <span class="font-heading" style="font-weight: 800; font-size: 18px; letter-spacing: -0.02em;">STACKLABS</span>
-          <span class="font-mono" style="font-size: 11px; color: var(--text-dim); margin-left: 6px;">LLC</span>
-        </div>
-      </div>
-
-      <!-- Edge Status Pill -->
-      <nav style="display: flex; align-items: center; gap: 28px;">
-        <div class="status-pill pill-cyan" style="display: none; @media(min-width: 768px){display: flex;}">
-          <span class="pulse-dot"></span> Cloudflare Edge Live: 330+ POPs
-        </div>
-        <a href="#audit" style="color: var(--text-muted); text-decoration: none; font-size: 13px; font-weight: 500;" class="hover:text-white transition">Reconnaissance</a>
-        <a href="#cases" style="color: var(--text-muted); text-decoration: none; font-size: 13px; font-weight: 500;" class="hover:text-white transition">Proof Ledger</a>
-        <a href="#thesis" style="color: var(--text-muted); text-decoration: none; font-size: 13px; font-weight: 500;" class="hover:text-white transition">Information Gain</a>
-        <a href="#economics" style="color: var(--text-muted); text-decoration: none; font-size: 13px; font-weight: 500;" class="hover:text-white transition">Economics</a>
-        <a href="#audit" class="btn-primary" style="padding: 8px 18px; font-size: 13px;">
-          Run Audit
-        </a>
-      </nav>
+  <main class="container">
+    <div class="logo-wrapper">
+      <svg id="logo-svg" viewBox="-120 -120 240 240">
+        <defs>
+          <filter id="glow-filter" x="-20%" y="-20%" width="140%" height="140%">
+            <feGaussianBlur stdDeviation="1.5" result="blur" />
+            <feMerge>
+              <feMergeNode in="blur" />
+              <feMergeNode in="SourceGraphic" />
+            </feMerge>
+          </filter>
+        </defs>
+        <g id="edges-group"></g>
+      </svg>
     </div>
-  </header>
 
-  <main>
-    <!-- HERO SECTION -->
-    <section style="padding: 100px 0 60px 0; text-align: center;">
-      <div class="container" style="max-width: 980px;">
-        <div style="display: inline-flex; margin-bottom: 24px;">
-          <div class="status-pill pill-cyan font-mono">
-            <span class="pulse-dot"></span> PROGRAMMATIC EDGE SEARCH RECLAMATION
-          </div>
-        </div>
-
-        <h1 class="font-heading" style="font-size: clamp(38px, 6vw, 64px); font-weight: 800; letter-spacing: -0.03em; line-height: 1.1; margin-bottom: 24px;">
-          We Reclaim High-Ticket Local Search Authority From Private Equity Aggregators.
-        </h1>
-
-        <p style="font-size: clamp(16px, 2vw, 19px); color: var(--text-muted); max-width: 760px; margin: 0 auto 36px auto; font-weight: 400; line-height: 1.7;">
-          Corporate aggregators bleed independent practices by ranking generic syndicated content on Page 1 for $3,000–$6,000 surgical and specialist procedures. StackLabs engineers crawlable edge infrastructure, structured Schema.org entity graphs, and contrarian clinical information gain that recaptures organic #1 authority.
-        </p>
-
-        <div style="display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; margin-bottom: 56px;">
-          <a href="#audit" class="btn-primary">
-            <span>⚡ Run Asymmetric SERP Audit</span>
-          </a>
-          <a href="#cases" class="btn-secondary">
-            <span>Inspect Verified Proof Cases</span>
-          </a>
-        </div>
-
-        <!-- Grounded Metal Stats Strip -->
-        <div class="glass-card" style="padding: 24px 32px; display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 24px; text-align: left;">
-          <div>
-            <div class="font-mono" style="font-size: 11px; color: var(--text-dim); text-transform: uppercase; margin-bottom: 4px;">Infrastructure Margin</div>
-            <div class="font-heading" style="font-size: 28px; font-weight: 800; color: var(--emerald-accent);">99.6%</div>
-            <div style="font-size: 12px; color: var(--text-muted);">$3.65/mo Cloud COGS</div>
-          </div>
-          <div>
-            <div class="font-mono" style="font-size: 11px; color: var(--text-dim); text-transform: uppercase; margin-bottom: 4px;">Edge SSR Latency</div>
-            <div class="font-heading" style="font-size: 28px; font-weight: 800; color: var(--cyan-accent);">&lt; 350ms</div>
-            <div style="font-size: 12px; color: var(--text-muted);">Cloudflare V8 Workers</div>
-          </div>
-          <div>
-            <div class="font-mono" style="font-size: 11px; color: var(--text-dim); text-transform: uppercase; margin-bottom: 4px;">Top-Tier Displacement</div>
-            <div class="font-heading" style="font-size: 28px; font-weight: 800; color: #FFF;">72 Hours</div>
-            <div style="font-size: 12px; color: var(--text-muted);">WildSeed Global Rank #1</div>
-          </div>
-          <div>
-            <div class="font-mono" style="font-size: 11px; color: var(--text-dim); text-transform: uppercase; margin-bottom: 4px;">Information Gain Model</div>
-            <div class="font-heading" style="font-size: 28px; font-weight: 800; color: var(--amber-accent);">US 11,354,343</div>
-            <div style="font-size: 12px; color: var(--text-muted);">Verified Non-Redundant Data</div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- INTERACTIVE AUDIT TERMINAL SECTION -->
-    <section id="audit" style="padding: 80px 0; background: linear-gradient(180deg, transparent 0%, rgba(11,15,23,0.6) 100%);">
-      <div class="container">
-        <div style="text-align: center; max-width: 720px; margin: 0 auto 48px auto;">
-          <div class="status-pill pill-emerald font-mono" style="margin-bottom: 12px;">
-            TOOL #49 // PROSPECT RECON SENTINEL
-          </div>
-          <h2 class="font-heading" style="font-size: 36px; font-weight: 800; margin-bottom: 14px;">
-            The Asymmetric Pre-Flight SERP Audit
-          </h2>
-          <p style="color: var(--text-muted); font-size: 16px;">
-            Enter your practice credentials to simulate an authentic local resident search. Our automated reconnaissance engine isolates the high-ticket procedural queries where corporate aggregators are currently capturing your surgical revenue.
-          </p>
-        </div>
-
-        <div class="glass-card" style="max-width: 880px; margin: 0 auto; padding: 36px; border: 1px solid var(--border-focus);">
-          <form id="auditForm" onsubmit="handleAuditSubmit(event)">
-            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 20px; margin-bottom: 24px;">
-              <div>
-                <label class="font-mono" style="font-size: 12px; color: var(--text-muted); display: block; margin-bottom: 8px;">
-                  PRACTICE TRADE NAME
-                </label>
-                <input type="text" id="targetName" class="terminal-input font-mono" required placeholder="e.g. ARKLE Veterinary Care" value="ARKLE Veterinary Care" />
-              </div>
-              <div>
-                <label class="font-mono" style="font-size: 12px; color: var(--text-muted); display: block; margin-bottom: 8px;">
-                  PRACTICE SPECIALTY & VERTICAL
-                </label>
-                <select id="targetVertical" class="terminal-input font-mono" required>
-                  <option value="veterinary">Veterinary Surgery & Emergency Medicine</option>
-                  <option value="dentistry">Cosmetic & Surgical Implant Dentistry</option>
-                  <option value="builder">Custom Home Remodeling & Architecture</option>
-                  <option value="extraction">Solventless Craft Botanical Extraction</option>
-                </select>
-              </div>
-              <div>
-                <label class="font-mono" style="font-size: 12px; color: var(--text-muted); display: block; margin-bottom: 8px;">
-                  GEOGRAPHIC MARKET (CITY, STATE)
-                </label>
-                <input type="text" id="targetLocation" class="terminal-input font-mono" required placeholder="e.g. Smyrna, GA" value="Smyrna, GA" />
-              </div>
-            </div>
-
-            <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px;">
-              <div class="font-mono" style="font-size: 12px; color: var(--text-dim);">
-                🔒 Emulates Headless Chromium @ 1920x1080 Viewport with WGS-84 Centroid
-              </div>
-              <button type="submit" id="auditBtn" class="btn-primary" style="padding: 14px 28px;">
-                <span id="btnText">Execute Pre-Flight Diagnostic</span>
-              </button>
-            </div>
-          </form>
-
-          <!-- Audit Output Console (Hidden initially) -->
-          <div id="auditResults" style="display: none; margin-top: 36px; padding-top: 32px; border-top: 1px solid var(--border-subtle);">
-            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
-              <div style="display: flex; align-items: center; gap: 10px;">
-                <span class="status-pill pill-cyan font-mono">DIAGNOSTIC COMPLETE</span>
-                <span id="resultTargetName" class="font-heading" style="font-weight: 700; font-size: 18px;"></span>
-              </div>
-              <div class="font-mono" style="font-size: 12px; color: var(--amber-accent);">
-                ⚠️ High Corporate Aggregator Bleed Detected
-              </div>
-            </div>
-
-            <!-- Procedural Bleed Matrix Table -->
-            <div style="overflow-x: auto; margin-bottom: 24px;">
-              <table style="width: 100%; border-collapse: collapse; text-align: left; font-size: 13px;">
-                <thead>
-                  <tr style="border-bottom: 1px solid var(--border-subtle); color: var(--text-dim);" class="font-mono">
-                    <th style="padding: 10px 14px;">High-Ticket Procedure</th>
-                    <th style="padding: 10px 14px;">Average Value</th>
-                    <th style="padding: 10px 14px;">Your Rank</th>
-                    <th style="padding: 10px 14px;">Dominant Aggregator (Page 1)</th>
-                    <th style="padding: 10px 14px;">Information Gain Deficit</th>
-                  </tr>
-                </thead>
-                <tbody id="matrixBody" class="font-mono">
-                  <!-- Dynamically populated by JS -->
-                </tbody>
-              </table>
-            </div>
-
-            <!-- Economic Summary Banner -->
-            <div class="glass-card" style="background: rgba(245, 158, 11, 0.05); border-color: rgba(245, 158, 11, 0.2); padding: 20px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px;">
-              <div>
-                <div class="font-heading" style="font-size: 16px; font-weight: 700; color: #FFF; margin-bottom: 4px;">
-                  Estimated Reclaimable Surgical Cash Flow: <span style="color: var(--emerald-accent); font-weight: 800;">$142,000 – $268,000 / year</span>
-                </div>
-                <div style="font-size: 13px; color: var(--text-muted);">
-                  Capturing just 2 additional surgical procedures per month pays for 24 months of StackLabs edge infrastructure.
-                </div>
-              </div>
-              <a href="#economics" class="btn-primary" style="padding: 10px 20px; font-size: 13px;">
-                Deploy Showroom ($995/mo Retainer)
-              </a>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- VERIFIED PROOF LEDGER SECTION -->
-    <section id="cases" style="padding: 100px 0;">
-      <div class="container">
-        <div style="text-align: center; max-width: 720px; margin: 0 auto 56px auto;">
-          <div class="status-pill pill-cyan font-mono" style="margin-bottom: 12px;">
-            EMPIRICAL PROOF // ZERO SPECULATION
-          </div>
-          <h2 class="font-heading" style="font-size: 36px; font-weight: 800; margin-bottom: 14px;">
-            The Sovereign Proof Ledger
-          </h2>
-          <p style="color: var(--text-muted); font-size: 16px;">
-            We do not sell theoretical marketing packages. We deploy hardened edge systems that achieve provable, cryptographic rank dominance on real search engines.
-          </p>
-        </div>
-
-        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(360px, 1fr)); gap: 32px;">
-          <!-- Case 1: WildSeed Extracts -->
-          <div class="glass-card glass-card-interactive" style="padding: 36px; display: flex; flex-direction: column; justify-content: space-between;">
-            <div>
-              <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 20px;">
-                <span class="status-pill pill-emerald font-mono">CASE 01: GLOBAL RANK #1</span>
-                <span class="font-mono" style="font-size: 11px; color: var(--text-dim);">HUMBOLDT COUNTY, CA</span>
-              </div>
-              <h3 class="font-heading" style="font-size: 24px; font-weight: 700; margin-bottom: 12px;">
-                WildSeed Extracts: 72-Hour Search Reclamation
-              </h3>
-              <p style="color: var(--text-muted); font-size: 14px; margin-bottom: 20px; line-height: 1.7;">
-                High-net-worth craft brand displaced by multi-million dollar California dispensaries. StackLabs engineered a brutalist botanical edge showroom grounded in Michael Mclaren's living soil extraction thermodynamics, volatile monoterpene biogenesis, and Section 781 compliance.
-              </p>
-              <div class="font-mono" style="font-size: 12px; background: rgba(5,7,10,0.6); padding: 14px; border-radius: 8px; border: 1px solid var(--border-subtle); margin-bottom: 24px;">
-                <div style="color: var(--cyan-accent); margin-bottom: 4px;">🏆 Google Organic Rank #1 Worldwide</div>
-                <div style="color: var(--emerald-accent); margin-bottom: 4px;">⚡ Google AI Overview Citation Acquired</div>
-                <div style="color: var(--text-dim);">$0 Paid Ads // Zero Syndicated Blog Fluff</div>
-              </div>
-            </div>
-            <div>
-              <a href="/wildseed" target="_blank" class="btn-secondary" style="width: 100%; justify-content: center;">
-                Inspect Live Edge Deployment &rarr;
-              </a>
-            </div>
-          </div>
-
-          <!-- Case 2: ARKLE Veterinary Care -->
-          <div class="glass-card glass-card-interactive" style="padding: 36px; display: flex; flex-direction: column; justify-content: space-between;">
-            <div>
-              <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 20px;">
-                <span class="status-pill pill-cyan font-mono">CASE 02: TENANT ZERO</span>
-                <span class="font-mono" style="font-size: 11px; color: var(--text-dim);">SMYRNA, GA</span>
-              </div>
-              <h3 class="font-heading" style="font-size: 24px; font-weight: 700; margin-bottom: 12px;">
-                ARKLE Veterinary Care: Surgical Authority
-              </h3>
-              <p style="color: var(--text-muted); font-size: 14px; margin-bottom: 20px; line-height: 1.7;">
-                Independent practice at 1020 Concord Rd SE suffering Page 3 bleed for $4,200 canine TPLO surgeries while corporate consolidators (BluePearl, VCA) siphoned patients. StackLabs deployed an authoritative, compassionate clinical edge satellite with 6-advocate MARD reasoning and doctor JIT sign-off.
-              </p>
-              <div class="font-mono" style="font-size: 12px; background: rgba(5,7,10,0.6); padding: 14px; border-radius: 8px; border: 1px solid var(--border-subtle); margin-bottom: 24px;">
-                <div style="color: var(--cyan-accent); margin-bottom: 4px;">🩺 Dr. Roxanne Levinson Pettit Attribution</div>
-                <div style="color: var(--emerald-accent); margin-bottom: 4px;">🛡️ Day-0 Cryptographic SHA-256 Freeze</div>
-                <div style="color: var(--text-dim);">Reclaims Cobb County TPLO & Pit Viper Surgeries</div>
-              </div>
-            </div>
-            <div>
-              <a href="https://arkle-portal.pages.dev" target="_blank" class="btn-secondary" style="width: 100%; justify-content: center;">
-                Inspect Live Edge Satellite &rarr;
-              </a>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- INFORMATION GAIN THESIS SECTION -->
-    <section id="thesis" style="padding: 80px 0; background: rgba(11,15,23,0.4); border-top: 1px solid var(--border-subtle); border-bottom: 1px solid var(--border-subtle);">
-      <div class="container" style="max-width: 980px;">
-        <div style="text-align: center; margin-bottom: 48px;">
-          <div class="status-pill pill-emerald font-mono" style="margin-bottom: 12px;">
-            THE SYSTEM ARCHITECTURE THESIS
-          </div>
-          <h2 class="font-heading" style="font-size: 36px; font-weight: 800; margin-bottom: 14px;">
-            Why Local Search is an Infrastructure Problem, Not a Marketing Problem
-          </h2>
-          <p style="color: var(--text-muted); font-size: 16px;">
-            The traditional digital agency model is obsolete. Here is why the old playbook of bloated WordPress themes and syndicated copywriting fails against modern algorithmic information retrieval.
-          </p>
-        </div>
-
-        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px;">
-          <div class="glass-card" style="padding: 28px;">
-            <div class="font-mono" style="font-size: 12px; color: var(--amber-accent); margin-bottom: 12px;">01 // INFORMATION GAIN</div>
-            <h4 class="font-heading" style="font-size: 18px; font-weight: 700; margin-bottom: 10px;">US Patent 11,354,343 B2</h4>
-            <p style="font-size: 13px; color: var(--text-muted); line-height: 1.6;">
-              Google scores documents based on the non-redundant additional information provided. Syndicated marketing copy written by generalist agencies is down-weighted. Our Multi-Agent council mines local geology, epidemiology, and specific clinical counter-arguments that score in the 99th percentile of information gain.
-            </p>
-          </div>
-
-          <div class="glass-card" style="padding: 28px;">
-            <div class="font-mono" style="font-size: 12px; color: var(--cyan-accent); margin-bottom: 12px;">02 // EDGE LATENCY</div>
-            <h4 class="font-heading" style="font-size: 18px; font-weight: 700; margin-bottom: 10px;">Sub-350ms TTFB</h4>
-            <p style="font-size: 13px; color: var(--text-muted); line-height: 1.6;">
-              Legacy clinic sites built on bloated WordPress installations deliver 4.8s mobile LCP. StackLabs edge showrooms run on Cloudflare V8 edge isolates, compiling pure static SSR HTML and hydration graphs that load in under 350ms globally with perfect Core Web Vitals.
-            </p>
-          </div>
-
-          <div class="glass-card" style="padding: 28px;">
-            <div class="font-mono" style="font-size: 12px; color: var(--emerald-accent); margin-bottom: 12px;">03 // ENTITY GRAPHS</div>
-            <h4 class="font-heading" style="font-size: 18px; font-weight: 700; margin-bottom: 10px;">W3C / Schema.org Triplets</h4>
-            <p style="font-size: 13px; color: var(--text-muted); line-height: 1.6;">
-              Instead of unstructured blog text, every clinical protocol is published with valid Schema.org <code style="color:var(--cyan-accent);">VeterinaryCare</code>, <code style="color:var(--cyan-accent);">MedicalBusiness</code>, and verified licensing credentials linking the clinic owner directly into Google's Knowledge Graph.
-            </p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ECONOMICS & COMMERCIAL RETAINER SECTION -->
-    <section id="economics" style="padding: 100px 0;">
-      <div class="container" style="max-width: 900px;">
-        <div class="glass-card" style="padding: 48px; border: 1px solid var(--border-focus); background: linear-gradient(180deg, rgba(16,22,34,0.9) 0%, rgba(11,15,23,0.95) 100%);">
-          <div style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 20px; margin-bottom: 32px;">
-            <div>
-              <span class="status-pill pill-emerald font-mono" style="margin-bottom: 12px;">THE ASYMMETRIC COMMERCIAL MODEL</span>
-              <h3 class="font-heading" style="font-size: 32px; font-weight: 800; margin-top: 6px;">
-                $995 / month Flat Infrastructure Retainer
-              </h3>
-              <p style="color: var(--text-muted); font-size: 15px; margin-top: 6px;">
-                Zero hourly agency bills. Zero setup extortion. 100% aligned with surgical procedure recovery.
-              </p>
-            </div>
-            <div style="text-align: right;">
-              <div class="font-heading" style="font-size: 40px; font-weight: 800; color: var(--cyan-accent);">$995</div>
-              <div class="font-mono" style="font-size: 12px; color: var(--text-dim);">PER MONTH // CANCEL ANYTIME</div>
-            </div>
-          </div>
-
-          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 20px; margin-bottom: 36px; padding: 24px; background: rgba(5,7,10,0.6); border-radius: 12px; border: 1px solid var(--border-subtle);">
-            <div>
-              <div class="font-mono" style="font-size: 11px; color: var(--text-dim); text-transform: uppercase;">Phase 1: Pre-Flight Baseline</div>
-              <div style="font-size: 14px; font-weight: 600; color: #FFF; margin-top: 4px;">Day-0 Cryptographic SERP Freeze</div>
-              <div style="font-size: 12px; color: var(--text-muted); margin-top: 2px;">SHA-256 hashed DOM and high-DPI screenshots of competitor bleed.</div>
-            </div>
-            <div>
-              <div class="font-mono" style="font-size: 11px; color: var(--text-dim); text-transform: uppercase;">Phase 2: Showroom Edge Delivery</div>
-              <div style="font-size: 14px; font-weight: 600; color: #FFF; margin-top: 4px;">Custom Sovereign Edge Satellite</div>
-              <div style="font-size: 12px; color: var(--text-muted); margin-top: 2px;">Zero-slop, luxury white space portal with doctor JIT review workflow.</div>
-            </div>
-            <div>
-              <div class="font-mono" style="font-size: 11px; color: var(--text-dim); text-transform: uppercase;">Phase 3: Differential Tracking</div>
-              <div style="font-size: 14px; font-weight: 600; color: #FFF; margin-top: 4px;">Automated Executive Proof Packet</div>
-              <div style="font-size: 12px; color: var(--text-muted); margin-top: 2px;">Day 1, 3, 7, 14, 30 headless re-audits proving organic displacement.</div>
-            </div>
-          </div>
-
-          <!-- Direct Inquiry Form -->
-          <form id="inquiryForm" onsubmit="handleInquirySubmit(event)" style="display: flex; gap: 14px; flex-wrap: wrap;">
-            <input type="text" id="inquiryContact" class="terminal-input font-mono" style="flex: 2; min-width: 260px;" required placeholder="Enter Doctor or Practice Owner Name & Email/Phone" />
-            <button type="submit" id="inquiryBtn" class="btn-primary" style="flex: 1; min-width: 200px; justify-content: center;">
-              <span>Deploy Sovereign Tenant</span>
-            </button>
-          </form>
-          <div id="inquiryFeedback" style="display: none; margin-top: 14px;" class="font-mono text-xs text-emerald-400">
-            ✓ Inquiry received. Pre-flight reconnaissance job queued on Clio workstation. We will transmit the Day-0 baseline within 4 hours.
-          </div>
-        </div>
-      </div>
-    </section>
+    <h1 class="title">STACKLABS</h1>
+    <div class="badge">
+      <span class="badge-dot"></span>
+      <span>UNDER SCHEDULED MAINTENANCE</span>
+    </div>
   </main>
 
-  <!-- FOOTER -->
-  <footer style="border-top: 1px solid var(--border-subtle); padding: 48px 0; background: var(--bg-base); font-size: 13px; color: var(--text-dim);">
-    <div class="container" style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px;">
-      <div>
-        <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 6px;">
-          <span style="font-weight: 700; color: var(--text-main); font-family: 'Outfit';">STACKLABS LLC</span>
-          <span class="font-mono" style="font-size: 11px;">// SMYRNA, GEORGIA</span>
-        </div>
-        <div>Sovereign Distributed Edge Systems & Local Search Authority Networks.</div>
-      </div>
-
-      <div style="display: flex; align-items: center; gap: 20px;" class="font-mono text-xs">
-        <span>© 2026 StackLabs LLC</span>
-        <a href="/wildseed" style="color: var(--text-muted); text-decoration: none;">WildSeed B2B</a>
-        <a href="https://arkle-portal.pages.dev" style="color: var(--text-muted); text-decoration: none;">Tenant Zero (ARKLE)</a>
-      </div>
-    </div>
+  <footer class="footer">
+    <span>SYSTEM DISPATCH: SECURE EDGE ENCLAVE</span>
   </footer>
 
-  <!-- Interactive Terminal Scripts -->
   <script>
-    const PROCEDURAL_VECTORS = {
-      veterinary: [
-        { kw: "dog tplo surgery", ticket: "$4,200", bleed: "BluePearl / VCA Cobb", deficit: "Missing Smyrna red clay joint wear & recovery timelines" },
-        { kw: "cat urinary blockage emergency", ticket: "$2,200", bleed: "Cobb Emergency Vet", deficit: "Zero FLUTD emergency staging or home triage protocol" },
-        { kw: "veterinary dental extraction cost", ticket: "$1,400", bleed: "Generalist Aggregators", deficit: "Zero digital dental radiography or nerve block transparency" },
-        { kw: "copperhead bite dog treatment", ticket: "$1,800", bleed: "Generic Editorial Farms", deficit: "Lacks local pit viper antivenin vial availability" },
-        { kw: "dog foreign body surgery cost", ticket: "$3,500", bleed: "24/7 Corporate Chains", deficit: "Missing gastrointestinal endoscopy vs surgical bypass triage" }
-      ],
-      dentistry: [
-        { kw: "all on 4 dental implants cost", ticket: "$18,500", bleed: "ClearChoice / Corporate", deficit: "Missing CBCT 3D guided surgical precision & local lab warranty" },
-        { kw: "emergency root canal specialist", ticket: "$1,600", bleed: "Aspen Dental", deficit: "Lacks microscope endodontics and same-day pain interlock" },
-        { kw: "cosmetic porcelain veneers", ticket: "$9,200", bleed: "Yelp / Aggregators", deficit: "Zero master ceramist provenance or smile design diagnostic" },
-        { kw: "sedation dentistry for dental anxiety", ticket: "$1,800", bleed: "General GPs", deficit: "Missing board-certified IV sedation telemetry standards" },
-        { kw: "bone graft dental implant", ticket: "$2,400", bleed: "Corporate Chains", deficit: "Lacks autogenous vs xenograft biological healing kinetics" }
-      ],
-      builder: [
-        { kw: "custom modern farmhouse build cost", ticket: "$650,000", bleed: "Houzz / HomeAdvisor", deficit: "Missing realistic Georgia red clay grading & foundation realities" },
-        { kw: "luxury architectural kitchen remodel", ticket: "$85,000", bleed: "Angi Aggregator Farms", deficit: "Zero inset custom cabinet engineering & mechanical MEP detail" },
-        { kw: "whole home historic renovation", ticket: "$220,000", bleed: "General Handymen", deficit: "Lacks historic district zoning & structural load compliance" },
-        { kw: "screened porch with masonry fireplace", ticket: "$65,000", bleed: "Generic Deck Builders", deficit: "Missing Cobb County setback & timber framing specifications" },
-        { kw: "custom detached accessory dwelling unit", ticket: "$145,000", bleed: "Prefab National Brokers", deficit: "Zero local municipal utility connection & permitting roadmap" }
-      ],
-      extraction: [
-        { kw: "first wash live rosin wholesale", ticket: "$2,500/case", bleed: "Corporate Brokers", deficit: "Missing 73u-120u trichome harvest window & SC Labs terpene proof" },
-        { kw: "living soil cold water hash", ticket: "$3,200/case", bleed: "Multi-State MSOs", deficit: "Lacks Humboldt rhizosphere microbiology & zero-VPD cure curves" },
-        { kw: "solventless bulk rosin allocation", ticket: "$4,800/case", bleed: "Distributor Middlemen", deficit: "Zero dispensary keystone margin & direct Metrc transfer purity" },
-        { kw: "single source full melt hash", ticket: "$2,800/case", bleed: "Commercial Extractors", deficit: "Missing low-temperature Darcy press thermodynamics standard" },
-        { kw: "volatile monoterpene preservation rosin", ticket: "$3,500/case", bleed: "Hydrocarbon Labs", deficit: "Lacks gas chromatography (GC-MS) sublimation verification" }
-      ]
-    };
+    // 3D Wireframe S/SL Interlocking Monogram Engine
+    const boxesLoop1 = [
+      { xMin: -14, xMax: -10, yMin: 12,  yMax: 16,  zMin: -16, zMax: 0 },
+      { xMin: -12, xMax: 12,  yMin: 12,  yMax: 16,  zMin: -18, zMax: -14 },
+      { xMin: 10,  xMax: 14,  yMin: 0,   yMax: 14,  zMin: -18, zMax: -14 },
+      { xMin: 10,  xMax: 14,  yMin: -2,  yMax: 2,   zMin: -16, zMax: 16 },
+      { xMin: 10,  xMax: 14,  yMin: -14, yMax: 0,   zMin: 14,  zMax: 18 },
+      { xMin: -12, xMax: 12,  yMin: -16, yMax: -12, zMin: 14,  zMax: 18 }
+    ];
 
-    function handleAuditSubmit(e) {
-      e.preventDefault();
-      const btn = document.getElementById('auditBtn');
-      const btnText = document.getElementById('btnText');
-      const targetName = document.getElementById('targetName').value.trim();
-      const targetVertical = document.getElementById('targetVertical').value;
-      const targetLocation = document.getElementById('targetLocation').value.trim();
-      const resultsDiv = document.getElementById('auditResults');
-      const matrixBody = document.getElementById('matrixBody');
+    const boxesLoop2 = boxesLoop1.map(b => ({
+      xMin: -b.xMax,
+      xMax: -b.xMin,
+      yMin: -b.yMax,
+      yMax: -b.yMin,
+      zMin: -b.zMax,
+      zMax: -b.zMin
+    }));
 
-      btn.disabled = true;
-      btnText.innerText = "Emulating Geo-Proxy Search...";
+    const allBoxes = [...boxesLoop1, ...boxesLoop2];
+    const meshVertices = [];
+    const meshEdges = [];
 
-      setTimeout(() => {
-        btnText.innerText = "Harvesting Information Gain Vacuums...";
-      }, 700);
+    allBoxes.forEach((box, index) => {
+      const startIndex = index * 8;
+      meshVertices.push(
+        { x: box.xMin, y: box.yMin, z: box.zMin }, // 0
+        { x: box.xMax, y: box.yMin, z: box.zMin }, // 1
+        { x: box.xMin, y: box.yMax, z: box.zMin }, // 2
+        { x: box.xMax, y: box.yMax, z: box.zMin }, // 3
+        { x: box.xMin, y: box.yMin, z: box.zMax }, // 4
+        { x: box.xMax, y: box.yMin, z: box.zMax }, // 5
+        { x: box.xMin, y: box.yMax, z: box.zMax }, // 6
+        { x: box.xMax, y: box.yMax, z: box.zMax }  // 7
+      );
 
-      setTimeout(() => {
-        btn.disabled = false;
-        btnText.innerText = "Re-Run Pre-Flight Diagnostic";
+      meshEdges.push(
+        { u: startIndex + 0, v: startIndex + 1 },
+        { u: startIndex + 2, v: startIndex + 3 },
+        { u: startIndex + 4, v: startIndex + 5 },
+        { u: startIndex + 6, v: startIndex + 7 },
+        { u: startIndex + 0, v: startIndex + 2 },
+        { u: startIndex + 1, v: startIndex + 3 },
+        { u: startIndex + 4, v: startIndex + 6 },
+        { u: startIndex + 5, v: startIndex + 7 },
+        { u: startIndex + 0, v: startIndex + 4 },
+        { u: startIndex + 1, v: startIndex + 5 },
+        { u: startIndex + 2, v: startIndex + 6 },
+        { u: startIndex + 3, v: startIndex + 7 }
+      );
+    });
 
-        document.getElementById('resultTargetName').innerText = `${targetName} (${targetLocation})`;
-        
-        const vectors = PROCEDURAL_VECTORS[targetVertical] || PROCEDURAL_VECTORS.veterinary;
-        let html = '';
+    const edgesGroup = document.getElementById('edges-group');
+    let theta = 0;
+    const D = 120;
+    const scale = 3.8;
+    const tiltX = 18 * Math.PI / 180;
+    const cosX = Math.cos(tiltX);
+    const sinX = Math.sin(tiltX);
+    const zMin = -28;
+    const zMax = 28;
 
-        vectors.forEach((v, idx) => {
-          const rank = idx === 0 ? "Pos 24 (Page 3)" : (idx === 1 ? "Pos 19 (Page 2)" : "Off SERP (&gt;30)");
-          html += `
-            <tr style="border-bottom: 1px solid rgba(255,255,255,0.04); background: ${idx % 2 === 0 ? 'rgba(255,255,255,0.01)' : 'transparent'};">
-              <td style="padding: 12px 14px; color: #FFF; font-weight: 600;">"${v.kw} ${targetLocation.toLowerCase()}"</td>
-              <td style="padding: 12px 14px; color: var(--emerald-accent);">${v.ticket}</td>
-              <td style="padding: 12px 14px; color: var(--amber-accent); font-weight: 700;">${rank}</td>
-              <td style="padding: 12px 14px; color: #EF4444;">${v.bleed}</td>
-              <td style="padding: 12px 14px; color: var(--text-muted); font-size: 11px;">${v.deficit}</td>
-            </tr>
-          `;
-        });
+    function renderFrame() {
+      theta = (theta + 0.012) % (Math.PI * 2);
+      const cosY = Math.cos(theta);
+      const sinY = Math.sin(theta);
 
-        matrixBody.innerHTML = html;
-        resultsDiv.style.display = 'block';
-        resultsDiv.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-      }, 1500);
+      const projectedVertices = meshVertices.map(v => {
+        const x1 = v.x * cosY - v.z * sinY;
+        const z1 = v.x * sinY + v.z * cosY;
+        const y1 = v.y;
+
+        const x2 = x1;
+        const y2 = y1 * cosX - z1 * sinX;
+        const z2 = y1 * sinX + z1 * cosX;
+
+        const s = D / (D - z2);
+        const px = x2 * s * scale;
+        const py = y2 * s * scale;
+
+        return { x: px, y: py, z: z2 };
+      });
+
+      const projectedEdges = meshEdges.map(edge => {
+        const p1 = projectedVertices[edge.u];
+        const p2 = projectedVertices[edge.v];
+        return {
+          x1: p1.x,
+          y1: p1.y,
+          x2: p2.x,
+          y2: p2.y,
+          avgZ: (p1.z + p2.z) / 2
+        };
+      });
+
+      projectedEdges.sort((a, b) => a.avgZ - b.avgZ);
+
+      let svgContent = '';
+      for (let i = 0; i < projectedEdges.length; i++) {
+        const edge = projectedEdges[i];
+        const t = Math.max(0, Math.min(1, (edge.avgZ - zMin) / (zMax - zMin)));
+        const strokeWidth = (0.6 + t * 1.5).toFixed(2);
+        const opacity = (0.12 + t * 0.78).toFixed(2);
+        const stroke = t > 0.52 ? '#ffffff' : '#00d4ff';
+        const filterAttr = t > 0.7 ? ' filter="url(#glow-filter)"' : '';
+
+        svgContent += `<line x1="${edge.x1.toFixed(1)}" y1="${edge.y1.toFixed(1)}" x2="${edge.x2.toFixed(1)}" y2="${edge.y2.toFixed(1)}" stroke="${stroke}" stroke-width="${strokeWidth}" opacity="${opacity}" stroke-linecap="round"${filterAttr} />`;
+      }
+
+      edgesGroup.innerHTML = svgContent;
+      requestAnimationFrame(renderFrame);
     }
 
-    function handleInquirySubmit(e) {
-      e.preventDefault();
-      const btn = document.getElementById('inquiryBtn');
-      const contact = document.getElementById('inquiryContact').value.trim();
-      const feedback = document.getElementById('inquiryFeedback');
-
-      btn.disabled = true;
-      btn.innerText = "Transmitting to Clio...";
-
-      setTimeout(() => {
-        btn.disabled = false;
-        btn.innerText = "Inquiry Logged ✓";
-        feedback.style.display = 'block';
-      }, 900);
-    }
+    requestAnimationFrame(renderFrame);
   </script>
 </body>
 </html>
