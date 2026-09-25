@@ -1,7 +1,7 @@
 User-agent: *
 Allow: /
-Allow: /wildseed
-Allow: /wildseed/*
 Allow: /assets/*
+Disallow: /wildseed
+Disallow: /wildseed/*
 
 Sitemap: https://www.stacklabsllc.com/sitemap.xml
