@@ -500,11 +500,6 @@
       }
     }
 
-    @media (max-width: 480px) {
-      .advocate-picker {
-        grid-template-columns: 1fr;
-      }
-    }
 
     .advocate-card {
       background: var(--bg-card);
@@ -735,6 +730,158 @@
     .swarm-send-btn:disabled {
       opacity: 0.5;
       cursor: not-allowed;
+    }
+
+    /* --- MOBILE SWARM CONSOLE OVERHAUL (WO0010295) --- */
+    .active-advocate-mobile-strip {
+      display: none;
+    }
+
+    .swarm-send-btn .mobile-text {
+      display: none;
+    }
+    .swarm-send-btn .desktop-text {
+      display: inline;
+    }
+
+    @media (max-width: 640px) {
+      .advocate-picker {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr) !important;
+        gap: 8px !important;
+        margin-bottom: 10px !important;
+      }
+
+      .advocate-card {
+        padding: 8px 4px !important;
+        align-items: center !important;
+        text-align: center !important;
+        border-radius: 8px !important;
+        min-height: unset !important;
+      }
+
+      .adv-avatar-wrapper {
+        width: 44px !important;
+        height: 44px !important;
+        border-radius: 50% !important;
+        margin: 0 auto 6px auto !important;
+        border: 2px solid transparent !important;
+      }
+
+      .advocate-card.active .adv-avatar-wrapper {
+        border-color: var(--accent-teal) !important;
+        box-shadow: 0 0 10px rgba(20, 184, 166, 0.4) !important;
+      }
+
+      .adv-handle {
+        font-size: 11px !important;
+        justify-content: center !important;
+        white-space: nowrap !important;
+        overflow: hidden !important;
+        text-overflow: ellipsis !important;
+        max-width: 100% !important;
+        margin-bottom: 0 !important;
+      }
+
+      .adv-role,
+      .adv-actions {
+        display: none !important;
+      }
+
+      /* Compact Active Advocate Sub-Banner */
+      .active-advocate-mobile-strip {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background: rgba(20, 184, 166, 0.08);
+        border: 1px solid rgba(20, 184, 166, 0.25);
+        border-radius: 8px;
+        padding: 8px 12px;
+        margin-bottom: 14px;
+      }
+
+      .active-strip-label {
+        font-size: 12px;
+        color: #E2E8F0;
+        font-weight: 500;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        max-width: 75%;
+      }
+
+      .active-strip-dossier {
+        font-size: 11px;
+        font-weight: 600;
+        color: var(--accent-amber);
+        background: transparent;
+        border: none;
+        cursor: pointer;
+        text-decoration: underline;
+        padding: 0;
+        white-space: nowrap;
+      }
+
+      /* Single-line horizontal swipe tray for query pills */
+      .pill-rack {
+        display: flex !important;
+        flex-wrap: nowrap !important;
+        overflow-x: auto !important;
+        -webkit-overflow-scrolling: touch !important;
+        scrollbar-width: none !important;
+        gap: 8px !important;
+        margin-bottom: 14px !important;
+        padding-bottom: 4px !important;
+      }
+      .pill-rack::-webkit-scrollbar {
+        display: none;
+      }
+      .query-pill {
+        flex-shrink: 0 !important;
+        font-size: 11.5px !important;
+        padding: 6px 12px !important;
+        white-space: nowrap !important;
+      }
+
+      /* Roomy dialogue pane on mobile */
+      .swarm-dialogue-pane {
+        padding: 14px 12px !important;
+        min-height: 220px !important;
+        max-height: 360px !important;
+        gap: 12px !important;
+        margin-bottom: 12px !important;
+      }
+
+      .bubble-text {
+        font-size: 13.5px !important;
+        line-height: 1.55 !important;
+        padding: 10px 14px !important;
+        max-width: 96% !important;
+        border-radius: 10px !important;
+      }
+
+      /* Compact, high-efficiency input dock */
+      .swarm-input-dock {
+        gap: 8px !important;
+      }
+
+      .swarm-input {
+        padding: 10px 12px !important;
+        font-size: 13.5px !important;
+      }
+
+      .swarm-send-btn {
+        padding: 10px 14px !important;
+        font-size: 13px !important;
+        white-space: nowrap !important;
+      }
+
+      .swarm-send-btn .desktop-text {
+        display: none !important;
+      }
+      .swarm-send-btn .mobile-text {
+        display: inline !important;
+      }
     }
 
     /* Research Publications Section */
@@ -1413,6 +1560,12 @@
         </div>
       </div>
 
+      <!-- Mobile Active Advocate Sub-Banner -->
+      <div class="active-advocate-mobile-strip" id="activeAdvocateMobileStrip">
+        <span class="active-strip-label" id="mobileStripLabel">James Carroll • Founder & Lead Systems Architect</span>
+        <button class="active-strip-dossier" id="mobileStripDossier" onclick="openDossier(activeAdvocateKey)">Dossier →</button>
+      </div>
+
       <!-- Quick Inquiry Pills -->
       <div class="pill-rack">
         <span class="query-pill" onclick="sendPillQuery('Explain the Pilot\'s Unbreakable Fence architectural edict.')">"Explain the Unbreakable Fence"</span>
@@ -1440,10 +1593,13 @@
           type="text" 
           id="swarmInput" 
           class="swarm-input" 
-          placeholder="Ask an architectural or economic question..." 
+          placeholder="Ask @sys_invariant an architectural question..." 
           onkeydown="if(event.key==='Enter') sendCustomQuery()"
         />
-        <button id="swarmSendBtn" class="swarm-send-btn" onclick="sendCustomQuery()">Interrogate Swarm →</button>
+        <button id="swarmSendBtn" class="swarm-send-btn" onclick="sendCustomQuery()">
+          <span class="desktop-text">Interrogate Swarm →</span>
+          <span class="mobile-text">Ask →</span>
+        </button>
       </div>
     </section>
 
@@ -1703,10 +1859,12 @@
       }
     };
 
+    const advocateData = advocates;
     let activeAdvocateKey = 'sys_invariant';
 
     function selectAdvocate(key, element) {
       activeAdvocateKey = key;
+      const advKey = key;
       document.querySelectorAll('.advocate-card').forEach(c => c.classList.remove('active'));
       const targetCard = element || document.getElementById('card-' + key);
       if (targetCard) targetCard.classList.add('active');
@@ -1715,6 +1873,19 @@
       document.getElementById('currentSender').textContent = adv.handle;
       document.getElementById('currentRole').textContent = adv.role;
       
+      // Update mobile strip label
+      const mobileStripLabel = document.getElementById('mobileStripLabel');
+      if (mobileStripLabel && advocateData[advKey]) {
+        const rolePart = advocateData[advKey].role.split('•')[1]?.trim() || advocateData[advKey].role;
+        mobileStripLabel.textContent = advocateData[advKey].name + ' • ' + rolePart;
+      }
+
+      // Update dynamic input placeholder
+      const swarmInput = document.getElementById('swarmInput');
+      if (swarmInput && advocateData[advKey]) {
+        swarmInput.placeholder = 'Ask ' + advocateData[advKey].handle + ' anything...';
+      }
+
       const dialogue = document.getElementById('swarmDialogue');
       const bubble = document.createElement('div');
       bubble.className = 'swarm-bubble';
