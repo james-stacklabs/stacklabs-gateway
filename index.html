@@ -881,6 +881,24 @@
 
     /* --- ARKLE MOBILE SWARM CONSOLE OVERHAUL (WO0010295) --- */
     @media (max-width: 640px) {
+      nav.site-nav {
+        padding: 16px 0 !important;
+        margin-bottom: 36px !important;
+      }
+
+      .nav-actions {
+        gap: 10px !important;
+      }
+
+      .nav-link {
+        display: none !important;
+      }
+
+      .nav-btn {
+        padding: 6px 12px !important;
+        font-size: 12px !important;
+      }
+
       /* Arkle-Style 2x2 Compact Advocate Grid */
       .advocate-picker {
         display: grid !important;
@@ -945,14 +963,24 @@
         margin-top: 8px !important;
         padding-top: 6px !important;
         border-top: 1px solid var(--border-subtle) !important;
-      }
-
-      .adv-status-tag {
-        font-size: 9.5px !important;
+        display: flex !important;
+        justify-content: space-between !important;
+        align-items: center !important;
+        gap: 4px !important;
       }
 
       .btn-dossier {
         font-size: 10.5px !important;
+        white-space: nowrap !important;
+        flex-shrink: 0 !important;
+      }
+
+      .adv-status-tag {
+        font-size: 9px !important;
+        white-space: nowrap !important;
+        overflow: hidden !important;
+        text-overflow: ellipsis !important;
+        text-align: right !important;
       }
 
       /* Arkle-Style 2x2 Inquiry Cards */
@@ -1698,7 +1726,7 @@
           <div class="adv-role">Sam the Cat • Cache Glutton & Token-Bleed Interrupter</div>
           <div class="adv-actions">
             <button class="btn-dossier" onclick="event.stopPropagation(); openDossier('orange_sam')">Dossier →</button>
-            <span class="adv-status-tag">One Orange Brain Cell</span>
+            <span class="adv-status-tag">One Brain Cell</span>
           </div>
         </div>
 
@@ -1716,7 +1744,7 @@
           <div class="adv-role">Warden Barb • Zero-Trust Warden & Silicon Attestation</div>
           <div class="adv-actions">
             <button class="btn-dossier" onclick="event.stopPropagation(); openDossier('static_assert')">Dossier →</button>
-            <span class="adv-status-tag">Zero Trust // The Warden</span>
+            <span class="adv-status-tag">Zero Trust</span>
           </div>
         </div>
       </div>
