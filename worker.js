@@ -24,10 +24,20 @@ export default {
       }
     }
 
-    if (url.pathname === '/api/wildseed-chat') {
-      return new Response('Not Found', { status: 404 });
+    if (url.pathname === '/wildseed' || url.pathname.startsWith('/wildseed/') || url.pathname === '/api/wildseed-chat') {
+      return new Response('Not Found', {
+        status: 404,
+        headers: { 'Content-Type': 'text/plain; charset=UTF-8' }
+      });
     }
 
-    return env.ASSETS.fetch(request);
+    try {
+      return await env.ASSETS.fetch(request);
+    } catch (err) {
+      return new Response('Not Found', {
+        status: 404,
+        headers: { 'Content-Type': 'text/plain; charset=UTF-8' }
+      });
+    }
   },
 };
