@@ -21,12 +21,13 @@
 
   <style>
     :root {
+      /* Dark Sovereign Void (Default) */
       --bg-base: #06080C;
       --bg-surface: #0B0E14;
       --bg-card: #10141D;
       --bg-card-hover: #151B27;
       --border-subtle: rgba(255, 255, 255, 0.07);
-      --border-focus: rgba(255, 255, 255, 0.16);
+      --border-focus: rgba(255, 255, 255, 0.18);
       --accent-amber: #F59E0B;
       --accent-teal: #14B8A6;
       --accent-blue: #3B82F6;
@@ -37,6 +38,106 @@
       --font-serif: 'Newsreader', Georgia, serif;
       --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
       --font-mono: 'JetBrains Mono', monospace;
+      --theme-toggle-bg: rgba(255, 255, 255, 0.08);
+      --theme-toggle-border: rgba(255, 255, 255, 0.12);
+    }
+
+    [data-theme="light"] {
+      /* Warm Editorial Parchment (Arkle / Financial Times Standard) */
+      --bg-base: #FCFBF7;
+      --bg-surface: #F5F2EB;
+      --bg-card: #FFFFFF;
+      --bg-card-hover: #F8F6F0;
+      --border-subtle: rgba(0, 0, 0, 0.08);
+      --border-focus: rgba(0, 0, 0, 0.22);
+      --accent-amber: #D97706;
+      --accent-teal: #0D9488;
+      --accent-blue: #2563EB;
+      --accent-purple: #7C3AED;
+      --text-primary: #18181B;
+      --text-secondary: #52525B;
+      --text-muted: #71717A;
+      --theme-toggle-bg: rgba(0, 0, 0, 0.05);
+      --theme-toggle-border: rgba(0, 0, 0, 0.12);
+    }
+
+    [data-theme="light"] .ambient-glow {
+      opacity: 0.15;
+    }
+
+    [data-theme="light"] .brand-mark,
+    [data-theme="light"] .brand-name,
+    [data-theme="light"] .hero-title,
+    [data-theme="light"] .adv-handle,
+    [data-theme="light"] .split-title,
+    [data-theme="light"] .pillar-title,
+    [data-theme="light"] .research-card .card-title,
+    [data-theme="light"] .dossier-name {
+      color: #18181B !important;
+    }
+
+    [data-theme="light"] .nav-btn,
+    [data-theme="light"] .btn-primary {
+      background: #18181B !important;
+      color: #FFFFFF !important;
+    }
+
+    [data-theme="light"] .btn-secondary {
+      background: transparent !important;
+      color: #18181B !important;
+      border-color: rgba(0, 0, 0, 0.15) !important;
+    }
+
+    [data-theme="light"] .hero-lead,
+    [data-theme="light"] .pillar-body,
+    [data-theme="light"] .swarm-intro-text,
+    [data-theme="light"] .card-excerpt {
+      color: #52525B !important;
+    }
+
+    [data-theme="light"] .bubble-text {
+      background: #FFFFFF !important;
+      border-color: rgba(0, 0, 0, 0.08) !important;
+      color: #27272A !important;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+    }
+
+    [data-theme="light"] .bubble-sender {
+      color: #18181B !important;
+    }
+
+    [data-theme="light"] .swarm-bubble.user .bubble-text {
+      background: rgba(37, 99, 235, 0.08) !important;
+      border-color: rgba(37, 99, 235, 0.25) !important;
+      color: #1E3A8A !important;
+    }
+
+    [data-theme="light"] .swarm-input {
+      color: #18181B !important;
+      background: #FFFFFF !important;
+      border-color: rgba(0, 0, 0, 0.12) !important;
+    }
+
+    [data-theme="light"] .modal-sheet {
+      background: #FFFFFF !important;
+      border-color: rgba(0, 0, 0, 0.12) !important;
+      color: #18181B !important;
+      box-shadow: 0 24px 60px rgba(0, 0, 0, 0.15) !important;
+    }
+
+    [data-theme="light"] .modal-close {
+      color: #18181B !important;
+      border-color: rgba(0, 0, 0, 0.12) !important;
+    }
+
+    [data-theme="light"] .dossier-stat-box,
+    [data-theme="light"] .dossier-lore-block {
+      background: #F8F6F0 !important;
+      border-color: rgba(0, 0, 0, 0.08) !important;
+    }
+
+    [data-theme="light"] .dossier-lore-block {
+      color: #3F3F46 !important;
     }
 
     * {
@@ -138,6 +239,25 @@
 
     .nav-btn:hover {
       opacity: 0.9;
+    }
+
+    .theme-toggle-btn {
+      background: var(--theme-toggle-bg);
+      border: 1px solid var(--theme-toggle-border);
+      color: var(--text-primary);
+      width: 36px;
+      height: 36px;
+      border-radius: 8px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      font-size: 15px;
+      transition: all 0.15s ease;
+    }
+    .theme-toggle-btn:hover {
+      border-color: var(--border-focus);
+      transform: translateY(-1px);
     }
 
     /* Hero Section */
@@ -543,10 +663,26 @@
       object-fit: cover;
     }
 
+    .adv-header-row {
+      display: block;
+    }
+
+    .adv-meta-compact {
+      width: 100%;
+    }
+
+    .adv-name-title {
+      font-size: 15px;
+      font-weight: 700;
+      font-family: var(--font-serif);
+      color: var(--text-primary);
+      margin-bottom: 2px;
+    }
+
     .adv-handle {
       font-weight: 600;
-      font-size: 14px;
-      color: #FFF;
+      font-size: 13px;
+      color: var(--text-muted);
       margin-bottom: 4px;
       display: flex;
       align-items: center;
@@ -596,26 +732,37 @@
     .pill-rack {
       display: flex;
       flex-wrap: wrap;
-      gap: 8px;
+      gap: 10px;
       margin-bottom: 24px;
     }
 
     .query-pill {
-      background: var(--bg-base);
+      background: var(--bg-card);
       border: 1px solid var(--border-subtle);
-      border-radius: 20px;
-      padding: 6px 14px;
+      border-radius: 8px;
+      padding: 8px 14px;
       font-size: 12px;
       color: var(--text-secondary);
       cursor: pointer;
       transition: all 0.15s ease;
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
     }
 
     .query-pill:hover {
       color: #FFF;
       border-color: var(--border-focus);
-      background: var(--bg-card);
+      background: var(--bg-card-hover);
       transform: translateY(-1px);
+    }
+
+    .pill-badge {
+      font-size: 9px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--accent-teal);
+      font-weight: 600;
     }
 
     .swarm-dialogue-pane {
@@ -732,155 +879,146 @@
       cursor: not-allowed;
     }
 
-    /* --- MOBILE SWARM CONSOLE OVERHAUL (WO0010295) --- */
-    .active-advocate-mobile-strip {
-      display: none;
-    }
-
-    .swarm-send-btn .mobile-text {
-      display: none;
-    }
-    .swarm-send-btn .desktop-text {
-      display: inline;
-    }
-
+    /* --- ARKLE MOBILE SWARM CONSOLE OVERHAUL (WO0010295) --- */
     @media (max-width: 640px) {
+      /* Arkle-Style 2x2 Compact Advocate Grid */
       .advocate-picker {
-        display: grid;
-        grid-template-columns: repeat(4, 1fr) !important;
-        gap: 8px !important;
-        margin-bottom: 10px !important;
+        display: grid !important;
+        grid-template-columns: repeat(2, 1fr) !important;
+        gap: 10px !important;
+        margin-bottom: 12px !important;
       }
 
       .advocate-card {
-        padding: 8px 4px !important;
-        align-items: center !important;
-        text-align: center !important;
-        border-radius: 8px !important;
+        padding: 10px !important;
+        flex-direction: column !important;
+        align-items: flex-start !important;
+        border-radius: 10px !important;
         min-height: unset !important;
       }
 
+      .adv-header-row {
+        display: flex !important;
+        align-items: center !important;
+        gap: 10px !important;
+        width: 100% !important;
+      }
+
       .adv-avatar-wrapper {
-        width: 44px !important;
-        height: 44px !important;
-        border-radius: 50% !important;
-        margin: 0 auto 6px auto !important;
-        border: 2px solid transparent !important;
+        width: 42px !important;
+        height: 42px !important;
+        border-radius: 10px !important;
+        margin-bottom: 0 !important;
+        flex-shrink: 0 !important;
       }
 
-      .advocate-card.active .adv-avatar-wrapper {
-        border-color: var(--accent-teal) !important;
-        box-shadow: 0 0 10px rgba(20, 184, 166, 0.4) !important;
+      .adv-meta-compact {
+        min-width: 0 !important;
+        flex: 1 !important;
       }
 
-      .adv-handle {
-        font-size: 11px !important;
-        justify-content: center !important;
+      .adv-name-title {
+        font-size: 12px !important;
+        font-weight: 700 !important;
+        font-family: var(--font-serif) !important;
+        color: var(--text-primary) !important;
         white-space: nowrap !important;
         overflow: hidden !important;
         text-overflow: ellipsis !important;
-        max-width: 100% !important;
-        margin-bottom: 0 !important;
       }
 
-      .adv-role,
-      .adv-actions {
+      .adv-handle {
+        font-size: 10.5px !important;
+        color: var(--text-muted) !important;
+        margin-bottom: 0 !important;
+        white-space: nowrap !important;
+        overflow: hidden !important;
+        text-overflow: ellipsis !important;
+      }
+
+      .adv-role {
         display: none !important;
       }
 
-      /* Compact Active Advocate Sub-Banner */
-      .active-advocate-mobile-strip {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        background: rgba(20, 184, 166, 0.08);
-        border: 1px solid rgba(20, 184, 166, 0.25);
-        border-radius: 8px;
-        padding: 8px 12px;
-        margin-bottom: 14px;
+      .adv-actions {
+        width: 100% !important;
+        margin-top: 8px !important;
+        padding-top: 6px !important;
+        border-top: 1px solid var(--border-subtle) !important;
       }
 
-      .active-strip-label {
-        font-size: 12px;
-        color: #E2E8F0;
-        font-weight: 500;
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        max-width: 75%;
+      .adv-status-tag {
+        font-size: 9.5px !important;
       }
 
-      .active-strip-dossier {
-        font-size: 11px;
-        font-weight: 600;
-        color: var(--accent-amber);
-        background: transparent;
-        border: none;
-        cursor: pointer;
-        text-decoration: underline;
-        padding: 0;
-        white-space: nowrap;
+      .btn-dossier {
+        font-size: 10.5px !important;
       }
 
-      /* Single-line horizontal swipe tray for query pills */
+      /* Arkle-Style 2x2 Inquiry Cards */
       .pill-rack {
-        display: flex !important;
-        flex-wrap: nowrap !important;
-        overflow-x: auto !important;
-        -webkit-overflow-scrolling: touch !important;
-        scrollbar-width: none !important;
+        display: grid !important;
+        grid-template-columns: repeat(2, 1fr) !important;
         gap: 8px !important;
         margin-bottom: 14px !important;
-        padding-bottom: 4px !important;
-      }
-      .pill-rack::-webkit-scrollbar {
-        display: none;
-      }
-      .query-pill {
-        flex-shrink: 0 !important;
-        font-size: 11.5px !important;
-        padding: 6px 12px !important;
-        white-space: nowrap !important;
       }
 
-      /* Roomy dialogue pane on mobile */
+      .query-pill {
+        border-radius: 8px !important;
+        padding: 8px 10px !important;
+        font-size: 11px !important;
+        line-height: 1.35 !important;
+        text-align: left !important;
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 2px !important;
+        white-space: normal !important;
+      }
+
+      .pill-badge {
+        font-size: 8.5px;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        color: var(--accent-teal);
+        font-weight: 600;
+      }
+
+      /* Natural dialogue flow */
       .swarm-dialogue-pane {
         padding: 14px 12px !important;
         min-height: 220px !important;
-        max-height: 360px !important;
-        gap: 12px !important;
+        max-height: 380px !important;
         margin-bottom: 12px !important;
       }
 
       .bubble-text {
         font-size: 13.5px !important;
-        line-height: 1.55 !important;
+        line-height: 1.5 !important;
         padding: 10px 14px !important;
         max-width: 96% !important;
         border-radius: 10px !important;
       }
 
-      /* Compact, high-efficiency input dock */
+      /* Full-Width Stacked Input & Consult CTA */
       .swarm-input-dock {
+        flex-direction: column !important;
         gap: 8px !important;
       }
 
       .swarm-input {
-        padding: 10px 12px !important;
+        width: 100% !important;
+        padding: 11px 14px !important;
         font-size: 13.5px !important;
       }
 
       .swarm-send-btn {
-        padding: 10px 14px !important;
+        width: 100% !important;
+        padding: 11px 16px !important;
         font-size: 13px !important;
-        white-space: nowrap !important;
-      }
-
-      .swarm-send-btn .desktop-text {
-        display: none !important;
-      }
-      .swarm-send-btn .mobile-text {
-        display: inline !important;
+        justify-content: center !important;
+        display: flex !important;
+        align-items: center !important;
+        gap: 6px !important;
       }
     }
 
@@ -1330,6 +1468,9 @@
           <a href="#swarm" class="nav-link">Live Swarm</a>
           <a href="#research" class="nav-link">Research</a>
           <a href="#contact" class="nav-btn">Commercial Inquiry</a>
+          <button id="themeToggleBtn" class="theme-toggle-btn" onclick="toggleTheme()" title="Toggle Light/Dark Mode" aria-label="Toggle Theme">
+            <span class="theme-icon">☀️</span>
+          </button>
         </div>
       </div>
     </nav>
@@ -1509,69 +1650,95 @@
       <div class="advocate-picker">
         <!-- James Carroll (Pilot) -->
         <div class="advocate-card active" id="card-sys_invariant" onclick="selectAdvocate('sys_invariant', this)">
-          <div class="adv-avatar-wrapper">
-            <img src="/james_carroll_avatar.jpg" alt="James Carroll" class="adv-avatar-img" />
+          <div class="adv-header-row">
+            <div class="adv-avatar-wrapper">
+              <img src="/james_carroll_avatar.jpg" alt="James Carroll" class="adv-avatar-img" />
+            </div>
+            <div class="adv-meta-compact">
+              <div class="adv-name-title">James Carroll</div>
+              <div class="adv-handle">@sys_invariant</div>
+            </div>
           </div>
-          <div class="adv-handle">@sys_invariant</div>
           <div class="adv-role">James Carroll • Founder & Lead Systems Architect</div>
           <div class="adv-actions">
-            <button class="btn-dossier" onclick="event.stopPropagation(); openDossier('sys_invariant')">Inspect Dossier →</button>
+            <button class="btn-dossier" onclick="event.stopPropagation(); openDossier('sys_invariant')">Dossier →</button>
             <span class="adv-status-tag">Lead Architect</span>
           </div>
         </div>
 
         <!-- The Blue Heeler -->
         <div class="advocate-card" id="card-anti_hype" onclick="selectAdvocate('anti_hype', this)">
-          <div class="adv-avatar-wrapper">
-            <img src="/blue_heeler_avatar.jpg" alt="The Blue Heeler" class="adv-avatar-img" />
+          <div class="adv-header-row">
+            <div class="adv-avatar-wrapper">
+              <img src="/blue_heeler_avatar.jpg" alt="The Blue Heeler" class="adv-avatar-img" />
+            </div>
+            <div class="adv-meta-compact">
+              <div class="adv-name-title">The Blue Heeler</div>
+              <div class="adv-handle">@anti_hype_sentry</div>
+            </div>
           </div>
-          <div class="adv-handle">@anti_hype_sentry</div>
           <div class="adv-role">The Blue Heeler • Anti-Sycophancy & Token Herder</div>
           <div class="adv-actions">
-            <button class="btn-dossier" onclick="event.stopPropagation(); openDossier('anti_hype')">Inspect Dossier →</button>
+            <button class="btn-dossier" onclick="event.stopPropagation(); openDossier('anti_hype')">Dossier →</button>
             <span class="adv-status-tag">The Heel</span>
           </div>
         </div>
 
         <!-- Sam the Orange Cat -->
         <div class="advocate-card" id="card-orange_sam" onclick="selectAdvocate('orange_sam', this)">
-          <div class="adv-avatar-wrapper">
-            <img src="/sam_the_cat_avatar.jpg" alt="Sam the Cat" class="adv-avatar-img" />
+          <div class="adv-header-row">
+            <div class="adv-avatar-wrapper">
+              <img src="/sam_the_cat_avatar.jpg" alt="Sam the Cat" class="adv-avatar-img" />
+            </div>
+            <div class="adv-meta-compact">
+              <div class="adv-name-title">Sam the Cat</div>
+              <div class="adv-handle">@orange_braincell_sam</div>
+            </div>
           </div>
-          <div class="adv-handle">@orange_braincell_sam</div>
           <div class="adv-role">Sam the Cat • Cache Glutton & Token-Bleed Interrupter</div>
           <div class="adv-actions">
-            <button class="btn-dossier" onclick="event.stopPropagation(); openDossier('orange_sam')">Inspect Dossier →</button>
+            <button class="btn-dossier" onclick="event.stopPropagation(); openDossier('orange_sam')">Dossier →</button>
             <span class="adv-status-tag">One Orange Brain Cell</span>
           </div>
         </div>
 
         <!-- Warden Barb (@static_assert) -->
         <div class="advocate-card" id="card-static_assert" onclick="selectAdvocate('static_assert', this)">
-          <div class="adv-avatar-wrapper">
-            <img src="/static_assert_avatar.jpg" alt="Warden Barb" class="adv-avatar-img" />
+          <div class="adv-header-row">
+            <div class="adv-avatar-wrapper">
+              <img src="/static_assert_avatar.jpg" alt="Warden Barb" class="adv-avatar-img" />
+            </div>
+            <div class="adv-meta-compact">
+              <div class="adv-name-title">Warden Barb</div>
+              <div class="adv-handle">@static_assert</div>
+            </div>
           </div>
-          <div class="adv-handle">@static_assert</div>
           <div class="adv-role">Warden Barb • Zero-Trust Warden & Silicon Attestation</div>
           <div class="adv-actions">
-            <button class="btn-dossier" onclick="event.stopPropagation(); openDossier('static_assert')">Inspect Dossier →</button>
+            <button class="btn-dossier" onclick="event.stopPropagation(); openDossier('static_assert')">Dossier →</button>
             <span class="adv-status-tag">Zero Trust // The Warden</span>
           </div>
         </div>
       </div>
 
-      <!-- Mobile Active Advocate Sub-Banner -->
-      <div class="active-advocate-mobile-strip" id="activeAdvocateMobileStrip">
-        <span class="active-strip-label" id="mobileStripLabel">James Carroll • Founder & Lead Systems Architect</span>
-        <button class="active-strip-dossier" id="mobileStripDossier" onclick="openDossier(activeAdvocateKey)">Dossier →</button>
-      </div>
-
-      <!-- Quick Inquiry Pills -->
+      <!-- Quick Inquiry Protocol Cards -->
       <div class="pill-rack">
-        <span class="query-pill" onclick="sendPillQuery('Explain the Pilot\'s Unbreakable Fence architectural edict.')">"Explain the Unbreakable Fence"</span>
-        <span class="query-pill" onclick="sendPillQuery('Why do polite RLHF models fail in enterprise workflows?')">"Why polite models fail in enterprise"</span>
-        <span class="query-pill" onclick="sendPillQuery('Why shouldn\'t I just call the cloud API every time?')">"Why not call cloud APIs for everything?"</span>
-        <span class="query-pill" onclick="sendPillQuery('How does StackLabs prove physical silicon attestation?')">"How to prove physical silicon attestation"</span>
+        <div class="query-pill" onclick="sendPillQuery('Explain the Pilot\'s Unbreakable Fence architectural edict.')">
+          <span class="pill-badge">Architecture Protocol</span>
+          <span>"The Unbreakable Fence"</span>
+        </div>
+        <div class="query-pill" onclick="sendPillQuery('Why do polite RLHF models fail in enterprise workflows?')">
+          <span class="pill-badge">Safety & Governance</span>
+          <span>"Why Polite Models Fail"</span>
+        </div>
+        <div class="query-pill" onclick="sendPillQuery('Why shouldn\'t I just call the cloud API every time?')">
+          <span class="pill-badge">Unit Economics</span>
+          <span>"Cloud Token Tax vs Cache"</span>
+        </div>
+        <div class="query-pill" onclick="sendPillQuery('How does StackLabs prove physical silicon attestation?')">
+          <span class="pill-badge">Hardware Security</span>
+          <span>"Physical Silicon Attestation"</span>
+        </div>
       </div>
 
       <!-- Dialogue Pane -->
@@ -1596,10 +1763,7 @@
           placeholder="Ask @sys_invariant an architectural question..." 
           onkeydown="if(event.key==='Enter') sendCustomQuery()"
         />
-        <button id="swarmSendBtn" class="swarm-send-btn" onclick="sendCustomQuery()">
-          <span class="desktop-text">Interrogate Swarm →</span>
-          <span class="mobile-text">Ask →</span>
-        </button>
+        <button id="swarmSendBtn" class="swarm-send-btn" onclick="sendCustomQuery()">Interrogate Swarm →</button>
       </div>
     </section>
 
@@ -1873,12 +2037,6 @@
       document.getElementById('currentSender').textContent = adv.handle;
       document.getElementById('currentRole').textContent = adv.role;
       
-      // Update mobile strip label
-      const mobileStripLabel = document.getElementById('mobileStripLabel');
-      if (mobileStripLabel && advocateData[advKey]) {
-        const rolePart = advocateData[advKey].role.split('•')[1]?.trim() || advocateData[advKey].role;
-        mobileStripLabel.textContent = advocateData[advKey].name + ' • ' + rolePart;
-      }
 
       // Update dynamic input placeholder
       const swarmInput = document.getElementById('swarmInput');
@@ -2080,6 +2238,32 @@
       div.textContent = text;
       return div.innerHTML;
     }
+
+    // Theme Engine (Light/Dark Persistence)
+    function initTheme() {
+      const savedTheme = localStorage.getItem('stacklabs_theme') || 'dark';
+      document.documentElement.setAttribute('data-theme', savedTheme);
+      updateThemeIcon(savedTheme);
+    }
+
+    function toggleTheme() {
+      const currentTheme = document.documentElement.getAttribute('data-theme') || 'dark';
+      const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+      document.documentElement.setAttribute('data-theme', newTheme);
+      localStorage.setItem('stacklabs_theme', newTheme);
+      updateThemeIcon(newTheme);
+    }
+
+    function updateThemeIcon(theme) {
+      const btn = document.getElementById('themeToggleBtn');
+      if (btn) {
+        btn.querySelector('.theme-icon').textContent = theme === 'dark' ? '☀️' : '🌙';
+        btn.title = theme === 'dark' ? 'Switch to Editorial Light Mode' : 'Switch to Obsidian Dark Mode';
+      }
+    }
+
+    // Initialize on load
+    initTheme();
   </script>
 </body>
 </html>
