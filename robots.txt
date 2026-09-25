@@ -4,4 +4,4 @@ Allow: /wildseed
 Allow: /wildseed/*
 Allow: /assets/*
 
-Sitemap: https://www.stacklabsllc.com/wildseed/sitemap.xml
+Sitemap: https://www.stacklabsllc.com/sitemap.xml
