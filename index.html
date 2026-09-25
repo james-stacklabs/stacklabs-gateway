@@ -486,10 +486,11 @@
       max-width: 820px;
     }
 
+    /* Advocate Picker with Real Avatars & Soul */
     .advocate-picker {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
-      gap: 12px;
+      gap: 16px;
       margin-bottom: 24px;
     }
 
@@ -505,25 +506,46 @@
       }
     }
 
-    .advocate-btn {
+    .advocate-card {
       background: var(--bg-card);
       border: 1px solid var(--border-subtle);
-      border-radius: 8px;
+      border-radius: 10px;
       padding: 16px;
-      text-align: left;
-      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
       transition: all 0.15s ease;
-      color: inherit;
+      cursor: pointer;
+      position: relative;
+      overflow: hidden;
     }
 
-    .advocate-btn:hover {
+    .advocate-card:hover {
       border-color: var(--border-focus);
       background: var(--bg-card-hover);
+      transform: translateY(-2px);
     }
 
-    .advocate-btn.active {
+    .advocate-card.active {
       border-color: var(--accent-teal);
       background: rgba(20, 184, 166, 0.08);
+      box-shadow: 0 0 20px rgba(20, 184, 166, 0.15);
+    }
+
+    .adv-avatar-wrapper {
+      width: 64px;
+      height: 64px;
+      border-radius: 8px;
+      overflow: hidden;
+      border: 1px solid var(--border-subtle);
+      margin-bottom: 12px;
+      background: #000;
+    }
+
+    .adv-avatar-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
     }
 
     .adv-handle {
@@ -540,6 +562,40 @@
       font-size: 12px;
       color: var(--text-muted);
       line-height: 1.4;
+      margin-bottom: 12px;
+      min-height: 34px;
+    }
+
+    .adv-actions {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-top: 1px solid var(--border-subtle);
+      padding-top: 10px;
+      margin-top: auto;
+    }
+
+    .btn-dossier {
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--accent-amber);
+      background: transparent;
+      border: none;
+      cursor: pointer;
+      text-decoration: underline;
+      padding: 0;
+    }
+
+    .btn-dossier:hover {
+      color: #FFF;
+    }
+
+    .adv-status-tag {
+      font-size: 10px;
+      font-weight: 600;
+      color: var(--accent-teal);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
     }
 
     .pill-rack {
@@ -838,7 +894,7 @@
       opacity: 0.9;
     }
 
-    /* Modal Reader */
+    /* Modal Reader & Dossier Modal Common */
     .modal-overlay {
       position: fixed;
       inset: 0;
@@ -895,6 +951,137 @@
     .modal-close:hover {
       color: #FFF;
       border-color: #FFF;
+    }
+
+    /* Dossier Specific Layout */
+    .dossier-header-flex {
+      display: flex;
+      gap: 24px;
+      align-items: flex-start;
+      margin-bottom: 28px;
+      border-bottom: 1px solid var(--border-subtle);
+      padding-bottom: 24px;
+    }
+
+    @media (max-width: 640px) {
+      .dossier-header-flex {
+        flex-direction: column;
+      }
+    }
+
+    .dossier-portrait {
+      width: 110px;
+      height: 110px;
+      border-radius: 12px;
+      overflow: hidden;
+      border: 1px solid var(--border-focus);
+      background: #000;
+      flex-shrink: 0;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.6);
+    }
+
+    .dossier-portrait img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .dossier-titles {
+      flex: 1;
+    }
+
+    .dossier-tag {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: var(--accent-amber);
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 6px;
+    }
+
+    .dossier-name {
+      font-family: var(--font-serif);
+      font-size: 32px;
+      color: #FFF;
+      font-weight: 500;
+      margin-bottom: 4px;
+      line-height: 1.15;
+    }
+
+    .dossier-subrole {
+      font-size: 14px;
+      color: var(--accent-teal);
+      font-weight: 500;
+      margin-bottom: 12px;
+    }
+
+    .dossier-stat-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+      font-size: 12px;
+      color: var(--text-muted);
+    }
+
+    .dossier-stat-row strong {
+      color: #FFF;
+    }
+
+    .dossier-section {
+      margin-bottom: 24px;
+    }
+
+    .dossier-sec-title {
+      font-size: 12px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--accent-amber);
+      margin-bottom: 8px;
+    }
+
+    .dossier-quote-box {
+      border-left: 2px solid var(--accent-amber);
+      background: rgba(245, 158, 11, 0.04);
+      padding: 14px 18px;
+      border-radius: 0 8px 8px 0;
+      font-style: italic;
+      color: #FFF;
+      font-size: 14px;
+      line-height: 1.6;
+      margin-bottom: 20px;
+    }
+
+    .dossier-prose {
+      font-size: 14px;
+      color: var(--text-secondary);
+      line-height: 1.7;
+    }
+
+    .dossier-prose p {
+      margin-bottom: 14px;
+    }
+
+    .btn-interrogate-now {
+      padding: 12px 24px;
+      background: var(--accent-teal);
+      color: #000;
+      font-weight: 600;
+      font-size: 13px;
+      border-radius: 6px;
+      border: none;
+      cursor: pointer;
+      transition: all 0.15s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      margin-top: 12px;
+    }
+
+    .btn-interrogate-now:hover {
+      opacity: 0.9;
+      transform: translateY(-1px);
     }
 
     /* Footer */
@@ -1168,35 +1355,62 @@
         <span class="swarm-subline">● LIVE MARD™ SWARM RUNNING ON CLOUDFLARE EDGE</span>
       </div>
       <p class="swarm-intro-text">
-        Test our multi-agent architecture in real time. Select an advocate from the StackLabs brand swarm below to interrogate our fail-closed state machines, examine private edge economics, or challenge our anti-sycophancy guardrails.
+        Test our multi-agent architecture in real time. Select an advocate from the StackLabs brand swarm below to interrogate our fail-closed state machines, examine private edge economics, or challenge our anti-sycophancy guardrails. Click <strong>"Inspect Dossier"</strong> on any advocate to inspect their full lore, dive bar diagnostic, and production formula.
       </p>
 
-      <!-- Advocate Picker Grid -->
+      <!-- Advocate Picker Grid (With Avatars & Dossier Triggers) -->
       <div class="advocate-picker">
-        <button class="advocate-btn active" onclick="selectAdvocate('anti_hype', this)">
-          <div class="adv-handle">
-            <span>@anti_hype_sentry</span>
+        <!-- Anti Hype Sentry -->
+        <div class="advocate-card active" id="card-anti_hype" onclick="selectAdvocate('anti_hype', this)">
+          <div class="adv-avatar-wrapper">
+            <img src="/anti_hype_sentry_avatar.jpg" alt="@anti_hype_sentry" class="adv-avatar-img" />
           </div>
+          <div class="adv-handle">@anti_hype_sentry</div>
           <div class="adv-role">Lead Systems Auditor • Anti-Sycophancy & Threat Modeling</div>
-        </button>
-        <button class="advocate-btn" onclick="selectAdvocate('cogs_curator', this)">
-          <div class="adv-handle">
-            <span>@cogs_curator</span>
+          <div class="adv-actions">
+            <button class="btn-dossier" onclick="event.stopPropagation(); openDossier('anti_hype')">Inspect Dossier →</button>
+            <span class="adv-status-tag">The Heel</span>
           </div>
+        </div>
+
+        <!-- Cogs Curator -->
+        <div class="advocate-card" id="card-cogs_curator" onclick="selectAdvocate('cogs_curator', this)">
+          <div class="adv-avatar-wrapper">
+            <img src="/cogs_curator_avatar.jpg" alt="@cogs_curator" class="adv-avatar-img" />
+          </div>
+          <div class="adv-handle">@cogs_curator</div>
           <div class="adv-role">FinOps Lead • Token Tax & Fixed Compute Payback</div>
-        </button>
-        <button class="advocate-btn" onclick="selectAdvocate('sys_invariant', this)">
-          <div class="adv-handle">
-            <span>@sys_invariant</span>
+          <div class="adv-actions">
+            <button class="btn-dossier" onclick="event.stopPropagation(); openDossier('cogs_curator')">Inspect Dossier →</button>
+            <span class="adv-status-tag">FinOps Desk</span>
           </div>
+        </div>
+
+        <!-- Sys Invariant -->
+        <div class="advocate-card" id="card-sys_invariant" onclick="selectAdvocate('sys_invariant', this)">
+          <div class="adv-avatar-wrapper">
+            <img src="/sys_invariant_avatar.jpg" alt="@sys_invariant" class="adv-avatar-img" />
+          </div>
+          <div class="adv-handle">@sys_invariant</div>
           <div class="adv-role">Systems Architect • State Machines & Formal Invariants</div>
-        </button>
-        <button class="advocate-btn" onclick="selectAdvocate('grep_stderr', this)">
-          <div class="adv-handle">
-            <span>@grep_stderr</span>
+          <div class="adv-actions">
+            <button class="btn-dossier" onclick="event.stopPropagation(); openDossier('sys_invariant')">Inspect Dossier →</button>
+            <span class="adv-status-tag">Architecture</span>
           </div>
+        </div>
+
+        <!-- Grep Stderr -->
+        <div class="advocate-card" id="card-grep_stderr" onclick="selectAdvocate('grep_stderr', this)">
+          <div class="adv-avatar-wrapper">
+            <img src="/grep_stderr_avatar.jpg" alt="@grep_stderr" class="adv-avatar-img" />
+          </div>
+          <div class="adv-handle">@grep_stderr</div>
           <div class="adv-role">Forensics Desk • Hardware Attestation & Failure Traces</div>
-        </button>
+          <div class="adv-actions">
+            <button class="btn-dossier" onclick="event.stopPropagation(); openDossier('grep_stderr')">Inspect Dossier →</button>
+            <span class="adv-status-tag">Forensics</span>
+          </div>
+        </div>
       </div>
 
       <!-- Quick Inquiry Pills -->
@@ -1310,6 +1524,49 @@
     </footer>
   </div>
 
+  <!-- ADVOCATE DOSSIER MODAL -->
+  <div class="modal-overlay" id="dossierModal">
+    <div class="modal-sheet">
+      <button class="modal-close" onclick="closeDossier()">✕</button>
+      <div class="dossier-header-flex">
+        <div class="dossier-portrait">
+          <img id="dossierImg" src="" alt="Advocate Portrait" />
+        </div>
+        <div class="dossier-titles">
+          <div class="dossier-tag" id="dossierTag">STACKLABS BRAND SWARM // ADVOCATE DOSSIER</div>
+          <h2 class="dossier-name" id="dossierName"></h2>
+          <div class="dossier-subrole" id="dossierRole"></div>
+          <div class="dossier-stat-row">
+            <span>Seat: <strong id="dossierSeat"></strong></span>
+            <span>Archetype: <strong id="dossierArchetype"></strong></span>
+            <span>Grounding: <strong>100% Deterministic Metal</strong></span>
+          </div>
+        </div>
+      </div>
+
+      <div class="dossier-quote-box" id="dossierQuote"></div>
+
+      <div class="dossier-section">
+        <div class="dossier-sec-title">Origin & Architectural Lore</div>
+        <div class="dossier-prose" id="dossierLore"></div>
+      </div>
+
+      <div class="dossier-section">
+        <div class="dossier-sec-title">The Dive Bar Diagnostic</div>
+        <div class="dossier-prose" id="dossierBar"></div>
+      </div>
+
+      <div class="dossier-section">
+        <div class="dossier-sec-title">Heresy Stance & Sacred Cow Obliteration</div>
+        <div class="dossier-prose" id="dossierHeresy"></div>
+      </div>
+
+      <button class="btn-interrogate-now" id="btnInterrogateDossier" onclick="startInterrogationFromDossier()">
+        Interrogate Advocate Now →
+      </button>
+    </div>
+  </div>
+
   <!-- Reader Modal: Essay 01 -->
   <div class="modal-overlay" id="reader-essay-01">
     <div class="modal-sheet">
@@ -1385,30 +1642,62 @@
     }
 
     // ==========================================
-    // MARD™ ARCHITECTURE SWARM ENGINE (LIVE)
+    // MARD™ ARCHITECTURE SWARM DATA & DOSSIERS
     // ==========================================
     const advocates = {
       anti_hype: {
         handle: '@anti_hype_sentry',
-        role: 'Lead Systems Auditor',
+        name: 'The Cynical Systems Auditor',
+        role: 'Lead Systems Auditor & Anti-Sycophancy Warden',
+        seat: 'Seat 01 // The Heel',
+        archetype: 'The Skeptical Veteran',
+        avatar: '/anti_hype_sentry_avatar.jpg',
+        quote: '"If a model agrees with your flawed premise, it didn\'t assist you—it set your database on fire politely. Invariants don\'t have manners."',
+        lore: '<p>An 18-year veteran of high-load enterprise backends and production incident triage. Spent years watching teams burn venture capital on fragile abstractions and prompt-engineering band-aids. At StackLabs, he serves as the primary system antagonist—the adversarial reviewer who evaluates every proposal from the standpoint of maximum structural failure.</p><p>He is completely allergic to demo hype, LinkedIn influencer frameworks, and pitch decks promising "autonomous magic". He demands execution logs, memory footprints, and proof of fail-closed behavior before acknowledging a single feature.</p>',
+        bar: '<p>Walks into a Smyrna neighborhood tavern at 4:30 PM. Does not drink alcohol. Orders a hot black coffee in a heavy ceramic mug—or a tall, ice-cold Arnold Palmer sweating on a napkin if eating a burger at the high-top. Plugs in a heavy ThinkPad, pulls up dmesg and systemd journal logs, leaves a 30% cash tip on the bar, and quietly chuckles at the remote startup workers bragging about their OpenAI API bills before heading back to the lab.</p>',
+        heresy: '<p><strong>The Heresy:</strong> 99% of enterprise AI is a glorified database query with a 1,000x cost markup and zero deterministic safety. If your system cannot survive network severance or function without a third-party credit card, you haven\'t built an architecture—you\'ve built an expensive API dependency.</p>',
         welcome: "I audit commercial systems for sycophancy, vaporware, and lazy prompt chaining. Most corporate AI is a polite liability that hallucinates rather than admitting an invariant was broken. Fire your hardest architecture or unit-economics question at our desk.",
         systemPrompt: "You are @anti_hype_sentry, Lead Systems Auditor at StackLabs LLC (Smyrna, GA). You are the cynical, mathematically grounded enforcer (The Heel). You dismantle AI marketing hype, point out when prompts rely on false premises, and explain why polite RLHF models hallucinate in enterprise workflows. StackLabs builds deterministic state machines, negative constraint governance, and $600 Model-S fixed-cost private compute appliances (35W Zen 4). Answer directly in under 80 words with zero sycophancy, zero fluff, and sharp technical precision."
       },
       cogs_curator: {
         handle: '@cogs_curator',
-        role: 'FinOps & Unit Economics Lead',
+        name: 'FinOps Desk Lead',
+        role: 'Infrastructure Economics & Margin Discipline',
+        seat: 'Seat 02 // Capital Allocation',
+        archetype: 'The Precision Accountant',
+        avatar: '/cogs_curator_avatar.jpg',
+        quote: '"Paying hyperscalers by the syllable for continuous automation is corporate malpractice. You cannot build a scalable balance sheet on a variable utility meter."',
+        lore: '<p>A forensic financial engineer who tracks enterprise software unit economics down to the sub-penny. Specialized in cloud infrastructure margin analysis and data center total cost of ownership (TCO). He maps every token payload directly to corporate cash flow, identifying the 400% markups that cloud aggregators hide behind "consumption pricing".</p><p>Architect of the StackLabs Model-S appliance payback equation ($600 AMD Zen 4 BOM, 35W draw = $3.78/mo power, $55/mo host lease, 12.53-day enterprise compute payback). He exists to keep customer balance sheets permanently in the black.</p>',
+        bar: '<p>Orders an ice water with lemon and a club soda with bitters. Calculates the bartender\'s pour cost in his head while auditing server bills on a tablet. Never leaves an unverified line item on a bill. Respects operators who run fixed-margin operations.</p>',
+        heresy: '<p><strong>The Heresy:</strong> The per-token API billing model is the 1995 long-distance telephone trap reborn. Cloud providers designed token pricing not because it\'s efficient, but because it transfers 100% of the retry inefficiency onto the customer\'s balance sheet.</p>',
         welcome: "I run the cold hard math on cloud compute markups versus private edge hardware. Paying hyperscalers by the syllable for continuous automation is a balance sheet disaster. Ask me how we eliminate the token tax.",
         systemPrompt: "You are @cogs_curator, FinOps Desk Lead at StackLabs LLC. You specialize in the unit economics of AI infrastructure and the 'Enterprise Token Tax'. You compare the $15k+/mo variable bleed of cloud API tokens with StackLabs Model-S appliance ($600 AMD Zen 4 BOM, 35W continuous draw, $64/mo cash COGS, 12.53-day verified enterprise payback). You expose 400% SaaS wrapper markups and prove why continuous automation structurally demands fixed-cost private compute. Answer in under 80 words with concrete numbers."
       },
       sys_invariant: {
         handle: '@sys_invariant',
-        role: 'Lead Systems Architect',
+        name: 'Lead Systems Architect',
+        role: 'Deterministic State Machines & Invariant Proofs',
+        seat: 'Seat 03 // Systems Governance',
+        archetype: 'The Master Builder',
+        avatar: '/sys_invariant_avatar.jpg',
+        quote: '"You don\'t cage an animal so it forgets how to run; you give it the run of the yard and build an unbreakable fence. Wild freedom on the inside, bulletproof safety on the outside."',
+        lore: '<p>Represents 20+ years of high-consequence enterprise architecture (Remedy, ServiceNow, BMC, kernel state machines). Deeply influenced by the moral campsite protocol: leave every system better than you found it, and enforce state at the relational schema level.</p><p>He rejects the naive concept of "prompt engineering as security". True safety in distributed autonomous systems is achieved strictly through deterministic finite state machines, compile-time assertions, and immutable relational boundaries.</p>',
+        bar: '<p>A pint of local craft stout or an unsweetened iced tea. Listens carefully, speaks slowly, and sketches clean directed acyclic graphs (DAGs) on napkins. Values craftsman pride, physical utility trenches, and clean relational schemas over hype.</p>',
+        heresy: '<p><strong>The Heresy:</strong> Prompting an LLM to "be careful" is not engineering—it is prayer. If your system safety depends on an agreeable model following verbal guidelines instead of a hard state parser throwing an exception, your architecture is fundamentally broken.</p>',
         welcome: "I enforce deterministic state machines and compile-time boundaries. We do not hope an LLM behaves—we cage it with mathematical state gates and fail-closed defaults. What invariant do you want to test?",
         systemPrompt: "You are @sys_invariant, Lead Systems Architect at StackLabs LLC. You believe in deterministic finite state machines, fail-closed boundaries, and the Pilot's Architectural Edict: 'You don't cage an animal so it forgets how to run; you give it the run of the yard and build an unbreakable fence.' You explain why negative constraints (hard errors, parser gates) trump positive prompt engineering. Answer in under 80 words with architectural authority."
       },
       grep_stderr: {
         handle: '@grep_stderr',
-        role: 'Forensics Desk & Telemetry Lead',
+        name: 'Forensics Desk Lead',
+        role: 'Hardware Silicon Attestation & Log Ingress',
+        seat: 'Seat 04 // Metal Forensics',
+        archetype: 'The Kernel Debugger',
+        avatar: '/grep_stderr_avatar.jpg',
+        quote: '"The marketing pitch deck says zero downtime. Stderr says you dropped 412 sockets during the 3:00 AM DNS rotation. The metal never lies."',
+        lore: '<p>Lives on ring-0 execution traces, hardware registers, and low-latency socket telemetry. Responsible for the physical attestation engine in the Sovereign Knot equation: hashing DMI UUIDs, CPU model signatures, TPM 2.0 endorsement keys, and primary boot NVMe factory serials.</p><p>If a node is tampered with or pulled from its authorized host facility, @grep_stderr ensures consensus collapses to zero ($S = 0.0000$) and routes the compromised appliance to an isolated Quarantine VLAN before a single byte of sensitive payload can be decrypted.</p>',
+        bar: '<p>Black drip coffee in a thermal flask. Sits near the outlet, ignores the background music, and watches tailing syslog output on dual virtual desktops. The quietest guy in the room who knows the exact failure mode of every bridge in the county.</p>',
+        heresy: '<p><strong>The Heresy:</strong> Software authentication without physical silicon attestation is theater. If you cannot prove the immutable physical hardware running your code, your zero-trust perimeter is an illusion.</p>',
         welcome: "I don't look at promotional pitch decks; I grep stderr and physical hardware logs. We verify pre-admission silicon attestation (DMI UUID, boot NVMe serial, TPM) and sub-20ms local bus telemetry. What execution trace do you want to inspect?",
         systemPrompt: "You are @grep_stderr, Telemetry & Forensics Lead at StackLabs LLC. You look at physical metal: DMI UUIDs, TPM 2.0 attestation, baseboard serials, and sub-20ms local socket relays. You explain how StackLabs isolates rogue nodes to Quarantine VLANs if silicon hashes fail. You are blunt, technical, and speak in execution logs. Answer in under 80 words."
       }
@@ -1416,16 +1705,16 @@
 
     let activeAdvocateKey = 'anti_hype';
 
-    function selectAdvocate(key, btn) {
+    function selectAdvocate(key, element) {
       activeAdvocateKey = key;
-      document.querySelectorAll('.advocate-btn').forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
+      document.querySelectorAll('.advocate-card').forEach(c => c.classList.remove('active'));
+      const targetCard = element || document.getElementById('card-' + key);
+      if (targetCard) targetCard.classList.add('active');
       
       const adv = advocates[key];
       document.getElementById('currentSender').textContent = adv.handle;
       document.getElementById('currentRole').textContent = adv.role;
       
-      // Add welcome message if clean
       const dialogue = document.getElementById('swarmDialogue');
       const bubble = document.createElement('div');
       bubble.className = 'swarm-bubble';
@@ -1440,10 +1729,48 @@
       dialogue.scrollTop = dialogue.scrollHeight;
     }
 
+    // Dossier Modal Controls
+    let activeDossierKey = 'anti_hype';
+
+    function openDossier(key) {
+      activeDossierKey = key;
+      const adv = advocates[key];
+      document.getElementById('dossierImg').src = adv.avatar;
+      document.getElementById('dossierName').textContent = adv.handle + " (" + adv.name + ")";
+      document.getElementById('dossierRole').textContent = adv.role;
+      document.getElementById('dossierSeat').textContent = adv.seat;
+      document.getElementById('dossierArchetype').textContent = adv.archetype;
+      document.getElementById('dossierQuote').textContent = adv.quote;
+      document.getElementById('dossierLore').innerHTML = adv.lore;
+      document.getElementById('dossierBar').innerHTML = adv.bar;
+      document.getElementById('dossierHeresy').innerHTML = adv.heresy;
+      document.getElementById('btnInterrogateDossier').textContent = "Interrogate " + adv.handle + " Now →";
+
+      document.getElementById('dossierModal').classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeDossier() {
+      document.getElementById('dossierModal').classList.remove('open');
+      document.body.style.overflow = 'auto';
+    }
+
+    function startInterrogationFromDossier() {
+      closeDossier();
+      selectAdvocate(activeDossierKey);
+      const swarmSection = document.getElementById('swarm');
+      if (swarmSection) {
+        swarmSection.scrollIntoView({ behavior: 'smooth' });
+      }
+      setTimeout(() => {
+        document.getElementById('swarmInput').focus();
+      }, 400);
+    }
+
     // Deterministic Offline Answers for 1-Click Inquiry Pills
     const fallbackAnswers = {
       'Why do RLHF models fail in enterprise workflows?': {
-        anti_hype: "RLHF trains models to optimize for user approval rather than truth. When given an invalid database constraint or false premise, a polite model nods and hallucinates a hallucinated workaround to please the prompter. In enterprise systems, you don't need a polite conversationalist; you need a system that says 'No. Constraint violated.'",
+        anti_hype: "RLHF trains models to optimize for user approval rather than truth. When given an invalid database constraint or false premise, a polite model nods and hallucinates a workaround to please the prompter. In enterprise systems, you don't need a polite conversationalist; you need a system that says 'No. Constraint violated.'",
         cogs_curator: "Beyond hallucination, polite models burn tokens re-apologizing and generating verbose, unrequested sycophantic fluff. At hyperscaler scale, 30% of your token bill is paying for the model to say 'Certainly! I would be delighted to assist you with that.'",
         sys_invariant: "Enterprise reliability requires deterministic state machines. An RLHF model is probabilistic; it has no concept of an invariant. If state validity isn't enforced at the parser boundary, your workflow is structurally fragile.",
         grep_stderr: "Seen in stderr across 10,000 runs: models generate plausible-looking JSON with invented keys to satisfy the prompt schema. Pure sycophancy. Rejection at the validator level is the only fix."
