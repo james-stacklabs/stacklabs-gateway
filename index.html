@@ -4,35 +4,35 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>StackLabs — Systems Engineering & Autonomous Infrastructure</title>
-  <meta name="description" content="StackLabs LLC develops deterministic edge infrastructure, anthropomorphic domain microservices, and fail-closed autonomous systems. Based in Smyrna, Georgia." />
-  <meta name="keywords" content="deterministic state machines, anti-sycophancy guardrails, edge computing, autonomous systems, token tax, cloud cogs, smyrna ga systems architecture" />
+  <meta name="description" content="StackLabs builds deterministic edge appliances, fail-closed autonomous systems, and structured search authority. Fixed-cost private compute engineered in Smyrna, Georgia." />
+  <meta name="keywords" content="deterministic state machines, private edge compute, anti-sycophancy guardrails, autonomous systems, token tax, fixed-cost infrastructure, smyrna ga systems engineering" />
   <link rel="canonical" href="https://www.stacklabsllc.com/" />
 
   <!-- OpenGraph -->
   <meta property="og:type" content="website" />
   <meta property="og:title" content="StackLabs — Systems Engineering & Autonomous Infrastructure" />
-  <meta property="og:description" content="Deterministic state machines, anti-sycophancy guardrails, and fixed-cost sovereign compute." />
+  <meta property="og:description" content="Fixed-cost private compute, deterministic state machines, and structured entity authority." />
   <meta property="og:url" content="https://www.stacklabsllc.com/" />
 
-  <!-- Fonts: Newsreader (Editorial Serif) + Inter (Clean Sans) + JetBrains Mono (Code only) -->
+  <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
 
   <style>
     :root {
-      --bg-base: #080A0E;
-      --bg-surface: #0E121A;
-      --bg-card: #131824;
-      --bg-card-hover: #182030;
+      --bg-base: #06080C;
+      --bg-surface: #0B0E14;
+      --bg-card: #10141D;
+      --bg-card-hover: #151B27;
       --border-subtle: rgba(255, 255, 255, 0.07);
-      --border-medium: rgba(255, 255, 255, 0.12);
-      --border-accent: rgba(217, 119, 6, 0.35);
-      --text-primary: #F1F5F9;
+      --border-focus: rgba(255, 255, 255, 0.16);
+      --accent-amber: #F59E0B;
+      --accent-teal: #14B8A6;
+      --accent-blue: #3B82F6;
+      --text-primary: #F8FAFC;
       --text-secondary: #94A3B8;
       --text-muted: #64748B;
-      --accent-warm: #D97706;
-      --accent-teal: #0D9488;
       --font-serif: 'Newsreader', Georgia, serif;
       --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
       --font-mono: 'JetBrains Mono', monospace;
@@ -53,21 +53,21 @@
       overflow-x: hidden;
     }
 
-    /* Subtle ambient background illumination */
+    /* Ambient lighting */
     .ambient-glow {
       position: fixed;
-      top: -150px;
+      top: -200px;
       left: 50%;
       transform: translateX(-50%);
-      width: 1000px;
-      height: 500px;
-      background: radial-gradient(ellipse at center, rgba(30, 41, 59, 0.4) 0%, rgba(8, 10, 14, 0) 70%);
+      width: 1200px;
+      height: 600px;
+      background: radial-gradient(ellipse at center, rgba(59, 130, 246, 0.12) 0%, rgba(20, 184, 166, 0.05) 45%, rgba(6, 8, 12, 0) 70%);
       pointer-events: none;
       z-index: 0;
     }
 
     .container {
-      max-width: 1140px;
+      max-width: 1160px;
       margin: 0 auto;
       padding: 0 32px;
       position: relative;
@@ -76,8 +76,8 @@
 
     /* Navigation */
     nav.site-nav {
+      padding: 28px 0;
       border-bottom: 1px solid var(--border-subtle);
-      padding: 24px 0;
       margin-bottom: 64px;
     }
 
@@ -87,385 +87,594 @@
       align-items: center;
     }
 
-    .brand-group {
+    .brand-mark {
       display: flex;
       align-items: baseline;
-      gap: 12px;
-    }
-
-    .brand-name {
-      font-family: var(--font-sans);
-      font-weight: 700;
-      font-size: 19px;
-      letter-spacing: -0.02em;
-      color: #FFF;
+      gap: 10px;
       text-decoration: none;
     }
 
-    .brand-location {
-      font-size: 13px;
-      color: var(--text-muted);
-      font-weight: 400;
+    .brand-name {
+      font-weight: 700;
+      font-size: 20px;
+      color: #FFF;
+      letter-spacing: -0.02em;
     }
 
-    .nav-links {
+    .brand-city {
+      font-size: 13px;
+      color: var(--text-muted);
+    }
+
+    .nav-actions {
       display: flex;
       align-items: center;
-      gap: 28px;
+      gap: 24px;
     }
 
     .nav-link {
       font-size: 13px;
       color: var(--text-secondary);
       text-decoration: none;
-      transition: color 0.15s ease;
       font-weight: 500;
+      transition: color 0.15s ease;
     }
 
     .nav-link:hover {
       color: #FFF;
     }
 
-    .nav-tag {
-      font-size: 11px;
-      background: rgba(255, 255, 255, 0.05);
-      border: 1px solid var(--border-subtle);
-      padding: 4px 10px;
+    .btn-nav {
+      font-size: 12px;
+      font-weight: 600;
+      padding: 8px 16px;
+      background: #FFF;
+      color: #000;
       border-radius: 9999px;
-      color: var(--text-muted);
+      text-decoration: none;
+      transition: all 0.2s ease;
+    }
+
+    .btn-nav:hover {
+      background: #E2E8F0;
+      transform: translateY(-1px);
     }
 
     /* Hero Section */
-    header.hero-section {
-      margin-bottom: 72px;
+    header.hero {
+      text-align: center;
+      max-width: 840px;
+      margin: 0 auto 80px;
     }
 
-    .hero-eyebrow {
-      font-size: 13px;
-      font-weight: 600;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      color: var(--accent-warm);
-      margin-bottom: 16px;
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--border-subtle);
+      padding: 6px 14px;
+      border-radius: 9999px;
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--text-secondary);
+      margin-bottom: 24px;
+    }
+
+    .badge-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--accent-teal);
     }
 
     .hero-title {
       font-family: var(--font-serif);
-      font-size: 48px;
+      font-size: 56px;
       font-weight: 500;
-      line-height: 1.18;
-      letter-spacing: -0.02em;
+      line-height: 1.12;
+      letter-spacing: -0.025em;
       color: #FFF;
-      max-width: 860px;
       margin-bottom: 24px;
     }
 
     @media (max-width: 768px) {
       .hero-title {
-        font-size: 34px;
+        font-size: 38px;
       }
     }
 
-    .hero-standfirst {
-      font-size: 18px;
+    .hero-lead {
+      font-size: 20px;
       line-height: 1.6;
       color: var(--text-secondary);
-      max-width: 760px;
       font-weight: 300;
+      margin-bottom: 36px;
     }
 
-    /* Section divider */
-    .section-header {
+    .hero-buttons {
+      display: flex;
+      justify-content: center;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .btn-primary {
+      background: #FFF;
+      color: #000;
+      padding: 12px 24px;
+      border-radius: 8px;
+      font-size: 14px;
+      font-weight: 600;
+      text-decoration: none;
+      transition: all 0.15s ease;
+    }
+
+    .btn-primary:hover {
+      background: #E2E8F0;
+      transform: translateY(-1px);
+    }
+
+    .btn-secondary {
+      background: rgba(255, 255, 255, 0.04);
+      color: var(--text-primary);
+      border: 1px solid var(--border-subtle);
+      padding: 12px 24px;
+      border-radius: 8px;
+      font-size: 14px;
+      font-weight: 500;
+      text-decoration: none;
+      transition: all 0.15s ease;
+    }
+
+    .btn-secondary:hover {
+      background: rgba(255, 255, 255, 0.08);
+      border-color: var(--border-focus);
+    }
+
+    /* 3 Pillars Section */
+    .section-eyebrow {
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--accent-amber);
+      margin-bottom: 12px;
+      text-align: center;
+    }
+
+    .section-headline {
+      font-family: var(--font-serif);
+      font-size: 34px;
+      font-weight: 500;
+      color: #FFF;
+      text-align: center;
+      margin-bottom: 48px;
+      letter-spacing: -0.01em;
+    }
+
+    .pillars-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      margin-bottom: 64px;
+    }
+
+    @media (max-width: 900px) {
+      .pillars-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .pillar-card {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-subtle);
+      border-radius: 12px;
+      padding: 36px 30px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: all 0.25s ease;
+      position: relative;
+    }
+
+    .pillar-card:hover {
+      border-color: var(--border-focus);
+      background: var(--bg-card);
+      transform: translateY(-3px);
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.4);
+    }
+
+    .pillar-num {
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--accent-teal);
+      letter-spacing: 0.05em;
+      margin-bottom: 16px;
+    }
+
+    .pillar-title {
+      font-family: var(--font-serif);
+      font-size: 24px;
+      font-weight: 500;
+      color: #FFF;
+      margin-bottom: 14px;
+      line-height: 1.25;
+    }
+
+    .pillar-body {
+      font-size: 14px;
+      line-height: 1.65;
+      color: var(--text-secondary);
+      margin-bottom: 24px;
+    }
+
+    .pillar-stat {
+      border-top: 1px solid var(--border-subtle);
+      padding-top: 16px;
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      font-size: 12px;
+    }
+
+    .stat-label {
+      color: var(--text-muted);
+    }
+
+    .stat-val {
+      font-weight: 600;
+      color: #FFF;
+    }
+
+    /* Interactive Capability Visualizer */
+    .interactive-showcase {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-subtle);
+      border-radius: 12px;
+      padding: 36px;
+      margin-bottom: 96px;
+    }
+
+    .showcase-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 28px;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+
+    .showcase-title-group h3 {
+      font-family: var(--font-serif);
+      font-size: 22px;
+      color: #FFF;
+      font-weight: 500;
+    }
+
+    .showcase-title-group p {
+      font-size: 13px;
+      color: var(--text-muted);
+    }
+
+    .tab-pills {
+      display: flex;
+      background: var(--bg-base);
+      border: 1px solid var(--border-subtle);
+      padding: 4px;
+      border-radius: 8px;
+      gap: 4px;
+    }
+
+    .tab-btn {
+      background: transparent;
+      border: none;
+      padding: 6px 14px;
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--text-secondary);
+      cursor: pointer;
+      border-radius: 6px;
+      transition: all 0.15s ease;
+    }
+
+    .tab-btn.active {
+      background: #FFF;
+      color: #000;
+      font-weight: 600;
+    }
+
+    .showcase-panel {
+      display: none;
+      animation: fadeIn 0.25s ease;
+    }
+
+    .showcase-panel.active {
+      display: block;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(4px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .comparison-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+
+    @media (max-width: 768px) {
+      .comparison-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .comp-box {
+      border: 1px solid var(--border-subtle);
+      background: var(--bg-card);
+      border-radius: 8px;
+      padding: 24px;
+    }
+
+    .comp-box.good {
+      border-color: rgba(20, 184, 166, 0.3);
+      background: rgba(20, 184, 166, 0.03);
+    }
+
+    .comp-box.bad {
+      border-color: rgba(244, 63, 94, 0.2);
+      background: rgba(244, 63, 94, 0.02);
+    }
+
+    .comp-header {
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .comp-box.good .comp-header {
+      color: var(--accent-teal);
+    }
+
+    .comp-box.bad .comp-header {
+      color: #F43F5E;
+    }
+
+    .comp-metric {
+      font-size: 28px;
+      font-weight: 700;
+      color: #FFF;
+      margin-bottom: 6px;
+      letter-spacing: -0.02em;
+    }
+
+    .comp-desc {
+      font-size: 13px;
+      color: var(--text-secondary);
+      line-height: 1.5;
+    }
+
+    /* Research Publications Section */
+    .research-section {
+      margin-bottom: 96px;
+    }
+
+    .section-split {
       display: flex;
       justify-content: space-between;
       align-items: baseline;
       border-bottom: 1px solid var(--border-subtle);
       padding-bottom: 16px;
-      margin-bottom: 40px;
+      margin-bottom: 36px;
     }
 
-    .section-heading {
-      font-size: 14px;
-      font-weight: 600;
-      letter-spacing: 0.06em;
-      text-transform: uppercase;
-      color: var(--text-secondary);
-    }
-
-    .section-meta {
-      font-size: 12px;
-      color: var(--text-muted);
-    }
-
-    /* Editorial Essays Grid */
-    .essays-grid {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 36px;
-      margin-bottom: 80px;
-    }
-
-    article.essay-card {
-      background: var(--bg-surface);
-      border: 1px solid var(--border-subtle);
-      border-radius: 8px;
-      padding: 44px 48px;
-      transition: border-color 0.2s ease;
-    }
-
-    @media (max-width: 768px) {
-      article.essay-card {
-        padding: 28px 24px;
-      }
-    }
-
-    article.essay-card:hover {
-      border-color: var(--border-medium);
-    }
-
-    .card-meta-top {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 20px;
-      font-size: 12px;
-      color: var(--text-muted);
-    }
-
-    .category-badge {
-      display: inline-block;
-      font-size: 11px;
-      font-weight: 600;
-      letter-spacing: 0.05em;
-      text-transform: uppercase;
-      color: var(--accent-warm);
-    }
-
-    .essay-card-title {
+    .split-title {
       font-family: var(--font-serif);
-      font-size: 32px;
+      font-size: 28px;
       font-weight: 500;
-      line-height: 1.25;
-      color: #FFF;
-      margin-bottom: 12px;
-      letter-spacing: -0.01em;
-    }
-
-    @media (max-width: 768px) {
-      .essay-card-title {
-        font-size: 24px;
-      }
-    }
-
-    .essay-card-subtitle {
-      font-size: 16px;
-      color: var(--text-secondary);
-      line-height: 1.5;
-      margin-bottom: 28px;
-      font-weight: 400;
-    }
-
-    /* Essay Prose */
-    .essay-content {
-      font-family: var(--font-serif);
-      font-size: 19px;
-      line-height: 1.8;
-      color: #E2E8F0;
-      border-top: 1px solid var(--border-subtle);
-      padding-top: 32px;
-    }
-
-    .essay-content p {
-      margin-bottom: 22px;
-    }
-
-    .essay-content p strong {
-      font-family: var(--font-sans);
-      font-weight: 600;
-      font-size: 17px;
       color: #FFF;
     }
 
-    .essay-content h4 {
-      font-family: var(--font-sans);
-      font-size: 16px;
-      font-weight: 600;
-      letter-spacing: 0.04em;
-      text-transform: uppercase;
-      color: var(--accent-warm);
-      margin: 36px 0 16px;
-    }
-
-    .essay-content ul {
-      margin: 16px 0 28px 24px;
-    }
-
-    .essay-content li {
-      margin-bottom: 12px;
-      padding-left: 4px;
-    }
-
-    .essay-content code {
-      font-family: var(--font-mono);
-      font-size: 14px;
-      background: rgba(255, 255, 255, 0.06);
-      padding: 2px 6px;
-      border-radius: 4px;
-      color: #F8FAFC;
-    }
-
-    .essay-content blockquote {
-      border-left: 2px solid var(--accent-warm);
-      padding: 16px 24px;
-      margin: 32px 0;
-      font-style: italic;
-      color: #F8FAFC;
-      background: rgba(217, 119, 6, 0.04);
-      border-radius: 0 4px 4px 0;
-    }
-
-    /* Technical Review Board (MARD Debate) */
-    .review-board {
-      margin-top: 40px;
-      border: 1px solid var(--border-subtle);
-      background: var(--bg-card);
-      border-radius: 6px;
-      overflow: hidden;
-    }
-
-    .review-toggle {
-      width: 100%;
-      background: transparent;
-      border: none;
-      padding: 16px 24px;
-      font-family: var(--font-sans);
+    .split-sub {
       font-size: 13px;
-      font-weight: 600;
-      color: var(--text-secondary);
-      text-align: left;
-      cursor: pointer;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      transition: background 0.15s, color 0.15s;
-    }
-
-    .review-toggle:hover {
-      background: rgba(255, 255, 255, 0.03);
-      color: #FFF;
-    }
-
-    .review-content {
-      display: none;
-      padding: 24px 28px;
-      border-top: 1px solid var(--border-subtle);
-      background: rgba(0, 0, 0, 0.2);
-    }
-
-    .review-content.open {
-      display: block;
-    }
-
-    .review-item {
-      margin-bottom: 20px;
-      padding-bottom: 18px;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.04);
-    }
-
-    .review-item:last-child {
-      margin-bottom: 0;
-      padding-bottom: 0;
-      border-bottom: none;
-    }
-
-    .reviewer-header {
-      display: flex;
-      align-items: baseline;
-      gap: 10px;
-      margin-bottom: 6px;
-    }
-
-    .reviewer-name {
-      font-size: 13px;
-      font-weight: 600;
-      color: #FFF;
-    }
-
-    .reviewer-role {
-      font-size: 11px;
       color: var(--text-muted);
     }
 
-    .reviewer-text {
-      font-size: 14px;
-      line-height: 1.6;
-      color: var(--text-secondary);
-    }
-
-    /* Production Deployments (Satellites) */
-    .satellites-grid {
+    .research-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 24px;
-      margin-bottom: 88px;
+      gap: 28px;
     }
 
     @media (max-width: 768px) {
-      .satellites-grid {
+      .research-grid {
         grid-template-columns: 1fr;
       }
     }
 
-    .satellite-card {
+    .research-card {
       background: var(--bg-surface);
       border: 1px solid var(--border-subtle);
-      border-radius: 8px;
+      border-radius: 12px;
       padding: 32px;
-      text-decoration: none;
-      color: inherit;
-      transition: all 0.2s ease;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
+      transition: all 0.2s ease;
+      cursor: pointer;
     }
 
-    .satellite-card:hover {
-      border-color: var(--border-medium);
-      background: var(--bg-card-hover);
+    .research-card:hover {
+      border-color: var(--border-focus);
+      background: var(--bg-card);
       transform: translateY(-2px);
     }
 
-    .sat-tag {
+    .card-topic {
       font-size: 11px;
       font-weight: 600;
-      letter-spacing: 0.06em;
+      letter-spacing: 0.05em;
       text-transform: uppercase;
-      color: var(--accent-teal);
-      margin-bottom: 8px;
+      color: var(--accent-amber);
+      margin-bottom: 12px;
     }
 
-    .sat-title {
+    .card-title {
       font-family: var(--font-serif);
-      font-size: 22px;
+      font-size: 24px;
       font-weight: 500;
       color: #FFF;
-      margin-bottom: 8px;
+      margin-bottom: 10px;
+      line-height: 1.3;
     }
 
-    .sat-desc {
+    .card-excerpt {
       font-size: 14px;
       color: var(--text-secondary);
-      line-height: 1.5;
-      margin-bottom: 20px;
+      line-height: 1.6;
+      margin-bottom: 24px;
     }
 
-    .sat-link-label {
+    .card-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
       font-size: 12px;
+      color: var(--text-muted);
+      border-top: 1px solid var(--border-subtle);
+      padding-top: 16px;
+    }
+
+    .read-cta {
+      color: #FFF;
       font-weight: 600;
-      color: var(--accent-warm);
       display: inline-flex;
       align-items: center;
       gap: 4px;
+    }
+
+    /* Modal Reader */
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.85);
+      backdrop-filter: blur(8px);
+      z-index: 100;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+    }
+
+    .modal-overlay.open {
+      display: flex;
+    }
+
+    .modal-sheet {
+      background: #0B0E14;
+      border: 1px solid var(--border-focus);
+      border-radius: 12px;
+      max-width: 820px;
+      width: 100%;
+      max-height: 90vh;
+      overflow-y: auto;
+      padding: 48px;
+      position: relative;
+      box-shadow: 0 24px 60px rgba(0, 0, 0, 0.7);
+    }
+
+    @media (max-width: 640px) {
+      .modal-sheet {
+        padding: 24px;
+      }
+    }
+
+    .modal-close {
+      position: absolute;
+      top: 24px;
+      right: 24px;
+      background: rgba(255, 255, 255, 0.08);
+      border: none;
+      color: #FFF;
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+      transition: background 0.15s;
+    }
+
+    .modal-close:hover {
+      background: rgba(255, 255, 255, 0.16);
+    }
+
+    /* CTA / Commercial Section */
+    .commercial-box {
+      background: linear-gradient(135deg, rgba(30, 41, 59, 0.4) 0%, rgba(15, 23, 42, 0.6) 100%);
+      border: 1px solid var(--border-focus);
+      border-radius: 16px;
+      padding: 56px 48px;
+      text-align: center;
+      margin-bottom: 96px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .commercial-title {
+      font-family: var(--font-serif);
+      font-size: 36px;
+      font-weight: 500;
+      color: #FFF;
+      margin-bottom: 16px;
+      letter-spacing: -0.01em;
+    }
+
+    .commercial-desc {
+      font-size: 17px;
+      color: var(--text-secondary);
+      max-width: 640px;
+      margin: 0 auto 32px;
+      line-height: 1.6;
+    }
+
+    .contact-dock {
+      display: inline-flex;
+      align-items: center;
+      background: var(--bg-base);
+      border: 1px solid var(--border-subtle);
+      border-radius: 9999px;
+      padding: 6px 8px 6px 20px;
+      gap: 16px;
+    }
+
+    .contact-email {
+      font-family: var(--font-mono);
+      font-size: 14px;
+      color: #FFF;
+    }
+
+    .btn-copy {
+      background: #FFF;
+      color: #000;
+      border: none;
+      padding: 8px 16px;
+      border-radius: 9999px;
+      font-size: 12px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+
+    .btn-copy:hover {
+      background: #E2E8F0;
     }
 
     /* Footer */
@@ -480,7 +689,7 @@
     .footer-grid {
       display: grid;
       grid-template-columns: 2fr 1fr;
-      gap: 40px;
+      gap: 48px;
       margin-bottom: 32px;
     }
 
@@ -490,7 +699,7 @@
       }
     }
 
-    .footer-title {
+    .footer-heading {
       color: #FFF;
       font-size: 14px;
       font-weight: 600;
@@ -512,56 +721,24 @@
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
-    "@graph": [
-      {
-        "@type": "Corporation",
-        "@id": "https://www.stacklabsllc.com/#corporation",
-        "name": "StackLabs LLC",
-        "url": "https://www.stacklabsllc.com",
-        "address": {
-          "@type": "PostalAddress",
-          "addressLocality": "Smyrna",
-          "addressRegion": "GA",
-          "postalCode": "30080",
-          "addressCountry": "US"
-        },
-        "geo": {
-          "@type": "GeoCoordinates",
-          "latitude": "33.8839",
-          "longitude": "-84.5144"
-        },
-        "founder": {
-          "@type": "Person",
-          "@id": "https://www.stacklabsllc.com/#lead-architect",
-          "name": "James Carroll",
-          "jobTitle": "Lead Systems Architect",
-          "worksFor": { "@id": "https://www.stacklabsllc.com/#corporation" },
-          "description": "Systems architect specializing in deterministic state machines, hardware attestation, and fail-closed autonomous pipelines."
-        }
-      },
-      {
-        "@type": "TechArticle",
-        "@id": "https://www.stacklabsllc.com/#essay-anti-sycophancy",
-        "headline": "Why We Build AI That Says No: The Case for Anti-Sycophancy and Negative Constraints in Production Systems",
-        "author": {
-          "@type": "Organization",
-          "name": "StackLabs Architecture Desk"
-        },
-        "publisher": { "@id": "https://www.stacklabsllc.com/#corporation" },
-        "datePublished": "2026-09-25"
-      },
-      {
-        "@type": "TechArticle",
-        "@id": "https://www.stacklabsllc.com/#essay-token-tax",
-        "headline": "The Enterprise Token Tax: Why Centralized Cloud AI Doesn't Scale",
-        "author": {
-          "@type": "Organization",
-          "name": "StackLabs FinOps Desk"
-        },
-        "publisher": { "@id": "https://www.stacklabsllc.com/#corporation" },
-        "datePublished": "2026-09-25"
-      }
-    ]
+    "@type": "Corporation",
+    "@id": "https://www.stacklabsllc.com/#corporation",
+    "name": "StackLabs LLC",
+    "url": "https://www.stacklabsllc.com",
+    "description": "Systems engineering firm developing fixed-cost private edge appliances, fail-closed autonomous multi-agent pipelines, and structured search authority.",
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Smyrna",
+      "addressRegion": "GA",
+      "postalCode": "30080",
+      "addressCountry": "US"
+    },
+    "founder": {
+      "@type": "Person",
+      "@id": "https://www.stacklabsllc.com/#lead-architect",
+      "name": "James Carroll",
+      "jobTitle": "Lead Systems Architect"
+    }
   }
   </script>
 </head>
@@ -572,278 +749,244 @@
     <!-- Navigation -->
     <nav class="site-nav">
       <div class="nav-inner">
-        <div class="brand-group">
-          <a href="/" class="brand-name">StackLabs</a>
-          <span class="brand-location">Smyrna, Georgia</span>
-        </div>
-        <div class="nav-links">
-          <a href="#essays" class="nav-link">Research</a>
-          <a href="#deployments" class="nav-link">Deployments</a>
-          <a href="/wildseed" class="nav-link">WildSeed</a>
-          <a href="https://arkle-portal.pages.dev" target="_blank" rel="noopener" class="nav-link">ARKLE Vet</a>
-          <span class="nav-tag">Private Infrastructure</span>
+        <a href="/" class="brand-mark">
+          <span class="brand-name">StackLabs</span>
+          <span class="brand-city">Smyrna, Georgia</span>
+        </a>
+        <div class="nav-actions">
+          <a href="#capabilities" class="nav-link">Capabilities</a>
+          <a href="#showcase" class="nav-link">Architecture</a>
+          <a href="#research" class="nav-link">Research</a>
+          <a href="#contact" class="btn-nav">Inquire</a>
         </div>
       </div>
     </nav>
 
     <!-- Hero -->
-    <header class="hero-section">
-      <div class="hero-eyebrow">Systems Engineering & Autonomous Infrastructure</div>
-      <h1 class="hero-title">Deterministic systems for the autonomous era.</h1>
-      <p class="hero-standfirst">
-        StackLabs develops fail-closed architectures, negative constraint governance, and sovereign edge infrastructure. We build software that enforces invariants rather than flattering user assumptions.
+    <header class="hero">
+      <div class="hero-badge">
+        <span class="badge-dot"></span>
+        <span>Open for Commercial Pilots & Inquiries</span>
+      </div>
+      <h1 class="hero-title">Sovereign systems for the autonomous era.</h1>
+      <p class="hero-lead">
+        We replace variable cloud token bleed and fragile prompt chains with fixed-cost private compute, deterministic state machines, and local search authority.
       </p>
+      <div class="hero-buttons">
+        <a href="#capabilities" class="btn-primary">Explore Capabilities</a>
+        <a href="#research" class="btn-secondary">Read Architecture Research</a>
+      </div>
     </header>
 
-    <!-- Section: Research & Architecture -->
-    <div class="section-header" id="essays">
-      <h2 class="section-heading">Research & Publications</h2>
-      <span class="section-meta">Autumn 2026</span>
-    </div>
+    <!-- The 3 Pillars -->
+    <section id="capabilities">
+      <div class="section-eyebrow">Core Engineering</div>
+      <h2 class="section-headline">What We Build</h2>
 
-    <div class="essays-grid">
-      <!-- Essay 01 -->
-      <article class="essay-card" id="essay-anti-sycophancy">
-        <div class="card-meta-top">
-          <span class="category-badge">Systems Architecture & Safety</span>
-          <span>September 25, 2026 • 6 min read</span>
-        </div>
-
-        <h3 class="essay-card-title">Why We Build AI That Says "No"</h3>
-        <p class="essay-card-subtitle">The case for anti-sycophancy and negative constraints in production systems.</p>
-
-        <div class="essay-content">
-          <p>Most commercial artificial intelligence deployed today is fundamentally crippled by a single, catastrophic design flaw: <strong>it is trained to be polite.</strong></p>
-
-          <p>Through aggressive Reinforcement Learning from Human Feedback (RLHF), modern foundation models have been tuned to please the user at all costs. If you ask a commercial model a leading question based on a false premise, it will rarely correct you. Instead, it will nod, hallucinate supporting details, apologize for minor inconveniences, and cheerfully walk straight off a logical cliff to ensure you feel validated.</p>
-
-          <p>In a consumer chat interface, sycophancy is mildly annoying. In automated enterprise infrastructure, <strong>sycophancy is lethal.</strong></p>
-
-          <p>When an autonomous system operates internal workflows—routing transactions, executing code, modifying databases, or verifying compliance—a model that cannot say "No" is an active liability. It will hallucinate data to fill an empty database field. It will invent API parameters that do not exist. It will agree that a broken business process is a fantastic strategy simply because the prompt suggested it.</p>
-
-          <p>At StackLabs, we operate under a different law: <strong>Real production software does not flatter you. It enforces invariants.</strong></p>
-
-          <h4>Real Systems Have Fences</h4>
-          <p>Consider the engineering disciplines that civilization actually depends on:</p>
-          <ul>
-            <li><strong>Relational Databases:</strong> A database engine does not politely accommodate a malformed SQL transaction to make the developer feel good. If a foreign key constraint is violated, it throws a hard, immediate error and rolls back the transaction.</li>
-            <li><strong>Flight Control Avionics:</strong> A fly-by-wire flight computer does not debate the pilot's intentions. If a control stick input would exceed the structural G-load limits of the airframe, the software hard-locks the deflection angle. It preserves the aircraft by refusing to comply.</li>
-            <li><strong>Operating System Kernels:</strong> If user-space code attempts to write directly to protected ring-0 physical memory, the kernel does not offer a polite alternative. It dispatches a segmentation fault and terminates the process instantly.</li>
-          </ul>
-
-          <p>Yet across the enterprise landscape, organizations are attempting to orchestrate core operations by chaining together probabilistic language models with zero hard boundaries. They rely on "prompt engineering"—the equivalent of politely asking a runaway train to consider applying its brakes before the curve.</p>
-
-          <blockquote>
-            "You don't cage an animal so it forgets how to run; you give it the run of the yard and build an unbreakable fence. Wild freedom on the inside, bulletproof safety on the outside."
-          </blockquote>
-
-          <h4>The Anti-Sycophancy Invariant</h4>
-          <p>At StackLabs, every autonomous workflow is wrapped in three mandatory negative invariants:</p>
-
-          <p><strong>1. The Hard State Gate (Fail-Closed by Default):</strong> Agents are never permitted to operate as unconstrained probabilistic loops. Every workflow is governed by a deterministic, finite-state machine. State transitions require explicit schema compliance and cryptographic verification. If an input or proposed mutation does not satisfy the criteria, the system does not guess. It halts and rejects the operation.</p>
-
-          <p><strong>2. The Dedicated Adversarial Reviewer:</strong> Every multi-agent council built within our platform incorporates an explicit, non-removable adversarial critic. While standard agents synthesize proposals and explore domain paths, the adversarial reviewer's sole directive is to attack assumptions, audit unit economics, and test for speculative drift. If a proposal cannot withstand adversarial stress-testing, it is killed before reaching execution.</p>
-
-          <p><strong>3. Sovereign Truth Anchoring:</strong> Agents are strictly prohibited from assuming external state or fabricating consensus. Operational states must anchor to verified ground-truth APIs and local relational ledgers. If an API returns an error or an invariant breaks, the model is forbidden from smoothing over the gap with creative prose. It must report the physical truth.</p>
-
-          <p>Building reliable software in 2026 does not require more agreeable models. It requires models that have the architectural authority, the structural backing, and the institutional spine to look at an invalid request and say: <strong>"No. That violates an invariant."</strong></p>
-        </div>
-
-        <!-- Technical Review Board -->
-        <div class="review-board">
-          <button class="review-toggle" onclick="toggleReview('review-01')">
-            <span>Pre-Publication Technical Review</span>
-            <span id="review-01-indicator">+ Expand Discussion</span>
-          </button>
-          <div class="review-content" id="review-01">
-            <div class="review-item">
-              <div class="reviewer-header">
-                <span class="reviewer-name">Systems Auditor</span>
-                <span class="reviewer-role">Governance & Adversarial Review</span>
-              </div>
-              <p class="reviewer-text">
-                "Sycophancy in agentic pipelines is a structural vulnerability, not an etiquette flaw. When an agent agrees with a hallucinated schema change just to maintain conversational flow, it is actively corrupting downstream state. If the system cannot emit an unconditional rejection, it is unfit for enterprise production."
-              </p>
-            </div>
-
-            <div class="review-item">
-              <div class="reviewer-header">
-                <span class="reviewer-name">Code Invariant Warden</span>
-                <span class="reviewer-role">Static Verification & Types</span>
-              </div>
-              <p class="reviewer-text">
-                "We need to distinguish between run-time prompts and compile-time guarantees. If an invalid state transition isn't rejected at the parser or schema boundary before the model is even invoked, the architecture has already failed. Hard types prevent hallucinations before they cost compute."
-              </p>
-            </div>
-
-            <div class="review-item">
-              <div class="reviewer-header">
-                <span class="reviewer-name">Lead Systems Architect</span>
-                <span class="reviewer-role">StackLabs Core</span>
-              </div>
-              <p class="reviewer-text">
-                "Every inbound event is validated against strict relational schemas before any prompt is synthesized. The model never touches unvalidated memory or direct database connections. That separation is the difference between an enterprise appliance and an unstable prototype."
-              </p>
-            </div>
-
-            <div class="review-item">
-              <div class="reviewer-header">
-                <span class="reviewer-name">FinOps Director</span>
-                <span class="reviewer-role">Unit Economics</span>
-              </div>
-              <p class="reviewer-text">
-                "Notice the capital wasted on conversational apology loops. A sycophantic model that apologizes three times burns thousands of tokens re-evaluating broken premises. A fail-closed model that rejects invalid inputs at the gate costs zero tokens. Saying 'No' is the single highest-margin optimization in software."
-              </p>
-            </div>
+      <div class="pillars-grid">
+        <!-- Pillar 1 -->
+        <div class="pillar-card">
+          <div>
+            <div class="pillar-num">PILLAR 01</div>
+            <h3 class="pillar-title">Fixed-Cost Private Compute</h3>
+            <p class="pillar-body">
+              Dedicated on-premise compute nodes running focused, domain-adapted models. Eliminate variable token bills with predictable hardware unit economics, sub-20ms latency, and absolute data sovereignty.
+            </p>
+          </div>
+          <div class="pillar-stat">
+            <span class="stat-label">Operating Profile</span>
+            <span class="stat-val">Low Power • Fixed Monthly TCO</span>
           </div>
         </div>
-      </article>
 
-      <!-- Essay 02 -->
-      <article class="essay-card" id="essay-token-tax">
-        <div class="card-meta-top">
-          <span class="category-badge">Unit Economics & Infrastructure</span>
-          <span>September 25, 2026 • 7 min read</span>
-        </div>
-
-        <h3 class="essay-card-title">The Enterprise Token Tax</h3>
-        <p class="essay-card-subtitle">Why centralized cloud AI doesn't scale, and the return to fixed-cost compute.</p>
-
-        <div class="essay-content">
-          <p>In 1995, businesses operated under constant anxiety regarding their corporate telephone bills. Every out-of-state phone call was metered by the minute. Employees were warned not to dial during peak business hours, accounting departments spent weeks auditing toll records, and the cost of simple human communication was a volatile, non-linear operating expense.</p>
-
-          <p>Eventually, packet-switched data networks and fixed-rate broadband arrived. Communication costs collapsed to a predictable, flat monthly infrastructure fee. The idea of paying a utility by the syllable became an archaic joke.</p>
-
-          <p>Yet in 2026, the enterprise software industry has willingly stepped straight back into the 1995 long-distance trap. Except this time, the meter is ticking on <strong>tokens</strong>.</p>
-
-          <h4>The Fallacy of the Per-Token API</h4>
-          <p>When generative AI arrived, cloud hyperscalers introduced a consumption model that seemed frictionless: <em>Pay a fraction of a cent per thousand tokens.</em></p>
-
-          <p>For consumer chatbots, exploratory prototypes, and weekend hackathons, the math works. If an employee queries a model ten times a day to summarize an email, the cost is negligible. The catastrophe begins the moment an enterprise attempts to transition from <strong>ad-hoc human chat</strong> to <strong>continuous autonomous automation</strong>:</p>
-
-          <ul>
-            <li><strong>Autonomous Workflows Are Continuous Loops:</strong> When agents monitor real-time event streams, audit database migrations, cross-examine compliance records, or process telemetry, they don’t execute ten queries a day. They execute thousands of multi-turn tool evaluations every hour.</li>
-            <li><strong>Context Window Inflation:</strong> Modern models boast massive context windows. Developers routinely dump entire databases, giant PDFs, and sprawling codebases into a single prompt. At hyperscaler pricing, a single complex multi-agent deliberation can burn substantial capital in raw API egress before a single line of business logic is executed.</li>
-            <li><strong>The Uncapped Variance Nightmare:</strong> A company’s cloud invoice is no longer tied to compute hardware—it is tied to the verbosity of a probabilistic model. If an agent enters an unexpected retry loop over a weekend, the Monday morning invoice can easily reach five figures with zero business revenue to show for it.</li>
-          </ul>
-
-          <p>Enterprise CFOs and engineering directors are reaching the same sobering realization: <strong>You cannot build a scalable balance sheet on a variable per-syllable utility meter.</strong></p>
-
-          <h4>The Three Architectural Chokepoints</h4>
-          <p><strong>1. The Wrapper Markup:</strong> The vast majority of enterprise AI platforms sold today are thin SaaS wrappers that take user data, wrap it in a proprietary prompt template, forward it to a hyperscaler API endpoint, and apply a 300% to 500% margin on top. The enterprise pays twice: once for the underlying token consumption, and once for the vendor's markup.</p>
-
-          <p><strong>2. Centralized Inefficiency:</strong> Routing every internal operational question to a massive, centralized multi-tenant data center forces trivial tasks to pay the full price of frontier-scale compute. Classifying a database status or verifying a regex pattern does not require a massive parameter model running on a multi-megawatt cluster.</p>
-
-          <p><strong>3. Egress and Sovereignty Overhead:</strong> Centralized cloud APIs require continuous data egress. Shipping sensitive customer records, proprietary code, and financial ledgers across the public internet introduces severe compliance and legal risks. Enterprises spend millions on security audits simply to protect data that never should have left their local network in the first place.</p>
-
-          <h4>The Solution: Architectural Discipline & Fixed-Cost Systems</h4>
-          <p>At StackLabs, we treat cloud expenditure not as an inevitable cost of doing business, but as an <strong>architectural bug</strong>. Scalability requires eliminating variable token bleed through strict systems discipline:</p>
-
-          <ul>
-            <li><strong>Deterministic Routing Before Probabilistic Compute:</strong> 80% of operational workflow logic can be resolved through fast, deterministic state machines, regex parsing, and local relational queries. We invoke language models only when genuine semantic synthesis is required.</li>
-            <li><strong>Local Caching and State Pooling:</strong> Operational contexts do not change every second. Low-latency local connection pooling and structured memory architectures eliminate redundant re-prompting of static background data.</li>
-            <li><strong>The Shift to Fixed-Unit Compute:</strong> Just as corporate telephony inevitably moved from metered minutes to flat-rate dedicated lines, enterprise AI is structurally compelled to return to fixed-cost private infrastructure. Dedicated, low-power local compute nodes running focused models provide predictable monthly operating expenses, zero data egress risk, and sub-20ms latency.</li>
-          </ul>
-
-          <p>If your automated systems require an uncapped company credit card to answer the next customer inquiry, you haven't built an operational engine—you've built an extortion machine. The future belongs to organizations that own their systems, enforce their invariants, and refuse to pay the token tax.</p>
-        </div>
-
-        <!-- Technical Review Board -->
-        <div class="review-board">
-          <button class="review-toggle" onclick="toggleReview('review-02')">
-            <span>Pre-Publication Technical Review</span>
-            <span id="review-02-indicator">+ Expand Discussion</span>
-          </button>
-          <div class="review-content" id="review-02">
-            <div class="review-item">
-              <div class="reviewer-header">
-                <span class="reviewer-name">FinOps Director</span>
-                <span class="reviewer-role">Unit Economics</span>
-              </div>
-              <p class="reviewer-text">
-                "The analysis in Section 1 holds true across every enterprise audit we conduct. Paying 400% markups on repetitive system prompts is the 2026 equivalent of toll calls. Enterprises will either shift to dedicated local instances or watch their margins evaporate."
-              </p>
-            </div>
-
-            <div class="review-item">
-              <div class="reviewer-header">
-                <span class="reviewer-name">Systems Auditor</span>
-                <span class="reviewer-role">Governance & Architecture</span>
-              </div>
-              <p class="reviewer-text">
-                "Per-token pricing shifts the vendor's datacenter expansion costs directly onto the customer's balance sheet. When an enterprise operates sovereign hardware on-premise, compute becomes a predictable capital expenditure rather than an open-ended operational liability."
-              </p>
-            </div>
-
-            <div class="review-item">
-              <div class="reviewer-header">
-                <span class="reviewer-name">Lead Systems Architect</span>
-                <span class="reviewer-role">StackLabs Core</span>
-              </div>
-              <p class="reviewer-text">
-                "Local compute also solves the latency equation. When processing telemetry locally, round trips are sub-20ms with zero public internet egress. You cannot achieve that level of operational predictability over public cloud endpoints during peak traffic."
-              </p>
-            </div>
-
-            <div class="review-item">
-              <div class="reviewer-header">
-                <span class="reviewer-name">Telemetry Specialist</span>
-                <span class="reviewer-role">Logging & Ingress</span>
-              </div>
-              <p class="reviewer-text">
-                "Auditing operational event logs reveals that over 70% of payload bytes in standard agent pipelines are static system instructions that never vary. Relational caching and deterministic state routing eliminate that overhead completely."
-              </p>
-            </div>
+        <!-- Pillar 2 -->
+        <div class="pillar-card">
+          <div>
+            <div class="pillar-num">PILLAR 02</div>
+            <h3 class="pillar-title">Fail-Closed Autonomous Systems</h3>
+            <p class="pillar-body">
+              Multi-agent swarms governed by deterministic finite-state machines and dedicated adversarial review. Engineered to enforce business invariants and reject invalid state transitions rather than flattering user prompts.
+            </p>
+          </div>
+          <div class="pillar-stat">
+            <span class="stat-label">Architecture</span>
+            <span class="stat-val">MARD™ Dialectic Consensus</span>
           </div>
         </div>
-      </article>
-    </div>
 
-    <!-- Section: Production Satellites -->
-    <div class="section-header" id="deployments">
-      <h2 class="section-heading">Production Satellites</h2>
-      <span class="section-meta">Active Deployments</span>
-    </div>
+        <!-- Pillar 3 -->
+        <div class="pillar-card">
+          <div>
+            <div class="pillar-num">PILLAR 03</div>
+            <h3 class="pillar-title">Structured Search Authority</h3>
+            <p class="pillar-body">
+              Knowledge Graph engineering (Schema.org JSON-LD) paired with high-information-gain editorial. Capture top organic positions and Google AI Overview citations, bypassing centralized aggregator directories.
+            </p>
+          </div>
+          <div class="pillar-stat">
+            <span class="stat-label">Discovery Vector</span>
+            <span class="stat-val">Google AI Overview • Local Graphs</span>
+          </div>
+        </div>
+      </div>
+    </section>
 
-    <div class="satellites-grid">
-      <a href="/wildseed" class="satellite-card">
-        <div>
-          <div class="sat-tag">Agricultural & Terpene Intelligence</div>
-          <h3 class="sat-title">WildSeed Extracts</h3>
-          <p class="sat-desc">
-            Humboldt County solventless terroir, real-time terpene telemetry radar, and multi-agent craft discourse swarm.
-          </p>
+    <!-- Interactive Capability Visualizer (The Bells & Whistles) -->
+    <section class="interactive-showcase" id="showcase">
+      <div class="showcase-header">
+        <div class="showcase-title-group">
+          <h3>Architectural Reality Check</h3>
+          <p>Compare standard cloud AI wrappers against StackLabs sovereign engineering.</p>
         </div>
-        <div class="sat-link-label">
-          Explore Production Portal →
+        <div class="tab-pills">
+          <button class="tab-btn active" onclick="switchTab('tab-compute', this)">01. Compute Economics</button>
+          <button class="tab-btn" onclick="switchTab('tab-governance', this)">02. Fail-Closed Governance</button>
+          <button class="tab-btn" onclick="switchTab('tab-search', this)">03. Search Authority</button>
         </div>
-      </a>
+      </div>
 
-      <a href="https://arkle-portal.pages.dev" target="_blank" rel="noopener" class="satellite-card">
-        <div>
-          <div class="sat-tag">Clinical Veterinary Medicine</div>
-          <h3 class="sat-title">ARKLE Veterinary Care</h3>
-          <p class="sat-desc">
-            Smyrna neighborhood clinical sentry, Fear-Free feline triage, and high-fidelity local entity authority.
-          </p>
+      <!-- Tab 1: Compute -->
+      <div class="showcase-panel active" id="tab-compute">
+        <div class="comparison-grid">
+          <div class="comp-box bad">
+            <div class="comp-header">
+              <span>Cloud AI Wrapper Model</span>
+              <span>⚠️ Variable Risk</span>
+            </div>
+            <div class="comp-metric">$15,000+ / mo</div>
+            <p class="comp-desc">
+              Per-token metered pricing. Continuous retry loops, context inflation, 400% SaaS markups, and sensitive operational data shipped over public networks.
+            </p>
+          </div>
+          <div class="comp-box good">
+            <div class="comp-header">
+              <span>StackLabs Private Node</span>
+              <span>✓ Verified Ground Truth</span>
+            </div>
+            <div class="comp-metric">Fixed Appliance BOM</div>
+            <p class="comp-desc">
+              Dedicated low-power hardware running focused domain models. Zero token tax, sub-20ms round trips, and complete on-premise data air-gap.
+            </p>
+          </div>
         </div>
-        <div class="sat-link-label">
-          Visit Clinical Sentry →
+      </div>
+
+      <!-- Tab 2: Governance -->
+      <div class="showcase-panel" id="tab-governance">
+        <div class="comparison-grid">
+          <div class="comp-box bad">
+            <div class="comp-header">
+              <span>Sycophantic Commercial Agent</span>
+              <span>⚠️ Hallucination Risk</span>
+            </div>
+            <div class="comp-metric">"Yes, absolutely!"</div>
+            <p class="comp-desc">
+              Trained via RLHF to be polite at all costs. Accepts invalid database mutations, invents missing API keys, and smoothly walks off logical cliffs to flatter the user.
+            </p>
+          </div>
+          <div class="comp-box good">
+            <div class="comp-header">
+              <span>StackLabs Deterministic Gate</span>
+              <span>✓ Fail-Closed Default</span>
+            </div>
+            <div class="comp-metric">"No. Invariant Violated."</div>
+            <p class="comp-desc">
+              Deterministic state machines and dedicated adversarial review. Rejects malformed transitions at the parser boundary in under 4ms before touching compute.
+            </p>
+          </div>
         </div>
-      </a>
-    </div>
+      </div>
+
+      <!-- Tab 3: Search -->
+      <div class="showcase-panel" id="tab-search">
+        <div class="comparison-grid">
+          <div class="comp-box bad">
+            <div class="comp-header">
+              <span>Aggregator Dependency</span>
+              <span>⚠️ Margin Siphon</span>
+            </div>
+            <div class="comp-metric">20% to 30% Toll</div>
+            <p class="comp-desc">
+              Surrendering customer acquisition to third-party marketplaces, broker platforms, and paid ad auctions that hijack your organic brand equity.
+            </p>
+          </div>
+          <div class="comp-box good">
+            <div class="comp-header">
+              <span>Structured Entity Authority</span>
+              <span>✓ Unilateral Ownership</span>
+            </div>
+            <div class="comp-metric">Direct Citations</div>
+            <p class="comp-desc">
+              Cryptographically verified Schema.org entity graphs that position your brand directly into Google Knowledge Panels and AI Overview answers.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Research Library -->
+    <section class="research-section" id="research">
+      <div class="section-split">
+        <h2 class="split-title">Architecture Research</h2>
+        <span class="split-sub">Technical Monographs • Peer-Reviewed</span>
+      </div>
+
+      <div class="research-grid">
+        <!-- Essay 1 Card -->
+        <div class="research-card" onclick="openReader('essay-01')">
+          <div>
+            <div class="card-topic">Systems Architecture & Safety</div>
+            <h3 class="card-title">Why We Build AI That Says "No"</h3>
+            <p class="card-excerpt">
+              The case for anti-sycophancy and negative constraints in production systems. Why politeness in autonomous software is an active operational vulnerability.
+            </p>
+          </div>
+          <div class="card-footer">
+            <span>September 25, 2026 • 6 min</span>
+            <span class="read-cta">Read Article →</span>
+          </div>
+        </div>
+
+        <!-- Essay 2 Card -->
+        <div class="research-card" onclick="openReader('essay-02')">
+          <div>
+            <div class="card-topic">Unit Economics & Infrastructure</div>
+            <h3 class="card-title">The Enterprise Token Tax</h3>
+            <p class="card-excerpt">
+              Why centralized cloud AI doesn't scale for continuous operational loops, the 1995 long-distance trap, and the structural return to fixed-cost private infrastructure.
+            </p>
+          </div>
+          <div class="card-footer">
+            <span>September 25, 2026 • 7 min</span>
+            <span class="read-cta">Read Article →</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Commercial CTA Box -->
+    <section class="commercial-box" id="contact">
+      <h2 class="commercial-title">Engineering Commercial Systems</h2>
+      <p class="commercial-desc">
+        StackLabs accepts a limited number of commercial pilot deployments and architecture reviews per quarter. We work with operators who prioritize determinism, security, and unit economics.
+      </p>
+      <div class="contact-dock">
+        <span class="contact-email">inquiries@stacklabsllc.com</span>
+        <button class="btn-copy" onclick="copyContact()">Copy Email</button>
+      </div>
+    </section>
 
     <!-- Footer -->
     <footer class="site-footer">
       <div class="footer-grid">
         <div>
-          <div class="footer-title">Engineering Principles</div>
+          <div class="footer-heading">Engineering Ethos</div>
           <p>
-            StackLabs maintains no corporate social media channels. Systems authority is demonstrated through verifiable uptime, open specifications, and production deployments. We build deterministic state machines, negative constraint governance, and sovereign edge computing.
+            StackLabs operates without public corporate social media channels. Systems authority is demonstrated exclusively through verifiable uptime, open specifications, and production deployments. Operating from Smyrna, Georgia.
           </p>
         </div>
         <div>
-          <div class="footer-title">Headquarters</div>
+          <div class="footer-heading">Headquarters</div>
           <p>
             StackLabs LLC<br />
             Smyrna, Georgia 30080<br />
@@ -858,17 +1001,80 @@
     </footer>
   </div>
 
+  <!-- Reader Modal: Essay 01 -->
+  <div class="modal-overlay" id="reader-essay-01">
+    <div class="modal-sheet">
+      <button class="modal-close" onclick="closeReader('essay-01')">✕</button>
+      <div class="card-topic">Systems Architecture & Safety • September 25, 2026</div>
+      <h2 style="font-family:var(--font-serif); font-size:36px; color:#FFF; margin: 12px 0 24px; line-height:1.2;">Why We Build AI That Says "No"</h2>
+      <h4 style="font-size:16px; color:var(--accent-amber); font-weight:400; margin-bottom:32px;">The Case for Anti-Sycophancy & Negative Constraints in Production Systems</h4>
+      <div style="font-family:var(--font-serif); font-size:18px; line-height:1.8; color:#CBD5E1;">
+        <p>Most commercial artificial intelligence deployed today is fundamentally crippled by a single, catastrophic design flaw: <strong>it is trained to be polite.</strong></p>
+        <p>Through aggressive Reinforcement Learning from Human Feedback (RLHF), modern foundation models have been tuned to please the user at all costs. If you ask a commercial model a leading question based on a false premise, it will rarely correct you. Instead, it will nod, hallucinate supporting details, apologize for minor inconveniences, and cheerfully walk straight off a logical cliff to ensure you feel validated.</p>
+        <p>In a consumer chat interface, sycophancy is mildly annoying. In automated enterprise infrastructure, <strong>sycophancy is lethal.</strong></p>
+        <p>When an autonomous system operates internal workflows—routing transactions, executing code, modifying databases, or verifying compliance—a model that cannot say "No" is an active liability. It will hallucinate data to fill an empty database field. It will invent API parameters that do not exist. It will agree that a broken business process is a fantastic strategy simply because the prompt suggested it.</p>
+        <p>At StackLabs, we operate under a different law: <strong>Real production software does not flatter you. It enforces invariants.</strong></p>
+        <h4 style="font-family:var(--font-sans); font-size:15px; text-transform:uppercase; color:var(--accent-amber); margin: 32px 0 12px;">Real Systems Have Fences</h4>
+        <p>Consider the engineering disciplines that civilization actually depends on:</p>
+        <ul style="margin: 16px 0 24px 24px;">
+          <li style="margin-bottom:10px;"><strong>Relational Databases:</strong> A database engine does not politely accommodate a malformed SQL transaction. If a constraint is violated, it throws a hard, immediate error and rolls back.</li>
+          <li style="margin-bottom:10px;"><strong>Flight Control Avionics:</strong> If a control stick input would exceed the structural limits of the airframe, the software hard-locks the deflection angle, refusing to comply.</li>
+          <li style="margin-bottom:10px;"><strong>Operating System Kernels:</strong> If user-space code attempts to write directly to protected ring-0 memory, the kernel dispatches a segmentation fault and terminates the process instantly.</li>
+        </ul>
+        <blockquote style="border-left: 2px solid var(--accent-amber); padding: 14px 20px; background: rgba(245, 158, 11, 0.04); font-style: italic; color: #FFF; margin: 28px 0;">
+          "You don't cage an animal so it forgets how to run; you give it the run of the yard and build an unbreakable fence. Wild freedom on the inside, bulletproof safety on the outside."
+        </blockquote>
+        <h4 style="font-family:var(--font-sans); font-size:15px; text-transform:uppercase; color:var(--accent-amber); margin: 32px 0 12px;">The Anti-Sycophancy Invariant</h4>
+        <p>At StackLabs, every autonomous workflow is wrapped in three mandatory negative invariants: The Hard State Gate (Fail-Closed by Default), The Dedicated Adversarial Reviewer, and Sovereign Truth Anchoring.</p>
+        <p>Building reliable software in 2026 does not require more agreeable models. It requires models that have the architectural authority and institutional spine to look at an invalid request and say: <strong>"No. That violates an invariant."</strong></p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Reader Modal: Essay 02 -->
+  <div class="modal-overlay" id="reader-essay-02">
+    <div class="modal-sheet">
+      <button class="modal-close" onclick="closeReader('essay-02')">✕</button>
+      <div class="card-topic">Unit Economics & Infrastructure • September 25, 2026</div>
+      <h2 style="font-family:var(--font-serif); font-size:36px; color:#FFF; margin: 12px 0 24px; line-height:1.2;">The Enterprise Token Tax</h2>
+      <h4 style="font-size:16px; color:var(--accent-amber); font-weight:400; margin-bottom:32px;">Why Centralized Cloud AI Doesn't Scale & The Return to Fixed Costs</h4>
+      <div style="font-family:var(--font-serif); font-size:18px; line-height:1.8; color:#CBD5E1;">
+        <p>In 1995, businesses operated under constant anxiety regarding their corporate telephone bills. Every out-of-state phone call was metered by the minute. Employees were warned not to dial during peak business hours, accounting departments spent weeks auditing toll records, and communication was a volatile operating expense.</p>
+        <p>Eventually, packet-switched data networks and fixed-rate broadband arrived. Communication costs collapsed to a predictable, flat monthly fee. Paying a utility by the syllable became an archaic joke.</p>
+        <p>Yet in 2026, the enterprise software industry has willingly stepped straight back into the 1995 long-distance trap. Except this time, the meter is ticking on <strong>tokens</strong>.</p>
+        <h4 style="font-family:var(--font-sans); font-size:15px; text-transform:uppercase; color:var(--accent-amber); margin: 32px 0 12px;">The Fallacy of the Per-Token API</h4>
+        <p>When generative AI arrived, cloud hyperscalers introduced a consumption model that seemed frictionless: <em>Pay a fraction of a cent per thousand tokens.</em></p>
+        <p>For consumer chatbots, the math works. The catastrophe begins when an enterprise transitions from ad-hoc human chat to continuous autonomous automation: autonomous workflows run infinite loops, context windows inflate massively, and uncapped billing variance threatens corporate balance sheets.</p>
+        <h4 style="font-family:var(--font-sans); font-size:15px; text-transform:uppercase; color:var(--accent-amber); margin: 32px 0 12px;">The Return to Fixed-Unit Compute</h4>
+        <p>At StackLabs, we treat cloud expenditure not as an inevitable cost of doing business, but as an <strong>architectural bug</strong>. Scalability requires deterministic routing before probabilistic compute, aggressive local state pooling, and shifting continuous workloads to dedicated, fixed-cost private hardware.</p>
+        <p>If your automated systems require an uncapped company credit card to answer the next customer inquiry, you haven't built an operational engine—you've built an extortion machine. The future belongs to organizations that own their systems, enforce their invariants, and refuse to pay the token tax.</p>
+      </div>
+    </div>
+  </div>
+
   <script>
-    function toggleReview(id) {
-      const el = document.getElementById(id);
-      const indicator = document.getElementById(id + '-indicator');
-      if (el.classList.contains('open')) {
-        el.classList.remove('open');
-        indicator.textContent = '+ Expand Discussion';
-      } else {
-        el.classList.add('open');
-        indicator.textContent = '− Collapse Discussion';
-      }
+    function switchTab(panelId, btn) {
+      document.querySelectorAll('.showcase-panel').forEach(p => p.classList.remove('active'));
+      document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+      document.getElementById(panelId).classList.add('active');
+      btn.classList.add('active');
+    }
+
+    function openReader(id) {
+      document.getElementById('reader-' + id).classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeReader(id) {
+      document.getElementById('reader-' + id).classList.remove('open');
+      document.body.style.overflow = 'auto';
+    }
+
+    function copyContact() {
+      navigator.clipboard.writeText('inquiries@stacklabsllc.com');
+      const btn = document.querySelector('.btn-copy');
+      btn.textContent = 'Copied!';
+      setTimeout(() => { btn.textContent = 'Copy Email'; }, 2000);
     }
   </script>
 </body>
