@@ -1,4 +1,11 @@
-<!DOCTYPE html>
+#!/usr/bin/env python3
+"""
+Generates the unified machined-billet drop.html for StackLabs Edge.
+Inherits exact tokens from index.html, restores multi-credit job queue with persistent dock,
+and preserves all MARD deliberation, recording, and TTS capabilities.
+"""
+
+DROP_HTML_CONTENT = r'''<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
@@ -2414,3 +2421,9 @@
   </script>
 </body>
 </html>
+'''
+
+if __name__ == '__main__':
+    with open('drop.html', 'w', encoding='utf-8') as f:
+        f.write(DROP_HTML_CONTENT)
+    print("Successfully built unified drop.html")
