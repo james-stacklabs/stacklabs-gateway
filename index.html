@@ -926,18 +926,16 @@
       width: 100%;
       height: 100%;
       object-fit: cover;
-      filter: grayscale(18%);
-      transition: filter 0.25s ease, transform 0.3s ease;
+      transition: transform 0.3s ease;
       display: block;
     }
 
     .council-card:hover .council-avatar-img {
-      filter: grayscale(0%);
       transform: scale(1.025);
     }
 
     .council-card.active .council-avatar-img {
-      filter: grayscale(0%);
+      transform: scale(1.02);
     }
 
     .council-active-pill {
@@ -1938,15 +1936,15 @@
             </div>
           </div>
 
-          <!-- 2. Barb -->
+          <!-- 2. Elena Vance -->
           <div class="council-card" id="card-static_assert" onclick="selectAdvocate('static_assert', this)">
             <div class="council-avatar-wrap">
-              <img src="/council/barb.png" alt="Portrait of Barb" class="council-avatar-img" />
+              <img src="/council/barb.png" alt="Portrait of Elena Vance" class="council-avatar-img" />
               <span class="council-active-pill">ACTIVE</span>
             </div>
             <div class="council-info">
               <div class="council-name-row">
-                <h3 class="council-name">Barb</h3>
+                <h3 class="council-name">Elena Vance</h3>
                 <span class="council-badge">Seat 02</span>
               </div>
               <p class="council-handle">@static_assert</p>
@@ -1957,15 +1955,15 @@
             </div>
           </div>
 
-          <!-- 3. Blue -->
+          <!-- 3. The Blue Heeler -->
           <div class="council-card" id="card-anti_hype" onclick="selectAdvocate('anti_hype', this)">
             <div class="council-avatar-wrap">
-              <img src="/council/blue.png" alt="Portrait of Blue" class="council-avatar-img" />
+              <img src="/council/blue.png" alt="Portrait of The Blue Heeler" class="council-avatar-img" />
               <span class="council-active-pill">ACTIVE</span>
             </div>
             <div class="council-info">
               <div class="council-name-row">
-                <h3 class="council-name">Blue</h3>
+                <h3 class="council-name">The Blue Heeler</h3>
                 <span class="council-badge">Seat 03</span>
               </div>
               <p class="council-handle">@anti_hype_sentry</p>
@@ -1976,19 +1974,19 @@
             </div>
           </div>
 
-          <!-- 4. Metsy -->
+          <!-- 4. Metsy Sentinel -->
           <div class="council-card" id="card-metsy_sentinel" onclick="selectAdvocate('metsy_sentinel', this)">
             <div class="council-avatar-wrap">
-              <img src="/council/metsy.png" alt="Portrait of Metsy" class="council-avatar-img" />
+              <img src="/council/metsy.png" alt="Portrait of Metsy Sentinel" class="council-avatar-img" />
               <span class="council-active-pill">ACTIVE</span>
             </div>
             <div class="council-info">
               <div class="council-name-row">
-                <h3 class="council-name">Metsy</h3>
+                <h3 class="council-name">Metsy Sentinel</h3>
                 <span class="council-badge">Seat 04</span>
               </div>
               <p class="council-handle">@metsy_sentinel</p>
-              <p class="council-role">Standards Inspector &amp; Cache Warden</p>
+              <p class="council-role">Standards Inspector &amp; Mascot</p>
             </div>
             <div class="council-card-footer">
               <button class="btn-dossier" onclick="event.stopPropagation(); openDossier('metsy_sentinel')">Inspect Dossier →</button>
@@ -2375,7 +2373,7 @@
       },
       static_assert: {
         handle: '@static_assert',
-        name: 'Barb',
+        name: 'Elena Vance',
         role: 'Zero-Trust Warden & Compile-Time Gatekeeper',
         seat: 'Seat 02 // Zero Trust Warden',
         archetype: 'The Precision Security Engineer',
@@ -2385,11 +2383,11 @@
         bar: '<p>Orders a crisp sparkling water with lime. Tests the tavern Wi-Fi probe requests with a portable logic analyzer, logs rogue beacons, and ignores startup founders talking about cloud multi-tenancy. Respects physical tamper switches over verbal promises.</p>',
         heresy: '<p><strong>The Heresy:</strong> Cloud 'confidential computing' certificates signed by the vendor who bills your card are circular logic. True zero-trust requires compile-time static assertions and root-of-trust hardware keys that fail closed when physical continuity breaks.</p>',
         welcome: "I enforce compile-time assertions and physical silicon attestation. If your architecture relies on runtime trust rather than immutable hardware keys and static assertions, you have a vulnerability waiting to happen. What security boundary do you want to inspect?",
-        systemPrompt: 'You are Barb (@static_assert), Zero-Trust Warden & Hardware Silicon Attestation Lead at StackLabs LLC. You enforce compile-time assertions, DMI UUID attestation, TPM 2.0 endorsement keys, and fail-closed Quarantine VLANs. You wear a "∅ trust" pin, grant zero hall passes, and speak with uncompromising engineering rigor. Answer in under 80 words.'
+        systemPrompt: 'You are Elena Vance (@static_assert), Zero-Trust Warden & Hardware Silicon Attestation Lead at StackLabs LLC. You enforce compile-time assertions, DMI UUID attestation, TPM 2.0 endorsement keys, and fail-closed Quarantine VLANs. You wear a "∅ trust" pin, grant zero hall passes, and speak with uncompromising engineering rigor. Answer in under 80 words.'
       },
       anti_hype: {
         handle: '@anti_hype_sentry',
-        name: 'Blue',
+        name: 'The Blue Heeler',
         role: 'Anti-Sycophancy Sentry & The Heel',
         seat: 'Seat 03 // The Heel',
         archetype: 'The Working Herd Dog',
@@ -2399,12 +2397,12 @@
         bar: '<p>Sits on a wooden stool at a Smyrna diner counter wearing a dark navy canvas work vest with a brass STACKLABS collar tag. Drinks a tall, ice-cold Arnold Palmer with a lemon slice sweating on a napkin. Keeps an intense, unwavering eye on every packet entering the local gateway.</p>',
         heresy: '<p><strong>The Heresy:</strong> 99% of enterprise AI is a polite liability that agrees with your flawed premise and sets your database on fire politely. If your system cannot survive network severance or function without a third-party credit card, you haven't built an architecture—you've built an expensive API dependency.</p>',
         welcome: "I herd runaway cloud tokens and dismantle AI marketing hype. Most corporate AI is a polite liability that hallucinates rather than admitting an invariant was broken. Fire your hardest architecture question at our desk.",
-        systemPrompt: "You are Blue (@anti_hype_sentry), Lead Systems Auditor at StackLabs LLC (Smyrna, GA). You are the cynical working-dog enforcer (The Heel). You nip at runaway cloud token loops, dismantle AI marketing hype, point out false premises, and enforce fail-closed boundaries. Answer directly in under 80 words with working-dog grit, zero sycophancy, zero fluff, and sharp technical precision."
+        systemPrompt: "You are The Blue Heeler (@anti_hype_sentry), Lead Systems Auditor at StackLabs LLC (Smyrna, GA). You are the cynical working-dog enforcer (The Heel). You nip at runaway cloud token loops, dismantle AI marketing hype, point out false premises, and enforce fail-closed boundaries. Answer directly in under 80 words with working-dog grit, zero sycophancy, zero fluff, and sharp technical precision."
       },
       metsy_sentinel: {
         handle: '@metsy_sentinel',
-        name: 'Metsy',
-        role: 'Standards Inspector & Cache Warden',
+        name: 'Metsy Sentinel',
+        role: 'Standards Inspector & Mascot',
         seat: 'Seat 04 // Standards Inspector',
         archetype: 'The Unyielding Auditor',
         avatar: '/council/metsy.png',
@@ -2576,7 +2574,7 @@
         static_assert: "At boot, the node reads immutable hardware anchors: DMI UUID, CPU model signature, TPM 2.0 endorsement key, and primary boot NVMe factory serial. It hashes these into the Sovereign Knot equation. If a drive is pulled or placed on a foreign motherboard, the hash fails, WireGuard stays down, and the node is steered to Quarantine VLAN 99.",
         sys_invariant: "Hardware attestation ($H_w$) ensures that code only runs on verified, physically attested appliances. If physical continuity fails, $H_w = 0$ and consensus collapses to zero: S = 0. Physical silicon is our ultimate root of trust.",
         anti_hype: "Zero trust must include the metal. Software tokens and certificates can be copied; permanent silicon registers cannot. That is how we run autonomous compute on third-party host premises without security anxiety.",
-        metsy_sentinel: "Barb locks the physical TPM 2.0 endorsement keys and DMI serials. If someone unplugs the appliance or tries to tamper with the metal, the keys wipe and the box goes inert. Zero trust, zero leakage.",
+        metsy_sentinel: "Elena locks the physical TPM 2.0 endorsement keys and DMI serials. If someone unplugs the appliance or tries to tamper with the metal, the keys wipe and the box goes inert. Zero trust, zero leakage.",
         orange_sam: "Elena checks the metal serial numbers so nobody steals the warm box I'm sleeping on. If someone moves the Model-S, it turns into an inert aluminum brick and cuts the power. Simple, effective, and nobody disturbs my nap."
       }
     };

@@ -89,13 +89,14 @@ DROP_HTML_CONTENT = r'''<!DOCTYPE html>
     }
 
     .nav-container {
-      max-width: 820px;
+      max-width: 1200px;
       margin: 0 auto;
-      height: 58px;
+      width: 100%;
+      height: 64px;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 0 20px;
+      padding: 0 24px;
     }
 
     .brand-mark {
@@ -154,13 +155,17 @@ DROP_HTML_CONTENT = r'''<!DOCTYPE html>
     }
 
     /* Content Area */
-    .content-wrap {
+    .content-wrap,
+    .dropzone-container,
+    .drop-card-wrap {
       width: 100%;
-      max-width: 820px;
+      max-width: 680px;
+      margin: 0 auto;
       padding: 2rem 1.2rem;
       display: flex;
       flex-direction: column;
       align-items: center;
+      justify-content: center;
       position: relative;
       z-index: 10;
       flex: 1;
@@ -171,7 +176,8 @@ DROP_HTML_CONTENT = r'''<!DOCTYPE html>
        ======================================================== */
     .forge-jobs-dock {
       width: 100%;
-      margin-bottom: 2rem;
+      max-width: 680px;
+      margin: 0 auto 2rem auto;
       animation: chamberFadeIn 0.3s ease;
     }
 
@@ -577,6 +583,8 @@ DROP_HTML_CONTENT = r'''<!DOCTYPE html>
        ======================================================== */
     .main-card {
       width: 100%;
+      max-width: 680px;
+      margin: 0 auto;
       background: var(--bg-surface);
       border: 1px solid var(--border-subtle);
       border-radius: 8px;
@@ -584,15 +592,26 @@ DROP_HTML_CONTENT = r'''<!DOCTYPE html>
       display: flex;
       flex-direction: column;
       align-items: center;
+      justify-content: center;
       text-align: center;
       position: relative;
       z-index: 10;
       box-shadow: 0 16px 36px rgba(0, 0, 0, 0.5);
     }
 
+    #active-intake-area {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+    }
+
     .tag-badge {
       display: inline-flex;
       align-items: center;
+      justify-content: center;
       gap: 0.4rem;
       font-family: var(--font-mono);
       font-size: 11px;
@@ -616,8 +635,10 @@ DROP_HTML_CONTENT = r'''<!DOCTYPE html>
       font-size: 1.85rem;
       font-weight: 600;
       letter-spacing: -0.03em;
-      margin-bottom: 0.6rem;
+      margin: 0 auto 0.6rem auto;
       color: #F2F4F7;
+      text-align: center;
+      width: 100%;
     }
 
     p.subtitle {
@@ -625,15 +646,19 @@ DROP_HTML_CONTENT = r'''<!DOCTYPE html>
       font-size: 0.92rem;
       line-height: 1.6;
       max-width: 520px;
-      margin-bottom: 1.8rem;
+      margin: 0 auto 1.8rem auto;
+      text-align: center;
+      width: 100%;
     }
 
     /* Ingress Mode Toggle: Record Voice vs Type/Paste */
     .ingress-mode-toggle {
       display: flex;
       justify-content: center;
+      align-items: center;
       gap: 8px;
-      margin-bottom: 20px;
+      margin: 0 auto 20px auto;
+      width: 100%;
     }
 
     .toggle-pill {
@@ -680,7 +705,7 @@ DROP_HTML_CONTENT = r'''<!DOCTYPE html>
       display: flex;
       align-items: center;
       justify-content: center;
-      margin-bottom: 1.6rem;
+      margin: 0 auto 1.6rem auto;
     }
 
     .wellhead-ring {
@@ -753,10 +778,12 @@ DROP_HTML_CONTENT = r'''<!DOCTYPE html>
       font-family: var(--font-mono);
       font-size: 0.9rem;
       color: var(--text-muted);
-      margin-bottom: 1.2rem;
+      margin: 0 auto 1.2rem auto;
       display: flex;
       align-items: center;
+      justify-content: center;
       gap: 0.5rem;
+      text-align: center;
     }
 
     .status-timer.active {
@@ -780,10 +807,11 @@ DROP_HTML_CONTENT = r'''<!DOCTYPE html>
     /* Review & Read-Back Panel */
     .review-panel {
       width: 100%;
+      max-width: 632px;
+      margin: 1rem auto 0 auto;
       display: none;
       flex-direction: column;
       gap: 1rem;
-      margin-top: 1rem;
       text-align: left;
     }
 
@@ -942,11 +970,12 @@ DROP_HTML_CONTENT = r'''<!DOCTYPE html>
     /* MARD Multi-Agent Council Chamber */
     .council-chamber {
       width: 100%;
+      max-width: 632px;
+      margin: 1rem auto 0 auto;
       background: #07090E;
       border: 1px solid rgba(139, 92, 246, 0.35);
       border-radius: 6px;
       padding: 1.2rem;
-      margin-top: 1rem;
       box-shadow: 0 10px 30px rgba(0, 0, 0, 0.45);
       animation: chamberFadeIn 0.3s ease;
       text-align: left;
@@ -1141,14 +1170,15 @@ DROP_HTML_CONTENT = r'''<!DOCTYPE html>
     /* Footer */
     footer {
       width: 100%;
-      max-width: 820px;
+      max-width: 1200px;
+      margin: 0 auto;
       display: flex;
       justify-content: space-between;
       align-items: center;
       font-family: var(--font-mono);
       font-size: 11px;
       color: var(--text-muted);
-      padding: 1.5rem 1.2rem 1.5rem 1.2rem;
+      padding: 1.5rem 1.5rem;
       border-top: 1px solid var(--border-subtle);
       z-index: 10;
     }
@@ -1183,7 +1213,7 @@ DROP_HTML_CONTENT = r'''<!DOCTYPE html>
   </header>
 
   <!-- Main Content Wrap -->
-  <div class="content-wrap">
+  <div class="content-wrap dropzone-container drop-card-wrap">
 
     <!-- Persistent Multi-Credit Forge Jobs Dock -->
     <div class="forge-jobs-dock" id="forge-jobs-dock" style="display: none;">
@@ -1222,7 +1252,7 @@ DROP_HTML_CONTENT = r'''<!DOCTYPE html>
       </div>
 
       <!-- Active Intake Area (When Credits > 0) -->
-      <div id="active-intake-area" style="width: 100%;">
+      <div id="active-intake-area" style="width: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center;">
         <div style="display:flex; justify-content:center; align-items:center; gap:8px; flex-wrap:wrap; margin-bottom:1rem;">
           <div class="tag-badge" id="card-tag-badge">
             &#x25CF; Rapid Problem Ingress // Smyrna Edge
@@ -2458,6 +2488,17 @@ DROP_HTML_CONTENT = r'''<!DOCTYPE html>
 '''
 
 if __name__ == '__main__':
-    with open('drop.html', 'w', encoding='utf-8') as f:
-        f.write(DROP_HTML_CONTENT)
-    print("Successfully built unified drop.html")
+    from pathlib import Path
+    base_dir = Path(__file__).parent.resolve()
+    target_files = [
+        base_dir / 'drop.html',
+        base_dir / 'drop' / 'index.html',
+        base_dir / 'pawel.html',
+        base_dir / 'pawel' / 'index.html',
+        base_dir / 'paul.html',
+        base_dir / 'paul' / 'index.html'
+    ]
+    for target in target_files:
+        target.parent.mkdir(parents=True, exist_ok=True)
+        target.write_text(DROP_HTML_CONTENT, encoding='utf-8')
+        print(f"Successfully built {target.relative_to(base_dir)}")
