@@ -1,3 +1,7 @@
 worker.js
 .git
 .wrangler
+deploy.sh
+verify_edge_deploy.py
+*.py
+*.sh
