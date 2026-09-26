@@ -96,12 +96,16 @@
 
     /* Mode Switcher */
     .mode-toggle {
-      display: flex;
+      display: none !important;
       background: rgba(16, 20, 29, 0.8);
       border: 1px solid var(--border-subtle);
       border-radius: 10px;
       padding: 3px;
       gap: 3px;
+    }
+
+    #btn-mode-well {
+      display: none !important;
     }
 
     .mode-btn {
@@ -741,11 +745,11 @@
       &larr; STACKLABS FORGE
     </a>
 
-    <div class="mode-toggle">
+    <div class="mode-toggle" style="display: none !important;">
       <button class="mode-btn active" id="btn-mode-console" onclick="setMode('console')">
         &gt;_ Console
       </button>
-      <button class="mode-btn" id="btn-mode-well" onclick="setMode('well')">
+      <button class="mode-btn" id="btn-mode-well" onclick="setMode('well')" style="display: none !important;">
         &#x1FA99; Wishing Well
       </button>
     </div>
@@ -804,7 +808,7 @@
         </div>
         <textarea id="transcript-input" maxlength="600" placeholder="Listening to your recording..."></textarea>
         <div class="char-limit-hint" style="font-family: var(--font-mono); font-size: 0.72rem; color: var(--text-muted); margin-top: 0.4rem; line-height: 1.4;">
-          Max 600 characters (focused operational bottlenecks only). For comprehensive macroeconomic theses or whitepapers, call James directly.
+          Max 600 characters (focused operational bottlenecks only). Comprehensive macroeconomic theses and enterprise scopes require an executive systems architecture review.
         </div>
       </div>
 
@@ -1377,7 +1381,7 @@
 
         if (lower.includes("mars") || lower.includes("hyperloop") || lower.includes("spaceship") || lower.includes("quantum") || lower.includes("teleport") || lower.includes("spacex") || lower.includes("rocket") || lower.includes("time travel") || lower.includes("cure aging") || lower.includes("fusion") || lower.includes("alien") || lower.includes("vegas")) {
           domainContext = "Moonshot / Astronomical Scope Overflow";
-          heelerTake = "Woah, woah, woah. Pump the brakes, partner. A Hyperloop to Vegas? Out here, a dog that won't herd is just an expense, but trying to herd supersonic vacuum tubes is how you incinerate a seed round before lunch. You want a four-week sci-fi megaproject? You're gonna have to pick up the phone and call James.";
+          heelerTake = "Woah, woah, woah. Pump the brakes, partner. A Hyperloop to Vegas? Out here, a dog that won't herd is just an expense, but trying to herd supersonic vacuum tubes is how you incinerate a seed round before lunch. You want a four-week sci-fi megaproject? You're gonna have to schedule an executive architecture review.";
           samTake = "*Swats the entire whiteboard off the easel and curls up.* I have one orange brain cell, and even it knows you cannot compile interstellar physics in a 4-hour sprint. I am not waking up from my nap for this. Go call the Pilot if you want to fund a space program.";
           barbTake = "STATIC ASSERTION FAILED: Proposed scope exceeds 4-hour Rapid Forge physical envelope (Est: 6+ weeks / requires FAA waiver). Compile-time gate tripped: Re-routing moonshot to Direct Pilot Consultation.";
           failureMode = "Astronomical scope overflow (Exceeds 4-hour rapid turnaround envelope).";
@@ -1483,7 +1487,7 @@
         // Red Lock Button
         const dispatchBtn = document.getElementById('btn-dispatch');
         dispatchBtn.className = 'btn-dispatch btn-denied';
-        document.getElementById('dispatch-btn-label').innerText = "⛔ Scope Denied — Call James Directly";
+        document.getElementById('dispatch-btn-label').innerText = "⛔ Scope Denied — Schedule Architecture Review";
         dispatchBtn.onclick = openDeniedScopeModal;
       } else {
         statusBadge.innerText = 'CONVERGED';
@@ -1619,7 +1623,7 @@
         <span style="font-size:0.88rem; color:#e2e8f0; font-weight:600;">Got a 4th operational catastrophe that needs solving before Monday morning?</span>
       </div>
       <div style="display:flex; gap:10px; justify-content:center; flex-wrap:wrap;">
-        <a href="tel:+14045550199" style="background:#f59e0b; color:#0b0d13; font-family:var(--font-mono); font-weight:700; padding:12px 22px; border-radius:10px; text-decoration:none; font-size:0.82rem; letter-spacing:0.05em; display:inline-flex; align-items:center; gap:6px;">📞 CALL THE PILOT DIRECTLY</a>
+        <a href="tel:+14045101845" style="background:#f59e0b; color:#0b0d13; font-family:var(--font-mono); font-weight:700; padding:12px 22px; border-radius:10px; text-decoration:none; font-size:0.82rem; letter-spacing:0.05em; display:inline-flex; align-items:center; gap:6px;">📞 CONNECT WITH LEAD ARCHITECT (+1 404-510-1845)</a>
         <button onclick="document.getElementById('credits-exhausted-modal').style.display='none'" style="background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.15); color:#94a3b8; font-family:var(--font-mono); padding:12px 18px; border-radius:10px; cursor:pointer; font-size:0.82rem;">CLOSE</button>
       </div>
     </div>
@@ -1641,10 +1645,10 @@
       <div style="display: flex; flex-direction: column; gap: 10px;">
         <a href="tel:+14045101845" class="modal-btn-call" style="display: flex; align-items: center; justify-content: center; gap: 8px; padding: 14px; background: #ef4444; color: #fff; border-radius: 8px; font-weight: 700; font-size: 13px; text-decoration: none;">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
-          CALL JAMES CARROLL (+1 404-510-1845)
+          CONNECT WITH LEAD ARCHITECT (+1 404-510-1845)
         </a>
         <a href="sms:+14045101845?body=Hey%20James%20-%20Reviewing%20StackLabs%20Drop.%20Our%20enterprise%20scope%20got%20shredded%20by%20the%20council." class="modal-btn-sms" style="display: flex; align-items: center; justify-content: center; gap: 8px; padding: 12px; background: rgba(255,255,255,0.05); color: #cbd5e1; border: 1px solid rgba(255,255,255,0.1); border-radius: 8px; font-size: 12px; text-decoration: none;">
-          TEXT PILOT DIRECTLY
+          TEXT SYSTEMS ARCHITECT
         </a>
         <button onclick="closeDeniedScopeModal()" style="padding: 10px; background: transparent; border: none; color: #64748b; font-size: 11px; cursor: pointer; text-transform: uppercase; letter-spacing: 0.1em;">
           Return to Ingress
