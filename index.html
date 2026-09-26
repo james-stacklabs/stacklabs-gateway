@@ -1798,9 +1798,9 @@
           <span class="pill-badge" style="color:var(--accent-amber);">Institutional Defense</span>
           <span>🛡️ Why can't Big AI starve StackLabs with predatory token dumping?</span>
         </div>
-        <div class="query-pill glowing-pill" onclick="sendPillQuery('How does the Model-S implement Pawel Rudnicki\'s Pendulum thesis?')">
+        <div class="query-pill glowing-pill" onclick="sendPillQuery('How does the Model-S achieve a 12.5-day hardware payback?')">
           <span class="pill-badge" style="color:var(--accent-teal);">Grounded Economics</span>
-          <span>⚡ How does the Model-S implement Pawel Rudnicki's Pendulum thesis?</span>
+          <span>⚡ How does the Model-S achieve a 12.5-day hardware payback?</span>
         </div>
         <div class="query-pill glowing-pill" onclick="sendPillQuery('Why does every enterprise AI council require an adversarial Heel?')">
           <span class="pill-badge" style="color:#A78BFA;">Adversarial Safety</span>
@@ -2202,12 +2202,12 @@
         orange_sam: "Hyperscalers burn 40% of their power on giant air conditioners just to keep from melting their GPUs while I take a warm nap on an aluminum box that only draws 35W. Let them burn their money; we'll read local disk.",
         static_assert: "Subsidized cloud APIs violate zero-trust. You stream proprietary telemetry across public networks to hardware you cannot attest. With private edge appliances, cryptographic keys and SQLite WAL state never leave local silicon."
       },
-      "How does the Model-S implement Pawel Rudnicki's Pendulum thesis?": {
-        sys_invariant: "Pawel Rudnicki diagnosed the crisis: AI cuts vertically across cognitive labor, causing Ghost GDP and the Retraining Fallacy. StackLabs provides the physical cure via the Campsite Protocol: we pay residential hosts $55/mo, leaving them with +$50.91/mo in net passive cash flow to subsidize their living room power and broadband.",
-        anti_hype: "You cannot retrain a nation of displaced junior engineers to be plumbers without crashing plumber wages from $90k to $35k through supply saturation. The solution isn't retraining; it's structural co-ownership of the physical computing commons.",
-        metsy_sentinel: "Centralized data centers are hitting physical brick walls—power substation queues and municipal water cooling caps. The pendulum swings back to local metal. 35 watts in the living room doing dedicated local inference is pure, unassailable operational hygiene.",
-        orange_sam: "Pawel's Energy Governor is physical. Centralized data centers have 5-year transformer queues and water limits. A standard 15-amp living room wall plug has 1,400W of free headroom. The Model-S uses less than 3% of that. It's pure common sense.",
-        static_assert: "Bypassing the Energy Governor means scaling compute without utility substation delays. 120V NEMA wall sockets already exist in every American home. We deploy infrastructure today while Big Cloud lobbies for nuclear permits."
+      "How does the Model-S achieve a 12.5-day hardware payback?": {
+        sys_invariant: "A baseline enterprise workload easily burns $1,500/mo in metered cloud tokens. The Model-S appliance has a $600 AMD Zen 4 bill of materials drawing 35W ($4.09/mo power). At a $48/day cloud substitution rate, the physical metal pays for itself in exactly 12.53 days, turning all future compute into permanent enterprise margin.",
+        anti_hype: "The cloud math is simple: they charge a 400% markup on inference and make you pay for retries when their network jitters. When you own the metal at 35 watts, your marginal cost is zero. You can't beat physics.",
+        metsy_sentinel: "Centralized data centers have 5-year power substation queues and municipal water cooling caps. 35 watts in the living room doing dedicated local inference is pure, unassailable operational hygiene.",
+        orange_sam: "Centralized data centers are melting their transformers. A standard 15-amp living room wall plug has 1,400W of free headroom. The Model-S uses less than 3% of that. It's pure common sense.",
+        static_assert: "120V NEMA wall sockets already exist in every American building. We deploy infrastructure today on attested hardware while Big Cloud lobbies for utility permits."
       },
       "Why does every enterprise AI council require an adversarial Heel?": {
         sys_invariant: "2026 academic research (LabourCrew, MAC-Bench, aistack) proves that cooperative 'helpful' agents suffer from the Machiavellian Gap—they fold under operational pressure and hallucinate. The MARD '5 Advocates + 1 Heel' framework introduces structural adversarial friction, reducing hallucination rates to near-zero.",
@@ -2302,8 +2302,8 @@
       if (!reply) {
         if (qLower.includes('predatory') || qLower.includes('token dumping') || qLower.includes('starve')) {
           reply = fallbackAnswers["Why can't Big AI starve StackLabs with predatory token dumping?"][activeAdvocateKey];
-        } else if (qLower.includes('pendulum') || qLower.includes('rudnicki') || qLower.includes('energy governor')) {
-          reply = fallbackAnswers["How does the Model-S implement Pawel Rudnicki's Pendulum thesis?"][activeAdvocateKey];
+        } else if (qLower.includes('payback') || qLower.includes('hardware payback') || qLower.includes('12.5') || qLower.includes('energy governor')) {
+          reply = fallbackAnswers["How does the Model-S achieve a 12.5-day hardware payback?"][activeAdvocateKey];
         } else if (qLower.includes('heel') || qLower.includes('vaccine') || qLower.includes('machiavellian') || qLower.includes('adversarial')) {
           reply = fallbackAnswers["Why does every enterprise AI council require an adversarial Heel?"][activeAdvocateKey];
         } else if (qLower.includes('fence')) {
