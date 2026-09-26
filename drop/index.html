@@ -1982,8 +1982,35 @@
       }
     }
 
-    // Restore Active Drop on Load (F5 / Safari Re-open Resilience)
+    // Restore Active Drop on Load (F5 / Safari Re-open Resilience & URL Preview)
     function restoreActiveDropIfPresent() {
+      // 1. Allow URL preview of confirmed state: ?confirmed=1 or ?state=confirmed
+      if (urlParams.get('confirmed') === '1' || urlParams.get('state') === 'confirmed' || urlParams.get('preview') === 'tracker') {
+        const modeTabs = document.querySelector('.input-mode-tabs, .ingress-mode-toggle');
+        if (modeTabs) modeTabs.style.display = 'none';
+        const recZone = document.getElementById('recording-zone');
+        if (recZone) recZone.style.display = 'none';
+        const statusTimer = document.getElementById('status-timer');
+        if (statusTimer) statusTimer.style.display = 'none';
+        const revPanel = document.getElementById('review-panel');
+        if (revPanel) revPanel.classList.remove('show');
+        const confPanel = document.getElementById('confirmed-panel');
+        if (confPanel) confPanel.classList.add('show');
+        const dropIdEl = document.getElementById('meta-drop-id');
+        if (dropIdEl) dropIdEl.innerText = 'DROP_20260926_FORGE_PREVIEW';
+        const metaSummaryEl = document.getElementById('meta-summary');
+        if (metaSummaryEl) {
+          metaSummaryEl.innerHTML = '<strong>HEARD:</strong> "Cross-tenant state machine orchestration bottleneck with zero-cloud toll."<div style="margin-top:0.5rem; color:#c084fc; font-size:0.75rem;"><strong>&#x25C6; MARD BLUEPRINT ATTACHED</strong></div>';
+        }
+        const stageParam = parseInt(urlParams.get('stage') || '3', 10);
+        let previewRemaining = 3 * 3600;
+        if (stageParam === 4) previewRemaining = 1.5 * 3600;
+        if (stageParam === 5) previewRemaining = 10 * 60;
+        startTurnaroundClock(previewRemaining, 4 * 3600);
+        return;
+      }
+
+      // 2. Normal localStorage restore
       try {
         const savedDropJson = localStorage.getItem('stacklabs_active_drop');
         if (savedDropJson) {
