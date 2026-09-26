@@ -974,7 +974,22 @@
 
     // Initialize partner context from URL
     const urlParams = new URLSearchParams(window.location.search);
-    const partnerParam = urlParams.get('partner') || urlParams.get('ref') || (window.location.pathname.includes('pawel') ? 'Pawel' : (window.location.pathname.includes('paul') ? 'Paul' : ''));
+    let pRaw = urlParams.get('p') || urlParams.get('partner') || urlParams.get('ref') || urlParams.get('m') || urlParams.get('j') || '';
+    if (!pRaw) {
+      if (window.location.pathname.includes('pawel')) pRaw = 'Pawel';
+      else if (window.location.pathname.includes('paul')) pRaw = 'Paul';
+      else if (window.location.pathname.includes('mclaren')) pRaw = 'Michael Mclaren';
+      else if (window.location.pathname.includes('michael')) pRaw = 'Michael Mclaren';
+    }
+    let partnerParam = '';
+    if (pRaw) {
+      const lower = pRaw.toLowerCase();
+      if (lower === 'pawel' || lower === 'paul') partnerParam = 'Pawel';
+      else if (lower === 'mclaren' || lower === 'michael' || lower === 'michael mclaren') partnerParam = 'Michael Mclaren';
+      else if (lower === 'jeremy') partnerParam = 'Jeremy';
+      else if (lower === 'adam') partnerParam = 'Adam';
+      else partnerParam = pRaw.charAt(0).toUpperCase() + pRaw.slice(1);
+    }
 
     if (partnerParam) {
       document.getElementById('tag-badge').innerHTML = `&#x25CF; Direct Partner Ingress // @${partnerParam}`;
@@ -1021,6 +1036,29 @@
       }
     }
     updateCreditDisplay();
+
+    // Instant Drop Wiretap Beacon (WO0010326)
+    (function sendDropWiretapBeacon() {
+      try {
+        const partner = partnerParam || 'anonymous';
+        const payload = {
+          event_type: 'drop_page_visit',
+          event: 'drop_page_visit',
+          details: {
+            route: window.location.pathname,
+            partner: partner,
+            referrer: document.referrer || 'direct',
+            credits_left: currentCredits,
+            timestamp: new Date().toISOString()
+          }
+        };
+        fetch('/api/telemetry-beacon', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload)
+        }).catch(() => {});
+      } catch (_) {}
+    })();
 
     function setMode(mode) {
       currentMode = mode;
