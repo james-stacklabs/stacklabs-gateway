@@ -1253,7 +1253,15 @@
     // Instant Drop Wiretap Beacon (WO0010326)
     (function sendDropWiretapBeacon() {
       try {
+        const isInternalHost = window.location.hostname === 'localhost' || 
+                               window.location.hostname === '127.0.0.1' || 
+                               window.location.hostname.includes('.ts.net');
+        const isTestFlag = urlParams.get('test') === '1' || urlParams.get('pilot') === '1' || urlParams.get('agy') === '1';
         const partner = partnerParam || 'anonymous';
+        
+        // If anonymous on internal host or test flag, mark as test
+        const isTest = isInternalHost || isTestFlag;
+
         const payload = {
           event_type: 'drop_page_visit',
           event: 'drop_page_visit',
@@ -1262,6 +1270,7 @@
             partner: partner,
             referrer: document.referrer || 'direct',
             credits_left: currentCredits,
+            is_test: isTest,
             timestamp: new Date().toISOString()
           }
         };
