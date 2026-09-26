@@ -433,6 +433,17 @@
       color: #381B04;
       box-shadow: 0 4px 15px rgba(245, 158, 11, 0.35);
     }
+    .btn-dispatch.btn-denied {
+      background: #450a0a !important;
+      color: #fca5a5 !important;
+      border: 1px solid #ef4444 !important;
+      box-shadow: 0 0 20px rgba(239, 68, 68, 0.4) !important;
+    }
+    .btn-dispatch.btn-denied:hover {
+      background: #7f1d1d !important;
+      border-color: #f87171 !important;
+      color: #ffffff !important;
+    }
 
     /* MARD Council Button & Chamber */
     .btn-council {
@@ -503,7 +514,7 @@
       align-items: center;
       gap: 0.5rem;
     }
-    .council-badge {
+    .council-badge, .status-badge {
       font-family: var(--font-mono);
       font-size: 0.65rem;
       color: var(--accent-cyan);
@@ -511,6 +522,33 @@
       padding: 0.2rem 0.5rem;
       border-radius: 4px;
       border: 1px solid rgba(0, 212, 255, 0.2);
+    }
+    .badge-denied, .council-badge.badge-denied, .status-badge.badge-denied {
+      background: rgba(239, 68, 68, 0.15) !important;
+      color: #ef4444 !important;
+      border: 1px solid rgba(239, 68, 68, 0.4) !important;
+    }
+
+    /* Modal Backdrop & Card */
+    .modal-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.88);
+      backdrop-filter: blur(10px);
+      z-index: 99999;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 1.5rem;
+    }
+    .modal-card {
+      background: #0b0d13;
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      border-radius: 20px;
+      padding: 2.2rem 1.8rem;
+      max-width: 500px;
+      width: 100%;
+      text-align: left;
     }
     .council-feed {
       display: flex;
@@ -716,8 +754,13 @@
   <!-- Main Card -->
   <div class="main-card">
     
-    <div class="tag-badge" id="tag-badge">
-      &#x25CF; Rapid Problem Ingress // Smyrna Edge
+    <div style="display:flex; justify-content:center; align-items:center; gap:8px; flex-wrap:wrap; margin-bottom:1rem;">
+      <div class="tag-badge" id="tag-badge" style="margin-bottom:0;">
+        &#x25CF; Rapid Problem Ingress // Smyrna Edge
+      </div>
+      <div class="tag-badge credit-badge" id="credit-badge" onclick="handleCreditBadgeClick()" title="VIP Forge Credit Allocation (Click 3x to reset)" style="margin-bottom:0; background:rgba(245, 158, 11, 0.12); color:#f59e0b; border-color:rgba(245, 158, 11, 0.3); cursor:pointer;">
+        🪙 3 / 3 CREDITS ALLOCATED
+      </div>
     </div>
 
     <h1 id="heading-title">Drop Your Business Bottleneck</h1>
@@ -772,7 +815,7 @@
             <path d="M15.54 8.46a5 5 0 0 1 0 7.07"></path>
             <path d="M19.07 4.93a10 10 0 0 1 0 14.14"></path>
           </svg>
-          <span id="readback-label">Read Back (Jarvis)</span>
+          <span id="readback-label">Audio Readback</span>
         </button>
 
         <button class="btn-council" id="btn-council" onclick="runMardCouncil()">
@@ -922,6 +965,48 @@
     if (partnerParam) {
       document.getElementById('tag-badge').innerHTML = `&#x25CF; Direct Partner Ingress // @${partnerParam}`;
     }
+
+    // 3-Credit VIP Allocation Logic
+    const storageKey = `stacklabs_forge_credits_${partnerParam ? partnerParam.toLowerCase() : 'default'}`;
+    if (urlParams.get('reset') === '1') {
+      localStorage.removeItem(storageKey);
+    }
+    let currentCredits = parseInt(localStorage.getItem(storageKey) ?? '3', 10);
+    if (isNaN(currentCredits)) currentCredits = 3;
+
+    function updateCreditDisplay() {
+      const badge = document.getElementById('credit-badge');
+      if (!badge) return;
+      if (currentCredits > 1) {
+        badge.innerHTML = `🪙 ${currentCredits} / 3 CREDITS ALLOCATED`;
+        badge.style.color = '#f59e0b';
+        badge.style.borderColor = 'rgba(245, 158, 11, 0.3)';
+        badge.style.background = 'rgba(245, 158, 11, 0.12)';
+      } else if (currentCredits === 1) {
+        badge.innerHTML = `⚡ 1 / 3 FINAL DROP REMAINING`;
+        badge.style.color = '#00d4ff';
+        badge.style.borderColor = 'rgba(0, 212, 255, 0.4)';
+        badge.style.background = 'rgba(0, 212, 255, 0.12)';
+      } else {
+        badge.innerHTML = `🔒 0 / 3 CREDITS EXHAUSTED`;
+        badge.style.color = '#ff6b6b';
+        badge.style.borderColor = 'rgba(255, 107, 107, 0.4)';
+        badge.style.background = 'rgba(255, 107, 107, 0.12)';
+      }
+    }
+
+    let clickCount = 0;
+    function handleCreditBadgeClick() {
+      clickCount++;
+      if (clickCount >= 3) {
+        localStorage.removeItem(storageKey);
+        currentCredits = 3;
+        updateCreditDisplay();
+        alert("VIP Credits Reset to 3/3 for testing!");
+        clickCount = 0;
+      }
+    }
+    updateCreditDisplay();
 
     function setMode(mode) {
       currentMode = mode;
@@ -1112,6 +1197,7 @@
     }
 
     function resetRecording() {
+      if (typeof closeDeniedScopeModal === 'function') closeDeniedScopeModal();
       document.getElementById('review-panel').classList.remove('show');
       document.getElementById('confirmed-panel').classList.remove('show');
       document.getElementById('recording-zone').style.display = 'flex';
@@ -1122,15 +1208,24 @@
       if (councilChamber) councilChamber.style.display = 'none';
       const councilBtnLabel = document.getElementById('council-btn-label');
       if (councilBtnLabel) councilBtnLabel.innerText = '⚡ Dispatch to MARD Council';
+      const statusBadge = document.getElementById('council-status-badge');
+      if (statusBadge) {
+        statusBadge.innerText = 'PARALLEL SYNTHESIS READY';
+        statusBadge.className = 'council-badge status-badge';
+      }
       const dispatchBtn = document.getElementById('btn-dispatch');
-      if (dispatchBtn) dispatchBtn.disabled = false;
+      if (dispatchBtn) {
+        dispatchBtn.disabled = false;
+        dispatchBtn.className = 'btn-dispatch' + (currentMode === 'well' ? ' gold' : '');
+        dispatchBtn.onclick = dispatchToForge;
+      }
       const dispatchLabel = document.getElementById('dispatch-btn-label');
       if (dispatchLabel) dispatchLabel.innerText = 'Dispatch to Forge';
       switchInputMode('voice');
       setMode(currentMode);
     }
 
-    // Enhanced Jarvis Voice Engine (British Male en-GB)
+    // Enhanced British Speech Engine (en-GB)
     let cachedVoices = [];
     function loadVoices() {
       if (typeof speechSynthesis === 'undefined') return;
@@ -1141,7 +1236,7 @@
       speechSynthesis.onvoiceschanged = loadVoices;
     }
 
-    function getJarvisVoice() {
+    function getReadbackVoice() {
       if (!cachedVoices.length && typeof speechSynthesis !== 'undefined') {
         cachedVoices = speechSynthesis.getVoices();
       }
@@ -1149,7 +1244,7 @@
 
       // 1. Google UK English Male (Chrome / Android / Chromium)
       let v = cachedVoices.find(v => v.name === "Google UK English Male" || v.name.includes("UK English Male"));
-      // 2. Daniel (macOS / iOS British male - the classic Jarvis voice)
+      // 2. Daniel (macOS / iOS British male)
       if (!v) v = cachedVoices.find(v => v.name.includes("Daniel") && (v.lang.includes("en-GB") || v.lang.startsWith("en")));
       // 3. Microsoft George / Oliver / Ryan (Windows 11 British Natural)
       if (!v) v = cachedVoices.find(v => (v.name.includes("George") || v.name.includes("Oliver") || v.name.includes("Ryan") || v.name.includes("Arthur")) && v.lang.includes("en-GB"));
@@ -1164,33 +1259,33 @@
       return v;
     }
 
-    // Read Back Feature (Text-to-Speech via Jarvis)
+    // Read Back Feature (Text-to-Speech)
     function readTranscriptBack() {
       const text = document.getElementById('transcript-input').value.trim();
       if (!text) return;
 
       if (synth.speaking) {
         synth.cancel();
-        document.getElementById('readback-label').innerText = "Read Back (Jarvis)";
+        document.getElementById('readback-label').innerText = "Audio Readback";
         return;
       }
 
       const utterance = new SpeechSynthesisUtterance(text);
-      const jarvisVoice = getJarvisVoice();
-      if (jarvisVoice) {
-        utterance.voice = jarvisVoice;
+      const readbackVoice = getReadbackVoice();
+      if (readbackVoice) {
+        utterance.voice = readbackVoice;
       }
       utterance.pitch = 0.92; // Slightly deeper, calm, authoritative
       utterance.rate = 1.0;
 
       utterance.onstart = () => {
-        document.getElementById('readback-label').innerText = "Jarvis Reading...";
+        document.getElementById('readback-label').innerText = "Reading Back...";
       };
       utterance.onend = () => {
-        document.getElementById('readback-label').innerText = "Read Back (Jarvis)";
+        document.getElementById('readback-label').innerText = "Audio Readback";
       };
       utterance.onerror = () => {
-        document.getElementById('readback-label').innerText = "Read Back (Jarvis)";
+        document.getElementById('readback-label').innerText = "Audio Readback";
       };
 
       synth.speak(utterance);
@@ -1202,6 +1297,11 @@
       const text = document.getElementById('transcript-input').value.trim();
       if (!text) {
         alert("Please record or enter a problem statement first.");
+        return;
+      }
+
+      if (currentCredits <= 0) {
+        document.getElementById('credits-exhausted-modal').style.display = 'flex';
         return;
       }
 
@@ -1217,6 +1317,10 @@
       statusBadge.innerText = 'CONSULTING COUNCIL...';
       councilBtnLabel.innerText = 'Consulting...';
 
+      currentCredits = Math.max(0, currentCredits - 1);
+      localStorage.setItem(storageKey, currentCredits.toString());
+      updateCreditDisplay();
+
       let bespokeCouncil = null;
       try {
         const crucibleResp = await fetch('/api/crucible', {
@@ -1226,7 +1330,8 @@
         });
         if (crucibleResp.ok) {
           const res = await crucibleResp.json();
-          if (res.ok && res.data && res.data.agents && res.data.agents.length >= 3) {
+          const rawAgents = res.ok && res.data && (res.data.agents || res.data.council);
+          if (rawAgents && rawAgents.length >= 3) {
             bespokeCouncil = res.data;
           }
         }
@@ -1256,7 +1361,8 @@
           `${basePath}static_assert_avatar.jpg`
         ];
 
-        agents = bespokeCouncil.agents.slice(0, 3).map((a, idx) => ({
+        const agentList = bespokeCouncil.agents || bespokeCouncil.council || [];
+        agents = agentList.slice(0, 3).map((a, idx) => ({
           name: a.name || (idx === 0 ? "The Blue Heeler" : idx === 1 ? "Sam the Cat" : "Warden Barb"),
           handle: a.handle || (idx === 0 ? "@anti_hype_sentry" : idx === 1 ? "@orange_braincell_sam" : "@static_assert"),
           role: a.role || (idx === 0 ? "Anti-Hype & Cloud Fluff Sentry" : idx === 1 ? "Local Disk & Cache Enforcer" : "Schema Invariants & Gatekeeper"),
@@ -1357,16 +1463,51 @@
       }
 
       await new Promise(r => setTimeout(r, 400));
-      statusBadge.innerText = 'CONVERGED';
       councilBtnLabel.innerText = 'Re-Run Council';
 
-      // Render Converged Memo
-      activeCouncilMemo = `[TARGET DOMAIN]: ${domainContext}\n[IDENTIFIED FAILURE MODE]: ${failureMode}\n[STACKLABS EDGE VECTOR]: ${edgeVector}\n[4-HOUR SPRINT DELIVERABLE]: ${sprintDeliverable}`;
-      document.getElementById('memo-content').innerText = activeCouncilMemo;
-      memo.style.display = 'block';
+      const councilData = bespokeCouncil || {};
+      const lowerText = text.toLowerCase();
+      const isDenied = councilData.verdict === 'DENIED' ||
+        (!bespokeCouncil && (lowerText.includes("mars") || lowerText.includes("hyperloop") || lowerText.includes("spaceship") || lowerText.includes("quantum") || lowerText.includes("teleport") || lowerText.includes("spacex") || lowerText.includes("rocket") || lowerText.includes("time travel") || lowerText.includes("cure aging") || lowerText.includes("fusion") || lowerText.includes("alien") || lowerText.includes("vegas"))) ||
+        /drone|uav|faa|sap\s+erp|bloomberg/i.test(text);
 
-      // Update Dispatch button
-      document.getElementById('dispatch-btn-label').innerText = "Dispatch Drop + Blueprint";
+      if (isDenied) {
+        statusBadge.innerText = 'REVIEW DENIED // SCOPE OUT OF BOUNDS';
+        statusBadge.className = 'council-badge status-badge badge-denied';
+
+        // Memo Banner
+        activeCouncilMemo = `[VERDICT]: ⛔ SUBMISSION DENIED (SCOPE EXCEEDS 4H RAPID FORGE)\n[DENIAL REASON]: ${councilData.denial_reason || 'Physical airframe fleets and enterprise ERP contracts require executive architecture alignment.'}\n\n[TARGET DOMAIN]: ${domainContext}\n[IDENTIFIED FAILURE MODE]: ${failureMode}\n[STACKLABS EDGE VECTOR]: ${edgeVector}\n[4-HOUR SPRINT DELIVERABLE]: ${sprintDeliverable}`;
+        document.getElementById('memo-content').innerText = activeCouncilMemo;
+        memo.style.display = 'block';
+
+        // Red Lock Button
+        const dispatchBtn = document.getElementById('btn-dispatch');
+        dispatchBtn.className = 'btn-dispatch btn-denied';
+        document.getElementById('dispatch-btn-label').innerText = "⛔ Scope Denied — Call James Directly";
+        dispatchBtn.onclick = openDeniedScopeModal;
+      } else {
+        statusBadge.innerText = 'CONVERGED';
+        statusBadge.className = 'council-badge status-badge';
+
+        activeCouncilMemo = `[TARGET DOMAIN]: ${domainContext}\n[IDENTIFIED FAILURE MODE]: ${failureMode}\n[STACKLABS EDGE VECTOR]: ${edgeVector}\n[4-HOUR SPRINT DELIVERABLE]: ${sprintDeliverable}`;
+        document.getElementById('memo-content').innerText = activeCouncilMemo;
+        memo.style.display = 'block';
+
+        const dispatchBtn = document.getElementById('btn-dispatch');
+        dispatchBtn.className = 'btn-dispatch' + (currentMode === 'well' ? ' gold' : '');
+        document.getElementById('dispatch-btn-label').innerText = "Dispatch Drop + Blueprint";
+        dispatchBtn.onclick = dispatchToForge;
+      }
+    }
+
+    function openDeniedScopeModal() {
+      const modal = document.getElementById('denied-scope-modal');
+      if (modal) modal.style.display = 'flex';
+    }
+
+    function closeDeniedScopeModal() {
+      const modal = document.getElementById('denied-scope-modal');
+      if (modal) modal.style.display = 'none';
     }
 
     function speakCouncilMemo() {
@@ -1464,5 +1605,52 @@
       setMode('well');
     }
   </script>
+
+  <!-- Credits Exhausted VIP Modal -->
+  <div id="credits-exhausted-modal" style="display:none; position:fixed; inset:0; background:rgba(0, 0, 0, 0.88); backdrop-filter:blur(10px); z-index:99999; justify-content:center; align-items:center; padding:1.5rem;">
+    <div style="background:#0b0d13; border:1px solid #f59e0b; border-radius:20px; padding:2.2rem 1.8rem; max-width:480px; width:100%; text-align:center; box-shadow:0 0 40px rgba(245, 158, 11, 0.25);">
+      <div style="font-size:2.8rem; margin-bottom:1rem;">🪙 ➔ 🔨</div>
+      <div style="font-family:var(--font-mono); font-size:0.75rem; color:#f59e0b; letter-spacing:0.1em; text-transform:uppercase; margin-bottom:0.5rem;">VIP ALLOCATION EXHAUSTED</div>
+      <h2 style="font-size:1.45rem; font-weight:700; color:#f8fafc; margin-bottom:0.85rem; letter-spacing:-0.02em;">All 3 Forge Credits Burned</h2>
+      <p style="color:#94a3b8; font-size:0.92rem; line-height:1.6; margin-bottom:1.2rem;">
+        Whoa, partner! You've used all 3 Rapid Forge drops for this sprint. James is already back at the physical metal forge on Clio compiling working prototypes for your first three bottlenecks.
+      </p>
+      <div style="background:rgba(245, 158, 11, 0.08); border:1px dashed rgba(245, 158, 11, 0.3); border-radius:10px; padding:12px; margin-bottom:1.5rem;">
+        <span style="font-size:0.88rem; color:#e2e8f0; font-weight:600;">Got a 4th operational catastrophe that needs solving before Monday morning?</span>
+      </div>
+      <div style="display:flex; gap:10px; justify-content:center; flex-wrap:wrap;">
+        <a href="tel:+14045550199" style="background:#f59e0b; color:#0b0d13; font-family:var(--font-mono); font-weight:700; padding:12px 22px; border-radius:10px; text-decoration:none; font-size:0.82rem; letter-spacing:0.05em; display:inline-flex; align-items:center; gap:6px;">📞 CALL THE PILOT DIRECTLY</a>
+        <button onclick="document.getElementById('credits-exhausted-modal').style.display='none'" style="background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.15); color:#94a3b8; font-family:var(--font-mono); padding:12px 18px; border-radius:10px; cursor:pointer; font-size:0.82rem;">CLOSE</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scope Rejection Modal -->
+  <div class="modal-backdrop" id="denied-scope-modal" style="display: none;" onclick="if (event.target === this) closeDeniedScopeModal()">
+    <div class="modal-card" style="border-color: rgba(239, 68, 68, 0.4); box-shadow: 0 0 40px rgba(239, 68, 68, 0.25);">
+      <div style="font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.15em; color: #ef4444; margin-bottom: 8px;">
+        [ ⛔ 4-HOUR RAPID FORGE SCOPE REJECTION ]
+      </div>
+      <div style="font-size: 18px; font-weight: 700; color: #fff; margin-bottom: 12px;">
+        Physical Airframes & Enterprise Bloat Denied
+      </div>
+      <div style="font-size: 13px; line-height: 1.6; color: #94a3b8; margin-bottom: 24px;">
+        The MARD Council has determined this request involves physical airframe manufacturing, multi-agency regulatory compliance (FAA), or multi-month enterprise contract sprawl (SAP/Bloomberg) that cannot be safely forged in a 4-hour rapid sprint.<br><br>
+        StackLabs builds working edge prototypes before dinner, but refuses enterprise consulting bloat. To schedule an executive systems architecture review with the Lead Systems Architect, connect directly below:
+      </div>
+      <div style="display: flex; flex-direction: column; gap: 10px;">
+        <a href="tel:+14045101845" class="modal-btn-call" style="display: flex; align-items: center; justify-content: center; gap: 8px; padding: 14px; background: #ef4444; color: #fff; border-radius: 8px; font-weight: 700; font-size: 13px; text-decoration: none;">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+          CALL JAMES CARROLL (+1 404-510-1845)
+        </a>
+        <a href="sms:+14045101845?body=Hey%20James%20-%20Reviewing%20StackLabs%20Drop.%20Our%20enterprise%20scope%20got%20shredded%20by%20the%20council." class="modal-btn-sms" style="display: flex; align-items: center; justify-content: center; gap: 8px; padding: 12px; background: rgba(255,255,255,0.05); color: #cbd5e1; border: 1px solid rgba(255,255,255,0.1); border-radius: 8px; font-size: 12px; text-decoration: none;">
+          TEXT PILOT DIRECTLY
+        </a>
+        <button onclick="closeDeniedScopeModal()" style="padding: 10px; background: transparent; border: none; color: #64748b; font-size: 11px; cursor: pointer; text-transform: uppercase; letter-spacing: 0.1em;">
+          Return to Ingress
+        </button>
+      </div>
+    </div>
+  </div>
 </body>
 </html>

@@ -34,7 +34,9 @@ Schema:
   "target_domain": "Short domain name (e.g. Hospitality Edge Dispatch, Distributed Inventory Sync, etc.)",
   "identified_failure_mode": "One concise sentence explaining root cause failure.",
   "stacklabs_edge_vector": "One concise sentence detailing physical metal / local SQLite / edge solution.",
-  "sprint_deliverable": "One concise sentence detailing working prototype deliverable in < 4 hours.",
+  "sprint_deliverable": "One concise sentence detailing exact 4-hour working prototype.",
+  "verdict": "APPROVED or DENIED (Strict Rule: If user asks for physical airframes/drones, robotics manufacturing, multi-agency FAA/FCC waivers, or multi-week enterprise ERP bloat like SAP/Bloomberg integration, verdict MUST be DENIED. Otherwise APPROVED).",
+  "denial_reason": "One concise sentence explaining why physical airframe fleet or multi-week enterprise ERP contracts cannot be built in a 4-hour rapid sprint, or null if approved.",
   "agents": [
     {
       "name": "The Blue Heeler",
