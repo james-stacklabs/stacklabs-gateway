@@ -443,6 +443,16 @@
       border: 1px solid #ef4444 !important;
       box-shadow: 0 0 20px rgba(239, 68, 68, 0.4) !important;
     }
+    .btn-dispatch:disabled {
+      background: rgba(255, 255, 255, 0.04) !important;
+      color: var(--text-muted) !important;
+      border: 1px solid rgba(255, 255, 255, 0.08) !important;
+      box-shadow: none !important;
+      cursor: not-allowed !important;
+      opacity: 0.4 !important;
+      transform: none !important;
+      pointer-events: none !important;
+    }
     .btn-dispatch.btn-denied:hover {
       background: #7f1d1d !important;
       border-color: #f87171 !important;
@@ -773,7 +783,7 @@
     </p>
 
     <!-- Ingress Mode Toggle: Voice vs Direct Text/Paste -->
-    <div class="ingress-mode-toggle" style="display:flex; justify-content:center; gap:8px; margin-bottom:16px;">
+    <div class="ingress-mode-toggle input-mode-tabs" style="display:flex; justify-content:center; gap:8px; margin-bottom:16px;">
       <button id="toggle-voice-btn" class="toggle-pill active" onclick="switchInputMode('voice')">🎙️ Record Voice</button>
       <button id="toggle-text-btn" class="toggle-pill" onclick="switchInputMode('text')">⌨️ Type / Paste</button>
     </div>
@@ -830,12 +840,12 @@
           <span id="council-btn-label">⚡ Dispatch to MARD Council</span>
         </button>
 
-        <button class="btn-dispatch" id="btn-dispatch" onclick="dispatchToForge()">
+        <button class="btn-dispatch" id="btn-dispatch" onclick="dispatchToForge()" disabled>
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
             <line x1="22" y1="2" x2="11" y2="13"></line>
             <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
           </svg>
-          <span id="dispatch-btn-label">Dispatch to Forge</span>
+          <span id="dispatch-btn-label">Dispatch to Forge (Awaiting Council)</span>
         </button>
       </div>
 
@@ -1152,6 +1162,12 @@
             updateCharCount();
           };
 
+          recognition.onend = () => {
+            if (isRecording) {
+              try { recognition.start(); } catch (_) {}
+            }
+          };
+
           recognition.start();
         }
 
@@ -1194,13 +1210,24 @@
       }
       updateCharCount();
 
-      // Show review panel
+      // Show review panel with locked dispatch button until council deliberates
       document.getElementById('recording-zone').style.display = 'none';
       document.getElementById('status-timer').style.display = 'none';
+      const dispatchBtn = document.getElementById('btn-dispatch');
+      if (dispatchBtn) dispatchBtn.disabled = true;
+      const dispatchLabel = document.getElementById('dispatch-btn-label');
+      if (dispatchLabel) dispatchLabel.innerText = 'Dispatch to Forge (Awaiting Council)';
       document.getElementById('review-panel').classList.add('show');
     }
 
     function resetRecording() {
+      localStorage.removeItem('stacklabs_active_drop');
+      if (typeof turnaroundInterval !== 'undefined' && turnaroundInterval) {
+        clearInterval(turnaroundInterval);
+        turnaroundInterval = null;
+      }
+      const modeTabs = document.querySelector('.input-mode-tabs, .ingress-mode-toggle');
+      if (modeTabs) modeTabs.style.display = 'flex';
       if (typeof closeDeniedScopeModal === 'function') closeDeniedScopeModal();
       document.getElementById('review-panel').classList.remove('show');
       document.getElementById('confirmed-panel').classList.remove('show');
@@ -1219,12 +1246,12 @@
       }
       const dispatchBtn = document.getElementById('btn-dispatch');
       if (dispatchBtn) {
-        dispatchBtn.disabled = false;
+        dispatchBtn.disabled = true;
         dispatchBtn.className = 'btn-dispatch' + (currentMode === 'well' ? ' gold' : '');
         dispatchBtn.onclick = dispatchToForge;
       }
       const dispatchLabel = document.getElementById('dispatch-btn-label');
-      if (dispatchLabel) dispatchLabel.innerText = 'Dispatch to Forge';
+      if (dispatchLabel) dispatchLabel.innerText = 'Dispatch to Forge (Awaiting Council)';
       switchInputMode('voice');
       setMode(currentMode);
     }
@@ -1473,9 +1500,14 @@
       const lowerText = text.toLowerCase();
       const isDenied = councilData.verdict === 'DENIED' ||
         (!bespokeCouncil && (lowerText.includes("mars") || lowerText.includes("hyperloop") || lowerText.includes("spaceship") || lowerText.includes("quantum") || lowerText.includes("teleport") || lowerText.includes("spacex") || lowerText.includes("rocket") || lowerText.includes("time travel") || lowerText.includes("cure aging") || lowerText.includes("fusion") || lowerText.includes("alien") || lowerText.includes("vegas"))) ||
-        /drone|uav|faa|sap\s+erp|bloomberg/i.test(text);
+        /drone|uav|faa|sap\s+erp|bloomberg|shark|lazer|laser\s+beam/i.test(text);
 
       if (isDenied) {
+        // Zero credit penalty for denied/out-of-bounds drops: refund credit immediately
+        currentCredits = Math.min(3, currentCredits + 1);
+        localStorage.setItem(storageKey, currentCredits.toString());
+        updateCreditDisplay();
+
         statusBadge.innerText = 'REVIEW DENIED // SCOPE OUT OF BOUNDS';
         statusBadge.className = 'council-badge status-badge badge-denied';
 
@@ -1484,8 +1516,9 @@
         document.getElementById('memo-content').innerText = activeCouncilMemo;
         memo.style.display = 'block';
 
-        // Red Lock Button
+        // Red Lock Button (Enabled so user can click to open escalation modal)
         const dispatchBtn = document.getElementById('btn-dispatch');
+        dispatchBtn.disabled = false;
         dispatchBtn.className = 'btn-dispatch btn-denied';
         document.getElementById('dispatch-btn-label').innerText = "⛔ Scope Denied — Schedule Architecture Review";
         dispatchBtn.onclick = openDeniedScopeModal;
@@ -1498,6 +1531,7 @@
         memo.style.display = 'block';
 
         const dispatchBtn = document.getElementById('btn-dispatch');
+        dispatchBtn.disabled = false;
         dispatchBtn.className = 'btn-dispatch' + (currentMode === 'well' ? ' gold' : '');
         document.getElementById('dispatch-btn-label').innerText = "Dispatch Drop + Blueprint";
         dispatchBtn.onclick = dispatchToForge;
@@ -1528,6 +1562,20 @@
 
       document.getElementById('dispatch-btn-label').innerText = "Encrypting & Transmitting...";
       document.getElementById('btn-dispatch').disabled = true;
+
+      const modeTabs = document.querySelector('.input-mode-tabs, .ingress-mode-toggle');
+      if (modeTabs) modeTabs.style.display = 'none';
+
+      const activeDrop = {
+        dropId: dropId,
+        text: text,
+        councilMemo: activeCouncilMemo || null,
+        timestamp: Date.now(),
+        targetEndTime: Date.now() + (4 * 3600 * 1000)
+      };
+      try {
+        localStorage.setItem('stacklabs_active_drop', JSON.stringify(activeDrop));
+      } catch (_) {}
 
       // Dispatch payload to Clio ingress / dead drop server
       try {
@@ -1572,6 +1620,8 @@
       }
 
       setTimeout(() => {
+        const modeTabs = document.querySelector('.input-mode-tabs, .ingress-mode-toggle');
+        if (modeTabs) modeTabs.style.display = 'none';
         document.getElementById('review-panel').classList.remove('show');
         document.getElementById('confirmed-panel').classList.add('show');
         document.getElementById('meta-drop-id').innerText = dropId;
@@ -1585,16 +1635,68 @@
     }
 
     // 4-Hour Countdown Timer
-    function startTurnaroundClock() {
-      let secondsLeft = 4 * 3600;
-      setInterval(() => {
-        secondsLeft--;
-        if (secondsLeft < 0) secondsLeft = 0;
+    let turnaroundInterval = null;
+    function startTurnaroundClock(initialSeconds = 4 * 3600) {
+      if (turnaroundInterval) clearInterval(turnaroundInterval);
+      let secondsLeft = initialSeconds;
+      const updateDisplay = () => {
         const h = String(Math.floor(secondsLeft / 3600)).padStart(2, '0');
         const m = String(Math.floor((secondsLeft % 3600) / 60)).padStart(2, '0');
         const s = String(secondsLeft % 60).padStart(2, '0');
-        document.getElementById('turnaround-countdown').innerText = `${h}:${m}:${s}`;
+        const cdEl = document.getElementById('turnaround-countdown');
+        if (cdEl) cdEl.innerText = `${h}:${m}:${s}`;
+      };
+      updateDisplay();
+      turnaroundInterval = setInterval(() => {
+        secondsLeft--;
+        if (secondsLeft < 0) {
+          secondsLeft = 0;
+          clearInterval(turnaroundInterval);
+        }
+        updateDisplay();
       }, 1000);
+    }
+
+    // Restore Active Drop on Load (F5 / Safari Re-open Resilience)
+    function restoreActiveDropIfPresent() {
+      try {
+        const savedDropJson = localStorage.getItem('stacklabs_active_drop');
+        if (savedDropJson) {
+          const savedDrop = JSON.parse(savedDropJson);
+          const now = Date.now();
+          if (now < savedDrop.targetEndTime) {
+            // Active drop running! Restore confirmation view
+            const modeTabs = document.querySelector('.input-mode-tabs, .ingress-mode-toggle');
+            if (modeTabs) modeTabs.style.display = 'none';
+            const recZone = document.getElementById('recording-zone');
+            if (recZone) recZone.style.display = 'none';
+            const statusTimer = document.getElementById('status-timer');
+            if (statusTimer) statusTimer.style.display = 'none';
+            const revPanel = document.getElementById('review-panel');
+            if (revPanel) revPanel.classList.remove('show');
+            const confPanel = document.getElementById('confirmed-panel');
+            if (confPanel) confPanel.classList.add('show');
+            const dropIdEl = document.getElementById('meta-drop-id');
+            if (dropIdEl) dropIdEl.innerText = savedDrop.dropId;
+            let summaryHtml = `<strong>HEARD:</strong> "${savedDrop.text}"`;
+            if (savedDrop.councilMemo) {
+              summaryHtml += `<div style="margin-top:0.5rem; color:#c084fc; font-size:0.75rem;"><strong>&#x25C6; MARD BLUEPRINT ATTACHED</strong></div>`;
+            }
+            const metaSummaryEl = document.getElementById('meta-summary');
+            if (metaSummaryEl) metaSummaryEl.innerHTML = summaryHtml;
+            const remainingSeconds = Math.max(0, Math.floor((savedDrop.targetEndTime - now) / 1000));
+            startTurnaroundClock(remainingSeconds);
+          } else {
+            localStorage.removeItem('stacklabs_active_drop');
+          }
+        }
+      } catch (_) {}
+    }
+
+    if (document.readyState === 'loading') {
+      window.addEventListener('DOMContentLoaded', restoreActiveDropIfPresent);
+    } else {
+      restoreActiveDropIfPresent();
     }
 
     // Character counter listener & initial state
