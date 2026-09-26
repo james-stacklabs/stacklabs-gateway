@@ -1,0 +1,1468 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>StackLabs — Problem Dropzone & Rapid Forge</title>
+  <meta name="description" content="Capture your operational bottleneck in 60 seconds. StackLabs turns real problems into interactive prototypes in hours." />
+  <link rel="canonical" href="https://www.stacklabsllc.com/drop" />
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+
+  <style>
+    :root {
+      --bg-base: #06080C;
+      --bg-surface: #0B0E14;
+      --bg-card: #10141D;
+      --border-subtle: rgba(255, 255, 255, 0.08);
+      --border-focus: rgba(0, 212, 255, 0.3);
+      --accent-cyan: #00D4FF;
+      --accent-gold: #F59E0B;
+      --accent-green: #10B981;
+      --accent-red: #EF4444;
+      --text-primary: #F8FAFC;
+      --text-secondary: #94A3B8;
+      --text-muted: #64748B;
+      --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      --font-mono: 'JetBrains Mono', monospace;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background-color: var(--bg-base);
+      color: var(--text-primary);
+      font-family: var(--font-sans);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: space-between;
+      overflow-x: hidden;
+      padding: 1.5rem 1rem;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* Ambient Lighting */
+    .ambient-glow {
+      position: fixed;
+      top: -150px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 800px;
+      height: 450px;
+      background: radial-gradient(ellipse at center, rgba(0, 212, 255, 0.08) 0%, rgba(245, 158, 11, 0.03) 45%, transparent 70%);
+      pointer-events: none;
+      z-index: 0;
+      transition: background 0.5s ease;
+    }
+
+    .ambient-glow.gold-mode {
+      background: radial-gradient(ellipse at center, rgba(245, 158, 11, 0.12) 0%, rgba(217, 119, 6, 0.04) 45%, transparent 70%);
+    }
+
+    /* Top Nav */
+    .nav-bar {
+      width: 100%;
+      max-width: 680px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      z-index: 10;
+      margin-bottom: 1.5rem;
+    }
+
+    .brand-back {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      text-decoration: none;
+      padding: 0.4rem 0.8rem;
+      border: 1px solid var(--border-subtle);
+      border-radius: 8px;
+      background: rgba(11, 14, 20, 0.6);
+      transition: all 0.2s;
+    }
+    .brand-back:hover {
+      color: var(--text-primary);
+      border-color: rgba(255, 255, 255, 0.2);
+    }
+
+    /* Mode Switcher */
+    .mode-toggle {
+      display: flex;
+      background: rgba(16, 20, 29, 0.8);
+      border: 1px solid var(--border-subtle);
+      border-radius: 10px;
+      padding: 3px;
+      gap: 3px;
+    }
+
+    .mode-btn {
+      background: transparent;
+      border: none;
+      color: var(--text-muted);
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      font-weight: 500;
+      padding: 0.4rem 0.75rem;
+      border-radius: 7px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 0.35rem;
+      transition: all 0.2s;
+    }
+
+    .mode-btn.active {
+      background: rgba(255, 255, 255, 0.08);
+      color: var(--text-primary);
+    }
+    .mode-btn.active.gold {
+      background: rgba(245, 158, 11, 0.15);
+      color: var(--accent-gold);
+      border: 1px solid rgba(245, 158, 11, 0.3);
+    }
+
+    /* Ingress Mode Toggle (Voice vs Type / Paste) */
+    .ingress-mode-toggle {
+      display: flex;
+      justify-content: center;
+      gap: 8px;
+      margin-bottom: 16px;
+    }
+    .toggle-pill {
+      background: rgba(16, 20, 29, 0.8);
+      border: 1px solid var(--border-subtle);
+      color: var(--text-muted);
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+      font-weight: 500;
+      padding: 0.45rem 1.1rem;
+      border-radius: 9999px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .toggle-pill:hover {
+      background: rgba(255, 255, 255, 0.08);
+      color: var(--text-primary);
+      border-color: rgba(255, 255, 255, 0.2);
+    }
+    .toggle-pill.active {
+      background: rgba(0, 240, 255, 0.12);
+      border-color: rgba(0, 240, 255, 0.5);
+      color: var(--accent-cyan);
+      box-shadow: 0 0 14px rgba(0, 240, 255, 0.2);
+    }
+    .toggle-pill.active.gold {
+      background: rgba(245, 158, 11, 0.15);
+      border-color: rgba(245, 158, 11, 0.5);
+      color: var(--accent-gold);
+      box-shadow: 0 0 14px rgba(245, 158, 11, 0.2);
+    }
+
+    /* Main Container */
+    .main-card {
+      width: 100%;
+      max-width: 680px;
+      background: var(--bg-surface);
+      border: 1px solid var(--border-subtle);
+      border-radius: 20px;
+      padding: 2.2rem 1.8rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      position: relative;
+      z-index: 10;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+    }
+
+    .tag-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      padding: 0.25rem 0.65rem;
+      border-radius: 9999px;
+      background: rgba(0, 212, 255, 0.08);
+      color: var(--accent-cyan);
+      border: 1px solid rgba(0, 212, 255, 0.2);
+      margin-bottom: 1rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    .tag-badge.gold {
+      background: rgba(245, 158, 11, 0.1);
+      color: var(--accent-gold);
+      border-color: rgba(245, 158, 11, 0.25);
+    }
+
+    h1 {
+      font-size: 1.85rem;
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      margin-bottom: 0.6rem;
+      color: var(--text-primary);
+    }
+
+    p.subtitle {
+      color: var(--text-secondary);
+      font-size: 0.95rem;
+      line-height: 1.5;
+      max-width: 480px;
+      margin-bottom: 2rem;
+    }
+
+    /* Audio Visualizer & Wellhead Area */
+    .interactive-zone {
+      position: relative;
+      width: 260px;
+      height: 260px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 1.8rem;
+    }
+
+    .wellhead-ring {
+      position: absolute;
+      width: 240px;
+      height: 240px;
+      border-radius: 50%;
+      border: 2px dashed rgba(255, 255, 255, 0.1);
+      transition: all 0.3s ease;
+    }
+    .wellhead-ring.gold {
+      border: 2px solid rgba(245, 158, 11, 0.25);
+      box-shadow: inset 0 0 30px rgba(245, 158, 11, 0.05), 0 0 25px rgba(245, 158, 11, 0.1);
+    }
+
+    canvas#waveform {
+      position: absolute;
+      width: 260px;
+      height: 260px;
+      border-radius: 50%;
+      pointer-events: none;
+    }
+
+    /* Central Button */
+    .action-circle-btn {
+      width: 140px;
+      height: 140px;
+      border-radius: 50%;
+      background: radial-gradient(circle at 35% 35%, #1e2638, #0e131d);
+      border: 2px solid rgba(0, 212, 255, 0.3);
+      color: var(--accent-cyan);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 0.4rem;
+      cursor: pointer;
+      user-select: none;
+      -webkit-tap-highlight-color: transparent;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.6), 0 0 20px rgba(0, 212, 255, 0.15);
+      transition: all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      z-index: 5;
+    }
+
+    .action-circle-btn:active, .action-circle-btn.recording {
+      transform: scale(0.94);
+      border-color: var(--accent-red);
+      color: var(--accent-red);
+      box-shadow: 0 0 35px rgba(239, 68, 68, 0.4);
+    }
+
+    /* Gold Coin Mode */
+    .action-circle-btn.gold-coin {
+      background: radial-gradient(circle at 35% 30%, #FBBF24, #D97706 60%, #92400E);
+      border: 3px solid #FEF3C7;
+      color: #78350F;
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.7), 0 0 25px rgba(245, 158, 11, 0.4);
+    }
+    .action-circle-btn.gold-coin .coin-label {
+      font-family: var(--font-mono);
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: #78350F;
+    }
+
+    .action-circle-btn.gold-coin:active, .action-circle-btn.gold-coin.recording {
+      transform: scale(0.92);
+      box-shadow: 0 0 40px rgba(245, 158, 11, 0.7);
+    }
+
+    .status-timer {
+      font-family: var(--font-mono);
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      margin-bottom: 1.2rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .status-timer.active {
+      color: var(--accent-red);
+      font-weight: 600;
+    }
+    .recording-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--accent-red);
+      animation: blink 1s infinite;
+      display: none;
+    }
+    .recording-dot.show { display: inline-block; }
+
+    @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0.2; } }
+
+    /* Review & Read-Back Panel */
+    .review-panel {
+      width: 100%;
+      display: none;
+      flex-direction: column;
+      gap: 1rem;
+      margin-top: 1rem;
+      text-align: left;
+    }
+    .review-panel.show { display: flex; }
+
+    .transcript-box {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: 12px;
+      padding: 1rem;
+      position: relative;
+    }
+
+    .transcript-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 0.6rem;
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      color: var(--text-muted);
+    }
+
+    textarea#transcript-input {
+      width: 100%;
+      height: 100px;
+      background: transparent;
+      border: none;
+      color: var(--text-primary);
+      font-family: var(--font-sans);
+      font-size: 0.95rem;
+      line-height: 1.5;
+      resize: vertical;
+      outline: none;
+    }
+    textarea#transcript-input:focus {
+      color: #FFFFFF;
+    }
+
+    /* Review Action Buttons */
+    .review-controls {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      width: 100%;
+    }
+
+    .btn-readback {
+      flex: 1;
+      min-width: 160px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--border-subtle);
+      border-radius: 10px;
+      padding: 0.8rem 1rem;
+      color: var(--text-primary);
+      font-family: var(--font-mono);
+      font-size: 0.85rem;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .btn-readback:hover {
+      background: rgba(255, 255, 255, 0.1);
+      border-color: rgba(255, 255, 255, 0.2);
+    }
+
+    .btn-dispatch {
+      flex: 2;
+      min-width: 220px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      background: var(--accent-cyan);
+      border: none;
+      border-radius: 10px;
+      padding: 0.8rem 1.2rem;
+      color: #06080C;
+      font-family: var(--font-mono);
+      font-weight: 600;
+      font-size: 0.85rem;
+      cursor: pointer;
+      box-shadow: 0 4px 15px rgba(0, 212, 255, 0.3);
+      transition: all 0.2s;
+    }
+    .btn-dispatch:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 6px 20px rgba(0, 212, 255, 0.45);
+    }
+    .btn-dispatch.gold {
+      background: var(--accent-gold);
+      color: #381B04;
+      box-shadow: 0 4px 15px rgba(245, 158, 11, 0.35);
+    }
+
+    /* MARD Council Button & Chamber */
+    .btn-council {
+      flex: 1.2;
+      min-width: 190px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      background: rgba(168, 85, 247, 0.12);
+      border: 1px solid rgba(168, 85, 247, 0.4);
+      border-radius: 10px;
+      padding: 0.8rem 1rem;
+      color: #c084fc;
+      font-family: var(--font-mono);
+      font-size: 0.82rem;
+      font-weight: 600;
+      cursor: pointer;
+      position: relative;
+      transition: all 0.2s;
+    }
+    .btn-council:hover {
+      background: rgba(168, 85, 247, 0.22);
+      border-color: rgba(168, 85, 247, 0.7);
+      box-shadow: 0 0 15px rgba(168, 85, 247, 0.35);
+      color: #e9d5ff;
+    }
+    .council-pulse {
+      width: 7px;
+      height: 7px;
+      background: #c084fc;
+      border-radius: 50%;
+      box-shadow: 0 0 6px #c084fc;
+      animation: pulseDot 1.5s infinite;
+    }
+    @keyframes pulseDot {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.4; transform: scale(0.8); }
+    }
+
+    .council-chamber {
+      width: 100%;
+      background: rgba(15, 23, 42, 0.85);
+      border: 1px solid rgba(168, 85, 247, 0.35);
+      border-radius: 12px;
+      padding: 1.2rem;
+      margin-top: 1rem;
+      backdrop-filter: blur(12px);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.45);
+      animation: chamberFadeIn 0.3s ease;
+      text-align: left;
+    }
+    .council-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-bottom: 0.8rem;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      margin-bottom: 1rem;
+    }
+    .council-title {
+      font-family: var(--font-mono);
+      font-size: 0.76rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      color: #c084fc;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .council-badge {
+      font-family: var(--font-mono);
+      font-size: 0.65rem;
+      color: var(--accent-cyan);
+      background: rgba(0, 212, 255, 0.1);
+      padding: 0.2rem 0.5rem;
+      border-radius: 4px;
+      border: 1px solid rgba(0, 212, 255, 0.2);
+    }
+    .council-feed {
+      display: flex;
+      flex-direction: column;
+      gap: 0.8rem;
+    }
+    .agent-card {
+      background: rgba(0, 0, 0, 0.4);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 10px;
+      padding: 0.85rem 1rem;
+      display: flex;
+      gap: 0.85rem;
+      align-items: flex-start;
+      animation: agentSlideIn 0.3s ease;
+    }
+    .agent-avatar {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 2px solid rgba(168, 85, 247, 0.5);
+      flex-shrink: 0;
+      box-shadow: 0 0 10px rgba(168, 85, 247, 0.25);
+      background: #0B0E14;
+    }
+    .agent-meta {
+      flex: 1;
+    }
+    .agent-name-role {
+      font-family: var(--font-mono);
+      font-size: 0.78rem;
+      font-weight: 700;
+      color: #e2e8f0;
+      margin-bottom: 0.3rem;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      flex-wrap: wrap;
+    }
+    .agent-handle {
+      color: #c084fc;
+      font-weight: 600;
+      font-size: 0.74rem;
+    }
+    .agent-role {
+      color: var(--text-muted);
+      font-weight: 400;
+      font-size: 0.72rem;
+    }
+    .agent-text {
+      font-size: 0.84rem;
+      line-height: 1.55;
+      color: #cbd5e1;
+    }
+    .council-memo {
+      margin-top: 1.2rem;
+      padding: 1rem;
+      background: rgba(168, 85, 247, 0.08);
+      border: 1px solid rgba(168, 85, 247, 0.35);
+      border-radius: 8px;
+      animation: chamberFadeIn 0.4s ease;
+    }
+    .memo-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 0.5rem;
+    }
+    .memo-tag {
+      font-family: var(--font-mono);
+      font-size: 0.65rem;
+      font-weight: 700;
+      color: #c084fc;
+      letter-spacing: 0.05em;
+    }
+    .memo-scope {
+      font-family: var(--font-mono);
+      font-size: 0.65rem;
+      color: var(--accent-green);
+    }
+    .memo-title {
+      font-family: var(--font-display);
+      font-size: 1rem;
+      font-weight: 600;
+      color: #f8fafc;
+      margin-bottom: 0.6rem;
+    }
+    .memo-content {
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      line-height: 1.6;
+      color: #e2e8f0;
+      white-space: pre-line;
+      background: rgba(0, 0, 0, 0.3);
+      padding: 0.8rem;
+      border-radius: 6px;
+      border: 1px solid rgba(255, 255, 255, 0.05);
+    }
+    .memo-actions {
+      margin-top: 0.8rem;
+      display: flex;
+      gap: 0.5rem;
+    }
+    @keyframes chamberFadeIn {
+      from { opacity: 0; transform: translateY(4px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes agentSlideIn {
+      from { opacity: 0; transform: translateX(-6px); }
+      to { opacity: 1; transform: translateX(0); }
+    }
+
+    /* Confirmation Screen */
+    .confirmed-panel {
+      width: 100%;
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      gap: 1rem;
+      padding-top: 1rem;
+    }
+    .confirmed-panel.show { display: flex; }
+
+    .confirmed-badge {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-family: var(--font-mono);
+      font-size: 0.85rem;
+      color: var(--accent-green);
+      background: rgba(16, 185, 129, 0.1);
+      border: 1px solid rgba(16, 185, 129, 0.3);
+      padding: 0.5rem 1rem;
+      border-radius: 9999px;
+    }
+
+    .turnaround-timer {
+      font-family: var(--font-mono);
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: var(--accent-cyan);
+      letter-spacing: 0.05em;
+      margin: 0.5rem 0;
+    }
+
+    .ticket-meta {
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid var(--border-subtle);
+      border-radius: 10px;
+      padding: 0.8rem 1.2rem;
+      width: 100%;
+      text-align: left;
+      line-height: 1.6;
+    }
+
+    /* Footer */
+    footer {
+      width: 100%;
+      max-width: 680px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      color: var(--text-muted);
+      padding: 1.5rem 0 0.5rem 0;
+      border-top: 1px solid var(--border-subtle);
+      margin-top: 2rem;
+      z-index: 10;
+    }
+
+    @media (max-width: 600px) {
+      h1 { font-size: 1.5rem; }
+      .main-card { padding: 1.6rem 1.2rem; }
+      footer { flex-direction: column; gap: 0.5rem; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="ambient-glow" id="ambient-glow"></div>
+
+  <!-- Top Navigation -->
+  <div class="nav-bar">
+    <a href="https://www.stacklabsllc.com" class="brand-back">
+      &larr; STACKLABS FORGE
+    </a>
+
+    <div class="mode-toggle">
+      <button class="mode-btn active" id="btn-mode-console" onclick="setMode('console')">
+        &gt;_ Console
+      </button>
+      <button class="mode-btn" id="btn-mode-well" onclick="setMode('well')">
+        &#x1FA99; Wishing Well
+      </button>
+    </div>
+  </div>
+
+  <!-- Main Card -->
+  <div class="main-card">
+    
+    <div class="tag-badge" id="tag-badge">
+      &#x25CF; Rapid Problem Ingress // Smyrna Edge
+    </div>
+
+    <h1 id="heading-title">Drop Your Business Bottleneck</h1>
+    <p class="subtitle" id="subtitle-text">
+      Tap to record. Capture your operational headache in 60 seconds. We transcribe, read it back, and build your interactive prototype before dinner.
+    </p>
+
+    <!-- Ingress Mode Toggle: Voice vs Direct Text/Paste -->
+    <div class="ingress-mode-toggle" style="display:flex; justify-content:center; gap:8px; margin-bottom:16px;">
+      <button id="toggle-voice-btn" class="toggle-pill active" onclick="switchInputMode('voice')">🎙️ Record Voice</button>
+      <button id="toggle-text-btn" class="toggle-pill" onclick="switchInputMode('text')">⌨️ Type / Paste</button>
+    </div>
+
+    <!-- Interactive Button Arena -->
+    <div class="interactive-zone" id="recording-zone">
+      <div class="wellhead-ring" id="wellhead-ring"></div>
+      <canvas id="waveform" width="260" height="260"></canvas>
+
+      <button class="action-circle-btn" id="action-btn" onclick="toggleRecording()">
+        <svg id="mic-icon" width="38" height="38" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"></path>
+          <path d="M19 10v2a7 7 0 0 1-14 0v-2"></path>
+          <line x1="12" y1="19" x2="12" y2="22"></line>
+        </svg>
+        <span class="coin-label" id="btn-label" style="font-size: 0.75rem; font-family: var(--font-mono); font-weight:600;">TAP TO SPEAK</span>
+      </button>
+    </div>
+
+    <!-- Timer -->
+    <div class="status-timer" id="status-timer">
+      <span class="recording-dot" id="recording-dot"></span>
+      <span id="timer-text">00:00 / 02:00</span>
+    </div>
+
+    <!-- Review & Read-Back Panel -->
+    <div class="review-panel" id="review-panel">
+      <div class="transcript-box">
+        <div class="transcript-header">
+          <span id="transcript-header-title">VERBATIM TRANSCRIPTION (TAP TO EDIT)</span>
+          <span id="char-count">0 / 600 max</span>
+        </div>
+        <textarea id="transcript-input" maxlength="600" placeholder="Listening to your recording..."></textarea>
+        <div class="char-limit-hint" style="font-family: var(--font-mono); font-size: 0.72rem; color: var(--text-muted); margin-top: 0.4rem; line-height: 1.4;">
+          Max 600 characters (focused operational bottlenecks only). For comprehensive macroeconomic theses or whitepapers, call James directly.
+        </div>
+      </div>
+
+      <div class="review-controls">
+        <button class="btn-readback" id="btn-readback" onclick="readTranscriptBack()">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+            <path d="M15.54 8.46a5 5 0 0 1 0 7.07"></path>
+            <path d="M19.07 4.93a10 10 0 0 1 0 14.14"></path>
+          </svg>
+          <span id="readback-label">Read Back (Jarvis)</span>
+        </button>
+
+        <button class="btn-council" id="btn-council" onclick="runMardCouncil()">
+          <span class="council-pulse"></span>
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
+          </svg>
+          <span id="council-btn-label">⚡ Dispatch to MARD Council</span>
+        </button>
+
+        <button class="btn-dispatch" id="btn-dispatch" onclick="dispatchToForge()">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="22" y1="2" x2="11" y2="13"></line>
+            <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+          </svg>
+          <span id="dispatch-btn-label">Dispatch to Forge</span>
+        </button>
+      </div>
+
+      <!-- MARD Multi-Agent Council Chamber -->
+      <div class="council-chamber" id="council-chamber" style="display: none;">
+        <div class="council-header">
+          <div class="council-title">
+            <span class="council-pulse"></span>
+            STACKLABS MULTI-AGENT COUNCIL (MARD)
+          </div>
+          <div class="council-badge" id="council-status-badge">PARALLEL SYNTHESIS READY</div>
+        </div>
+
+        <div class="council-feed" id="council-feed"></div>
+
+        <div class="council-memo" id="council-memo" style="display: none;">
+          <div class="memo-header">
+            <span class="memo-tag">&#x25C6; CONVERGED ARCHITECTURAL BLUEPRINT</span>
+            <span class="memo-scope">RAPID FORGE &lt; 4H</span>
+          </div>
+          <div class="memo-title" id="memo-title">System Architecture & Feasibility Memo</div>
+          <div class="memo-content" id="memo-content"></div>
+        </div>
+      </div>
+
+      <div style="font-family: var(--font-mono); font-size: 0.75rem; color: var(--text-muted); text-align: center; margin-top: 0.3rem;">
+        Need to redo it? <a href="javascript:void(0)" onclick="resetRecording()" style="color: var(--accent-cyan); text-decoration: none;">Discard & Start Over</a>
+      </div>
+    </div>
+
+    <!-- Confirmed Dispatched State -->
+    <div class="confirmed-panel" id="confirmed-panel">
+      <div class="confirmed-badge">
+        &#x2713; INGRESS CONFIRMED &bull; FORGE ACTIVE
+      </div>
+
+      <div style="font-family: var(--font-mono); font-size: 0.85rem; color: var(--text-muted); margin-top: 0.5rem;">
+        TARGET PROTOTYPE TURNAROUND
+      </div>
+      <div class="turnaround-timer" id="turnaround-countdown">03:59:48</div>
+
+      <div class="ticket-meta" id="ticket-meta">
+        <div><strong>DROP ID:</strong> <span id="meta-drop-id">DROP_20260926_XXXXXX</span></div>
+        <div><strong>DESTINATION:</strong> Clio Forge Master (Smyrna, GA)</div>
+        <div><strong>STATUS:</strong> Scaffold & User Flow Synthesis Underway</div>
+        <div style="margin-top: 0.5rem; color: var(--text-secondary);" id="meta-summary"></div>
+      </div>
+
+      <div style="margin-top: 1rem; display: flex; gap: 0.8rem;">
+        <button class="btn-readback" onclick="resetRecording()">Submit Another Drop</button>
+        <a href="https://www.stacklabsllc.com" class="brand-back" style="padding: 0.8rem 1.2rem; font-weight:600;">Return to Homepage</a>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    <div>STACKLABS LLC &copy; 2026 &bull; SMYRNA, GEORGIA</div>
+    <div>LOCAL APPLIANCE CORE &bull; BARE METAL FORGE</div>
+  </footer>
+
+  <script>
+    let currentMode = 'console';
+    let isRecording = false;
+    let mediaRecorder = null;
+    let audioChunks = [];
+    let recordInterval = null;
+    let secondsElapsed = 0;
+    let recognition = null;
+    let capturedTranscript = "";
+    let synth = window.speechSynthesis;
+    let audioContext = null;
+    let analyser = null;
+    let animId = null;
+    let currentInputMode = 'voice';
+
+    function updateCharCount() {
+      const textarea = document.getElementById('transcript-input');
+      const charCountEl = document.getElementById('char-count');
+      if (!textarea || !charCountEl) return;
+      const maxLen = 600;
+      const currentLen = textarea.value.length;
+      charCountEl.innerText = `${currentLen} / ${maxLen} max`;
+      if (currentLen >= maxLen) {
+        charCountEl.style.color = '#ff6b6b';
+      } else {
+        charCountEl.style.color = 'var(--text-muted)';
+      }
+    }
+
+    function switchInputMode(mode) {
+      currentInputMode = mode;
+      const voiceBtn = document.getElementById('toggle-voice-btn');
+      const textBtn = document.getElementById('toggle-text-btn');
+      const recZone = document.getElementById('recording-zone');
+      const timerZone = document.getElementById('status-timer');
+      const revPanel = document.getElementById('review-panel');
+      const inputEl = document.getElementById('transcript-input');
+      const headerTitle = document.getElementById('transcript-header-title');
+
+      if (mode === 'text') {
+        if (voiceBtn) voiceBtn.classList.remove('active');
+        if (textBtn) textBtn.classList.add('active');
+        if (recZone) recZone.style.display = 'none';
+        if (timerZone) timerZone.style.display = 'none';
+        if (revPanel) revPanel.classList.add('show');
+        if (headerTitle) headerTitle.innerText = "OPERATIONAL BOTTLENECK INGRESS (TYPE / PASTE)";
+        if (inputEl) {
+          inputEl.placeholder = "Type or paste your business bottleneck here (max 600 characters)...";
+          inputEl.focus();
+        }
+      } else {
+        if (textBtn) textBtn.classList.remove('active');
+        if (voiceBtn) voiceBtn.classList.add('active');
+        if (recZone) recZone.style.display = 'flex';
+        if (timerZone) timerZone.style.display = 'flex';
+        if (revPanel) revPanel.classList.remove('show');
+        if (headerTitle) headerTitle.innerText = "VERBATIM TRANSCRIPTION (TAP TO EDIT)";
+        if (inputEl) {
+          inputEl.placeholder = "Listening to your recording...";
+        }
+      }
+      updateCharCount();
+    }
+
+    // Initialize partner context from URL
+    const urlParams = new URLSearchParams(window.location.search);
+    const partnerParam = urlParams.get('partner') || urlParams.get('ref') || (window.location.pathname.includes('pawel') ? 'Pawel' : (window.location.pathname.includes('paul') ? 'Paul' : ''));
+
+    if (partnerParam) {
+      document.getElementById('tag-badge').innerHTML = `&#x25CF; Direct Partner Ingress // @${partnerParam}`;
+    }
+
+    function setMode(mode) {
+      currentMode = mode;
+      const glow = document.getElementById('ambient-glow');
+      const badge = document.getElementById('tag-badge');
+      const actionBtn = document.getElementById('action-btn');
+      const ring = document.getElementById('wellhead-ring');
+      const btnLabel = document.getElementById('btn-label');
+      const btnDispatch = document.getElementById('btn-dispatch');
+      const title = document.getElementById('heading-title');
+      const voiceBtn = document.getElementById('toggle-voice-btn');
+      const textBtn = document.getElementById('toggle-text-btn');
+
+      document.getElementById('btn-mode-console').classList.toggle('active', mode === 'console');
+      document.getElementById('btn-mode-well').classList.toggle('active', mode === 'well');
+      document.getElementById('btn-mode-well').classList.toggle('gold', mode === 'well');
+      if (voiceBtn) voiceBtn.classList.toggle('gold', mode === 'well');
+      if (textBtn) textBtn.classList.toggle('gold', mode === 'well');
+
+      if (mode === 'well') {
+        glow.classList.add('gold-mode');
+        badge.classList.add('gold');
+        badge.innerHTML = partnerParam ? `&#x25CF; Wishing Well Ingress // @${partnerParam}` : `&#x1FA99; StackLabs Wishing Well // Secure Ingress`;
+        actionBtn.classList.add('gold-coin');
+        ring.classList.add('gold');
+        btnDispatch.classList.add('gold');
+        title.innerText = "Make a Wish on Your Headache";
+        btnLabel.innerText = isRecording ? "RELEASE COIN" : "TOSS COIN";
+      } else {
+        glow.classList.remove('gold-mode');
+        badge.classList.remove('gold');
+        badge.innerHTML = partnerParam ? `&#x25CF; Direct Partner Ingress // @${partnerParam}` : `&#x25CF; Rapid Problem Ingress // Smyrna Edge`;
+        actionBtn.classList.remove('gold-coin');
+        ring.classList.remove('gold');
+        btnDispatch.classList.remove('gold');
+        title.innerText = "Drop Your Business Bottleneck";
+        btnLabel.innerText = isRecording ? "STOP RECORDING" : "TAP TO SPEAK";
+      }
+    }
+
+    // Canvas Soundwave
+    function startVisualizer(stream) {
+      try {
+        audioContext = new (window.AudioContext || window.webkitAudioContext)();
+        analyser = audioContext.createAnalyser();
+        const source = audioContext.createMediaStreamSource(stream);
+        source.connect(analyser);
+        analyser.fftSize = 64;
+
+        const canvas = document.getElementById('waveform');
+        const ctx = canvas.getContext('2d');
+        const bufferLength = analyser.frequencyBinCount;
+        const dataArray = new Uint8Array(bufferLength);
+
+        function draw() {
+          animId = requestAnimationFrame(draw);
+          analyser.getByteFrequencyData(dataArray);
+
+          ctx.clearRect(0, 0, canvas.width, canvas.height);
+          let sum = 0;
+          for (let i = 0; i < bufferLength; i++) { sum += dataArray[i]; }
+          const avg = sum / bufferLength;
+
+          const radius = 70 + (avg / 255) * 45;
+          ctx.beginPath();
+          ctx.arc(130, 130, radius, 0, 2 * Math.PI);
+          ctx.strokeStyle = currentMode === 'well' ? `rgba(245, 158, 11, ${0.2 + (avg/255)*0.6})` : `rgba(0, 212, 255, ${0.2 + (avg/255)*0.6})`;
+          ctx.lineWidth = 2 + (avg / 255) * 8;
+          ctx.stroke();
+        }
+        draw();
+      } catch (e) {
+        console.warn("Visualizer fallback:", e);
+      }
+    }
+
+    function stopVisualizer() {
+      if (animId) cancelAnimationFrame(animId);
+      const canvas = document.getElementById('waveform');
+      const ctx = canvas.getContext('2d');
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      if (audioContext) {
+        audioContext.close();
+        audioContext = null;
+      }
+    }
+
+    // Toggle Recording
+    async function toggleRecording() {
+      if (!isRecording) {
+        startRecording();
+      } else {
+        stopRecording();
+      }
+    }
+
+    async function startRecording() {
+      audioChunks = [];
+      capturedTranscript = "";
+      secondsElapsed = 0;
+
+      try {
+        const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+        mediaRecorder = new MediaRecorder(stream);
+
+        mediaRecorder.ondataavailable = (e) => {
+          if (e.data.size > 0) audioChunks.push(e.data);
+        };
+
+        mediaRecorder.start();
+        isRecording = true;
+
+        // UI states
+        document.getElementById('action-btn').classList.add('recording');
+        document.getElementById('recording-dot').classList.add('show');
+        document.getElementById('status-timer').classList.add('active');
+        document.getElementById('btn-label').innerText = currentMode === 'well' ? "RELEASE COIN" : "STOPPING...";
+
+        startVisualizer(stream);
+
+        // Web Speech live transcription
+        if ('webkitSpeechRecognition' in window || 'SpeechRecognition' in window) {
+          const SpeechRec = window.SpeechRecognition || window.webkitSpeechRecognition;
+          recognition = new SpeechRec();
+          recognition.continuous = true;
+          recognition.interimResults = true;
+
+          recognition.onresult = (event) => {
+            let interim = '';
+            for (let i = event.resultIndex; i < event.results.length; ++i) {
+              if (event.results[i].isFinal) {
+                capturedTranscript += event.results[i][0].transcript + ' ';
+              } else {
+                interim += event.results[i][0].transcript;
+              }
+            }
+            const fullText = (capturedTranscript + interim).trim();
+            document.getElementById('transcript-input').value = fullText.slice(0, 600);
+            updateCharCount();
+          };
+
+          recognition.start();
+        }
+
+        recordInterval = setInterval(() => {
+          secondsElapsed++;
+          const mins = String(Math.floor(secondsElapsed / 60)).padStart(2, '0');
+          const secs = String(secondsElapsed % 60).padStart(2, '0');
+          document.getElementById('timer-text').innerText = `${mins}:${secs} / 02:00`;
+          if (secondsElapsed >= 120) stopRecording();
+        }, 1000);
+
+      } catch (err) {
+        alert("Microphone access was denied or not available. Please allow mic permissions in your browser.");
+      }
+    }
+
+    function stopRecording() {
+      if (!isRecording) return;
+      isRecording = false;
+      clearInterval(recordInterval);
+      stopVisualizer();
+
+      if (recognition) {
+        try { recognition.stop(); } catch (e) {}
+      }
+
+      if (mediaRecorder && mediaRecorder.state !== 'inactive') {
+        mediaRecorder.stop();
+        mediaRecorder.stream.getTracks().forEach(track => track.stop());
+      }
+
+      document.getElementById('action-btn').classList.remove('recording');
+      document.getElementById('recording-dot').classList.remove('show');
+      document.getElementById('status-timer').classList.remove('active');
+      document.getElementById('btn-label').innerText = currentMode === 'well' ? "COIN PLUNGED" : "RECORDED";
+
+      // If speech recognition didn't catch anything, prefill realistic fallback for review
+      if (!document.getElementById('transcript-input').value.trim()) {
+        document.getElementById('transcript-input').value = "Warehouse inventory sync hangs on nightly CSV export between Metrc ledger and accounting software. Need automated reconciliation bridge.";
+      }
+      updateCharCount();
+
+      // Show review panel
+      document.getElementById('recording-zone').style.display = 'none';
+      document.getElementById('status-timer').style.display = 'none';
+      document.getElementById('review-panel').classList.add('show');
+    }
+
+    function resetRecording() {
+      document.getElementById('review-panel').classList.remove('show');
+      document.getElementById('confirmed-panel').classList.remove('show');
+      document.getElementById('recording-zone').style.display = 'flex';
+      document.getElementById('status-timer').style.display = 'flex';
+      document.getElementById('timer-text').innerText = '00:00 / 02:00';
+      document.getElementById('transcript-input').value = '';
+      const councilChamber = document.getElementById('council-chamber');
+      if (councilChamber) councilChamber.style.display = 'none';
+      const councilBtnLabel = document.getElementById('council-btn-label');
+      if (councilBtnLabel) councilBtnLabel.innerText = '⚡ Dispatch to MARD Council';
+      const dispatchBtn = document.getElementById('btn-dispatch');
+      if (dispatchBtn) dispatchBtn.disabled = false;
+      const dispatchLabel = document.getElementById('dispatch-btn-label');
+      if (dispatchLabel) dispatchLabel.innerText = 'Dispatch to Forge';
+      switchInputMode('voice');
+      setMode(currentMode);
+    }
+
+    // Enhanced Jarvis Voice Engine (British Male en-GB)
+    let cachedVoices = [];
+    function loadVoices() {
+      if (typeof speechSynthesis === 'undefined') return;
+      cachedVoices = speechSynthesis.getVoices();
+    }
+    loadVoices();
+    if (typeof speechSynthesis !== 'undefined' && speechSynthesis.onvoiceschanged !== undefined) {
+      speechSynthesis.onvoiceschanged = loadVoices;
+    }
+
+    function getJarvisVoice() {
+      if (!cachedVoices.length && typeof speechSynthesis !== 'undefined') {
+        cachedVoices = speechSynthesis.getVoices();
+      }
+      if (!cachedVoices || !cachedVoices.length) return null;
+
+      // 1. Google UK English Male (Chrome / Android / Chromium)
+      let v = cachedVoices.find(v => v.name === "Google UK English Male" || v.name.includes("UK English Male"));
+      // 2. Daniel (macOS / iOS British male - the classic Jarvis voice)
+      if (!v) v = cachedVoices.find(v => v.name.includes("Daniel") && (v.lang.includes("en-GB") || v.lang.startsWith("en")));
+      // 3. Microsoft George / Oliver / Ryan (Windows 11 British Natural)
+      if (!v) v = cachedVoices.find(v => (v.name.includes("George") || v.name.includes("Oliver") || v.name.includes("Ryan") || v.name.includes("Arthur")) && v.lang.includes("en-GB"));
+      // 4. Any explicit British or UK English male
+      if (!v) v = cachedVoices.find(v => (v.name.toLowerCase().includes("british") || v.name.toLowerCase().includes("uk english")) && !v.name.toLowerCase().includes("female"));
+      // 5. Any en-GB male voice (filtering out obvious female names)
+      if (!v) v = cachedVoices.find(v => (v.lang.includes("en-GB") || v.lang.replace('_', '-').includes("en-GB")) && !v.name.toLowerCase().includes("female") && !v.name.toLowerCase().includes("girl") && !v.name.toLowerCase().includes("hazel") && !v.name.toLowerCase().includes("susan") && !v.name.toLowerCase().includes("victoria") && !v.name.toLowerCase().includes("sonia"));
+      // 6. Any en-GB voice
+      if (!v) v = cachedVoices.find(v => v.lang.includes("en-GB") || v.lang.replace('_', '-').includes("en-GB"));
+      // 7. Natural English male fallback
+      if (!v) v = cachedVoices.find(v => (v.name.includes("David") || v.name.includes("Guy") || v.name.includes("Male")) && v.lang.startsWith("en"));
+      return v;
+    }
+
+    // Read Back Feature (Text-to-Speech via Jarvis)
+    function readTranscriptBack() {
+      const text = document.getElementById('transcript-input').value.trim();
+      if (!text) return;
+
+      if (synth.speaking) {
+        synth.cancel();
+        document.getElementById('readback-label').innerText = "Read Back (Jarvis)";
+        return;
+      }
+
+      const utterance = new SpeechSynthesisUtterance(text);
+      const jarvisVoice = getJarvisVoice();
+      if (jarvisVoice) {
+        utterance.voice = jarvisVoice;
+      }
+      utterance.pitch = 0.92; // Slightly deeper, calm, authoritative
+      utterance.rate = 1.0;
+
+      utterance.onstart = () => {
+        document.getElementById('readback-label').innerText = "Jarvis Reading...";
+      };
+      utterance.onend = () => {
+        document.getElementById('readback-label').innerText = "Read Back (Jarvis)";
+      };
+      utterance.onerror = () => {
+        document.getElementById('readback-label').innerText = "Read Back (Jarvis)";
+      };
+
+      synth.speak(utterance);
+    }
+
+    // MARD Multi-Agent Reactive Discourse Engine ("The Crucible")
+    let activeCouncilMemo = "";
+    async function runMardCouncil() {
+      const text = document.getElementById('transcript-input').value.trim();
+      if (!text) {
+        alert("Please record or enter a problem statement first.");
+        return;
+      }
+
+      const chamber = document.getElementById('council-chamber');
+      const feed = document.getElementById('council-feed');
+      const memo = document.getElementById('council-memo');
+      const statusBadge = document.getElementById('council-status-badge');
+      const councilBtnLabel = document.getElementById('council-btn-label');
+
+      chamber.style.display = 'block';
+      feed.innerHTML = '';
+      memo.style.display = 'none';
+      statusBadge.innerText = 'CONSULTING COUNCIL...';
+      councilBtnLabel.innerText = 'Consulting...';
+
+      let bespokeCouncil = null;
+      try {
+        const crucibleResp = await fetch('/api/crucible', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ text })
+        });
+        if (crucibleResp.ok) {
+          const res = await crucibleResp.json();
+          if (res.ok && res.data && res.data.agents && res.data.agents.length >= 3) {
+            bespokeCouncil = res.data;
+          }
+        }
+      } catch (e) {
+        console.warn("Live crucible fallback triggered:", e);
+      }
+
+      statusBadge.innerText = 'DELIBERATING...';
+      councilBtnLabel.innerText = 'Deliberating...';
+
+      const basePath = window.location.protocol === 'file:' ? '' : '/';
+      let domainContext = "Operational Systems & Workflow";
+      let failureMode = "";
+      let edgeVector = "";
+      let sprintDeliverable = "";
+      let agents = [];
+
+      if (bespokeCouncil) {
+        domainContext = bespokeCouncil.target_domain || "Operational Systems & Workflow";
+        failureMode = bespokeCouncil.identified_failure_mode || "";
+        edgeVector = bespokeCouncil.stacklabs_edge_vector || "";
+        sprintDeliverable = bespokeCouncil.sprint_deliverable || "";
+
+        const avatarList = [
+          `${basePath}blue_heeler_avatar.jpg`,
+          `${basePath}sam_the_cat_avatar.jpg`,
+          `${basePath}static_assert_avatar.jpg`
+        ];
+
+        agents = bespokeCouncil.agents.slice(0, 3).map((a, idx) => ({
+          name: a.name || (idx === 0 ? "The Blue Heeler" : idx === 1 ? "Sam the Cat" : "Warden Barb"),
+          handle: a.handle || (idx === 0 ? "@anti_hype_sentry" : idx === 1 ? "@orange_braincell_sam" : "@static_assert"),
+          role: a.role || (idx === 0 ? "Anti-Hype & Cloud Fluff Sentry" : idx === 1 ? "Local Disk & Cache Enforcer" : "Schema Invariants & Gatekeeper"),
+          avatar: avatarList[idx],
+          take: a.take || ""
+        }));
+      } else {
+        const lower = text.toLowerCase();
+        let heelerTake = "";
+        let samTake = "";
+        let barbTake = "";
+
+        if (lower.includes("mars") || lower.includes("hyperloop") || lower.includes("spaceship") || lower.includes("quantum") || lower.includes("teleport") || lower.includes("spacex") || lower.includes("rocket") || lower.includes("time travel") || lower.includes("cure aging") || lower.includes("fusion") || lower.includes("alien") || lower.includes("vegas")) {
+          domainContext = "Moonshot / Astronomical Scope Overflow";
+          heelerTake = "Woah, woah, woah. Pump the brakes, partner. A Hyperloop to Vegas? Out here, a dog that won't herd is just an expense, but trying to herd supersonic vacuum tubes is how you incinerate a seed round before lunch. You want a four-week sci-fi megaproject? You're gonna have to pick up the phone and call James.";
+          samTake = "*Swats the entire whiteboard off the easel and curls up.* I have one orange brain cell, and even it knows you cannot compile interstellar physics in a 4-hour sprint. I am not waking up from my nap for this. Go call the Pilot if you want to fund a space program.";
+          barbTake = "STATIC ASSERTION FAILED: Proposed scope exceeds 4-hour Rapid Forge physical envelope (Est: 6+ weeks / requires FAA waiver). Compile-time gate tripped: Re-routing moonshot to Direct Pilot Consultation.";
+          failureMode = "Astronomical scope overflow (Exceeds 4-hour rapid turnaround envelope).";
+          edgeVector = "Direct phone call & architecture alignment with Lead Systems Architect James Carroll.";
+          sprintDeliverable = "Schedule 1-on-1 strategy call with James to scope enterprise terms and feasibility.";
+        } else if (lower.includes("restaurant") || lower.includes("pos") || lower.includes("tablet") || lower.includes("delivery") || lower.includes("kitchen") || lower.includes("food") || lower.includes("order") || lower.includes("owner.com") || lower.includes("toast") || lower.includes("clover") || lower.includes("square") || lower.includes("pizza")) {
+          domainContext = "Hospitality Edge POS & Resilient Dispatch";
+          heelerTake = "Cloud-only tablets pushing forced OTA updates during a Friday dinner rush is malpractice. When the cloud cord gets cut, your kitchen tickets shouldn't vanish into thin air. Run dispatch on local iron.";
+          samTake = "*Swats the frozen tablet off the counter.* Store incoming chits on local NVMe flash with SQLite WAL. When the internet blinks, tickets still print and drivers still roll. Zero cloud dependencies.";
+          barbTake = "Enforce fail-closed offline order spooling and static buffer contracts. Tablets must spool delivery chits locally and sync idempotently once WAN connectivity returns.";
+          failureMode = "Unbounded cloud SaaS dependency & fragile single-point tablet update failure.";
+          edgeVector = "Air-gapped local POS dispatcher + offline SQLite ticket spooler.";
+          sprintDeliverable = "Edge-resilient order queue daemon + kitchen dispatch failover screen deployed in < 4 hours.";
+        } else if (lower.includes("inventory") || lower.includes("warehouse") || lower.includes("stock") || lower.includes("sku") || lower.includes("metrc") || lower.includes("count")) {
+          domainContext = "Supply Chain & Physical Inventory Sync";
+          heelerTake = "Uncapped vendor API syncs and nightly batch CSVs are absolute theater. When the network drops or Shopify throttles calls, your floor grinds to a halt. Cut out the cloud bloat.";
+          samTake = "*Swats the $400/mo middleware subscription off the table.* Store every SKU on local appliance NVMe in SQLite WAL. Instant barcode queries under 10ms with zero cloud lag.";
+          barbTake = "Compile-time schema invariants required. Implement fail-closed reconciliation gates so inventory counts cannot desync across physical bins and ledgers.";
+          failureMode = "Asynchronous batch delay & manual ledger reconciliation.";
+          edgeVector = "Local SQLite WAL ledger + real-time WebSocket state bridge.";
+          sprintDeliverable = "Standalone responsive inventory sync console deployed to test fleet in < 4 hours.";
+        } else if (lower.includes("lead") || lower.includes("crm") || lower.includes("sales") || lower.includes("client") || lower.includes("deal") || lower.includes("pipeline")) {
+          domainContext = "Commercial Pipeline & Ingress Velocity";
+          heelerTake = "Third-party CRMs are bloated black holes where inbound leads rot in email notifications. Stop paying $120/seat to watch high-intent prospects go cold.";
+          samTake = "*Paws at the SaaS dashboard and knocks it cold.* Route inbound voice and web drops straight to local flash storage with immediate audio playback. Zero seat fees.";
+          barbTake = "Strict state-machine ingress. Enforce immutable timestamped stages from initial touch to closed contract, preventing dropped leads.";
+          failureMode = "High-latency intake friction and unranked inbound queues.";
+          edgeVector = "Edge-resident ingress router + instant notification bus.";
+          sprintDeliverable = "High-conversion friction-free intake cockpit deployed to edge in < 4 hours.";
+        } else {
+          domainContext = "Operational Systems & Data Pipelines";
+          heelerTake = `Tear down the hype. The bottleneck isn't missing AI buzzwords—it's fragile glue code and slow SaaS queues. Strip the problem to raw metal.`;
+          samTake = `*Swats the serverless cloud bill off the counter.* Run this on a local appliance. Zero per-request compute billing, instantaneous disk I/O, works even if the WAN is cut.`;
+          barbTake = `Enforce rigid structural invariants. Build fail-closed typed interfaces so bad inputs are rejected before they touch the database.`;
+          failureMode = "Process latency caused by fragmented interfaces and manual coordination.";
+          edgeVector = "Decoupled transactional queue + lightweight single-page operator cockpit.";
+          sprintDeliverable = "Interactive functional UI prototype + REST ingress bridge deployed on metal in < 4 hours.";
+        }
+
+        agents = [
+          {
+            name: "The Blue Heeler",
+            handle: "@anti_hype_sentry",
+            role: "Anti-Hype & Cloud Fluff Sentry",
+            avatar: `${basePath}blue_heeler_avatar.jpg`,
+            take: heelerTake
+          },
+          {
+            name: "Sam the Cat",
+            handle: "@orange_braincell_sam",
+            role: "Local Disk & Cache Enforcer",
+            avatar: `${basePath}sam_the_cat_avatar.jpg`,
+            take: samTake
+          },
+          {
+            name: "Warden Barb",
+            handle: "@static_assert",
+            role: "Schema Invariants & Gatekeeper",
+            avatar: `${basePath}static_assert_avatar.jpg`,
+            take: barbTake
+          }
+        ];
+      }
+
+      // Stream cards into the feed
+      for (let i = 0; i < agents.length; i++) {
+        await new Promise(r => setTimeout(r, 1200));
+        const a = agents[i];
+        const card = document.createElement('div');
+        card.className = 'agent-card';
+        card.innerHTML = `
+          <img class="agent-avatar" src="${a.avatar}" alt="${a.name}" onerror="this.onerror=null;this.src='${basePath}pawel_avatar.png';" />
+          <div class="agent-meta">
+            <div class="agent-name-role">
+              <span>${a.name}</span>
+              <span class="agent-handle">${a.handle}</span>
+              <span class="agent-role">&bull; ${a.role}</span>
+            </div>
+            <div class="agent-text">${a.take}</div>
+          </div>
+        `;
+        feed.appendChild(card);
+      }
+
+      await new Promise(r => setTimeout(r, 400));
+      statusBadge.innerText = 'CONVERGED';
+      councilBtnLabel.innerText = 'Re-Run Council';
+
+      // Render Converged Memo
+      activeCouncilMemo = `[TARGET DOMAIN]: ${domainContext}\n[IDENTIFIED FAILURE MODE]: ${failureMode}\n[STACKLABS EDGE VECTOR]: ${edgeVector}\n[4-HOUR SPRINT DELIVERABLE]: ${sprintDeliverable}`;
+      document.getElementById('memo-content').innerText = activeCouncilMemo;
+      memo.style.display = 'block';
+
+      // Update Dispatch button
+      document.getElementById('dispatch-btn-label').innerText = "Dispatch Drop + Blueprint";
+    }
+
+    function speakCouncilMemo() {
+      // Neutralized per WO0010315 - Council deliberation TTS muted to prevent uncanny valley
+      if (typeof synth !== 'undefined' && synth.speaking) {
+        synth.cancel();
+      }
+    }
+
+    // Dispatch to Forge
+    async function dispatchToForge() {
+      const text = document.getElementById('transcript-input').value.trim();
+      const dropId = `DROP_${new Date().toISOString().replace(/[-:T.]/g, '').slice(0, 14)}_${partnerParam ? partnerParam.toLowerCase() : 'partner'}`;
+
+      document.getElementById('dispatch-btn-label').innerText = "Encrypting & Transmitting...";
+      document.getElementById('btn-dispatch').disabled = true;
+
+      // Dispatch payload to Clio ingress / dead drop server
+      try {
+        const payload = {
+          drop_id: dropId,
+          partner: partnerParam || 'guest',
+          problem_statement: text,
+          council_memo: activeCouncilMemo || null,
+          mode: currentMode,
+          timestamp: new Date().toISOString()
+        };
+
+        // Ingress beacon
+        fetch('/api/telemetry-beacon', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            event_type: 'voice_problem_drop',
+            event: 'voice_problem_drop',
+            details: payload
+          })
+        }).catch(() => {});
+
+        // Local / backend ingress if available
+        if (audioChunks.length > 0) {
+          const blob = new Blob(audioChunks, { type: 'audio/webm' });
+          const formData = new FormData();
+          formData.append('audio', blob, `${dropId}.webm`);
+          formData.append('sender', partnerParam || 'guest');
+          formData.append('source_route', window.location.pathname);
+          if (activeCouncilMemo) {
+            formData.append('council_memo', activeCouncilMemo);
+          }
+          fetch('/api/ingress/voice-drop', {
+            method: 'POST',
+            body: formData
+          }).catch(() => {});
+        }
+
+      } catch (e) {
+        console.warn("Forge relay fallback engaged");
+      }
+
+      setTimeout(() => {
+        document.getElementById('review-panel').classList.remove('show');
+        document.getElementById('confirmed-panel').classList.add('show');
+        document.getElementById('meta-drop-id').innerText = dropId;
+        let summaryHtml = `<strong>HEARD:</strong> "${text}"`;
+        if (activeCouncilMemo) {
+          summaryHtml += `<div style="margin-top:0.5rem; color:#c084fc; font-size:0.75rem;"><strong>&#x25C6; MARD BLUEPRINT ATTACHED</strong></div>`;
+        }
+        document.getElementById('meta-summary').innerHTML = summaryHtml;
+        startTurnaroundClock();
+      }, 700);
+    }
+
+    // 4-Hour Countdown Timer
+    function startTurnaroundClock() {
+      let secondsLeft = 4 * 3600;
+      setInterval(() => {
+        secondsLeft--;
+        if (secondsLeft < 0) secondsLeft = 0;
+        const h = String(Math.floor(secondsLeft / 3600)).padStart(2, '0');
+        const m = String(Math.floor((secondsLeft % 3600) / 60)).padStart(2, '0');
+        const s = String(secondsLeft % 60).padStart(2, '0');
+        document.getElementById('turnaround-countdown').innerText = `${h}:${m}:${s}`;
+      }, 1000);
+    }
+
+    // Character counter listener & initial state
+    const transcriptInputEl = document.getElementById('transcript-input');
+    if (transcriptInputEl) {
+      transcriptInputEl.addEventListener('input', updateCharCount);
+    }
+    updateCharCount();
+
+    // Default to Wishing Well if accessed with ?well=true
+    if (urlParams.get('well') === 'true' || urlParams.get('mode') === 'well') {
+      setMode('well');
+    }
+  </script>
+</body>
+</html>

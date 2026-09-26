@@ -757,6 +757,19 @@
       transform: translateY(-1px);
     }
 
+    .query-pill.glowing-pill {
+      border-color: rgba(56, 189, 248, 0.45);
+      background: rgba(15, 23, 42, 0.7);
+      box-shadow: 0 0 14px rgba(56, 189, 248, 0.18);
+    }
+
+    .query-pill.glowing-pill:hover {
+      border-color: rgba(56, 189, 248, 0.85);
+      background: rgba(30, 41, 59, 0.85);
+      box-shadow: 0 0 20px rgba(56, 189, 248, 0.35);
+      transform: translateY(-2px);
+    }
+
     .pill-badge {
       font-size: 9px;
       text-transform: uppercase;
@@ -1750,7 +1763,19 @@
       </div>
 
       <!-- Quick Inquiry Protocol Cards -->
-      <div class="pill-rack">
+      <div class="pill-rack swarm-inquiry-pills">
+        <div class="query-pill glowing-pill" onclick="sendPillQuery('Why can\'t Big AI starve StackLabs with predatory token dumping?')">
+          <span class="pill-badge" style="color:var(--accent-amber);">Institutional Defense</span>
+          <span>🛡️ Why can't Big AI starve StackLabs with predatory token dumping?</span>
+        </div>
+        <div class="query-pill glowing-pill" onclick="sendPillQuery('How does the Model-S implement Pawel Rudnicki\'s Pendulum thesis?')">
+          <span class="pill-badge" style="color:var(--accent-teal);">Grounded Economics</span>
+          <span>⚡ How does the Model-S implement Pawel Rudnicki's Pendulum thesis?</span>
+        </div>
+        <div class="query-pill glowing-pill" onclick="sendPillQuery('Why does every enterprise AI council require an adversarial Heel?')">
+          <span class="pill-badge" style="color:#A78BFA;">Adversarial Safety</span>
+          <span>🔬 Why does every enterprise AI council require an adversarial Heel?</span>
+        </div>
         <div class="query-pill" onclick="sendPillQuery('Explain the Pilot\'s Unbreakable Fence architectural edict.')">
           <span class="pill-badge">Architecture Protocol</span>
           <span>"The Unbreakable Fence"</span>
@@ -2126,6 +2151,24 @@
 
     // Deterministic Offline Answers for 1-Click Inquiry Pills
     const fallbackAnswers = {
+      "Why can't Big AI starve StackLabs with predatory token dumping?": {
+        sys_invariant: "Hyperscalers face an unyielding Wall Street CapEx deficit ($50B-$80B/yr each) and 40% parasitic cooling overhead. The StackLabs Model-S operates at 35W in ambient residential air, drawing just 25.55 kWh/mo ($4.09 power). Our physical baseline costs are fundamentally lower than their cooling chillers alone.",
+        anti_hype: "A free token in Ashburn, VA doesn't cut an 80mm paper receipt ticket in Smyrna, GA when the WAN link drops. When DaVinci's tablet died during Friday rush, it wasn't a cost issue—it was a cloud fragility issue. Subsidized cloud APIs are a liability for real-world businesses.",
+        orange_sam: "Hyperscalers burn 40% of their power on giant air conditioners just to keep from melting their GPUs while I take a warm nap on an aluminum box that only draws 35W. Let them burn their money; we'll read local disk.",
+        static_assert: "Subsidized cloud APIs violate zero-trust. You stream proprietary telemetry across public networks to hardware you cannot attest. With private edge appliances, cryptographic keys and SQLite WAL state never leave local silicon."
+      },
+      "How does the Model-S implement Pawel Rudnicki's Pendulum thesis?": {
+        sys_invariant: "Pawel Rudnicki diagnosed the crisis: AI cuts vertically across cognitive labor, causing Ghost GDP and the Retraining Fallacy. StackLabs provides the physical cure via the Campsite Protocol: we pay residential hosts $55/mo, leaving them with +$50.91/mo in net passive cash flow to subsidize their living room power and broadband.",
+        anti_hype: "You cannot retrain a nation of displaced junior engineers to be plumbers without crashing plumber wages from $90k to $35k through supply saturation. The solution isn't retraining; it's structural co-ownership of the physical computing commons.",
+        orange_sam: "Pawel's Energy Governor is physical. Centralized data centers have 5-year transformer queues and water limits. A standard 15-amp living room wall plug has 1,400W of free headroom. The Model-S uses less than 3% of that. It's pure common sense.",
+        static_assert: "Bypassing the Energy Governor means scaling compute without utility substation delays. 120V NEMA wall sockets already exist in every American home. We deploy infrastructure today while Big Cloud lobbies for nuclear permits."
+      },
+      "Why does every enterprise AI council require an adversarial Heel?": {
+        sys_invariant: "2026 academic research (LabourCrew, MAC-Bench, aistack) proves that cooperative 'helpful' agents suffer from the Machiavellian Gap—they fold under operational pressure and hallucinate. The MARD '5 Advocates + 1 Heel' framework introduces structural adversarial friction, reducing hallucination rates to near-zero.",
+        anti_hype: "Polite RLHF chatbots are polite liabilities. When an invariant is broken, they nod along, apologize, and set your database on fire politely. You don't need a sycophant; you need a Blue Heeler that growls and enforces fail-closed state.",
+        orange_sam: "Without a Heel, agents run 50 token loops apologizing for not having the answer. A good Heel swats the prompt off the table and tells you to read local cache. Stop paying for sycophancy.",
+        static_assert: "The Heel acts as a compile-time static assertion in human dialogue form. In mission-critical systems, sycophantic compliance is a critical vulnerability. The Heel ensures zero-trust governance."
+      },
       "Explain the Pilot's Unbreakable Fence architectural edict.": {
         sys_invariant: "You don't cage an animal so it forgets how to run; you give it the run of the yard and build an unbreakable fence. Wild freedom on the inside, bulletproof safety on the outside. We don't restrict prompt creativity; we cage it with hard relational schemas, parser gates, and compile-time boundaries.",
         anti_hype: "It means you stop hoping your AI behaves politely and start fencing it with hard exceptions. An unconstrained prompt loop in an enterprise database is an accident waiting to happen. The fence isn't polite advice—it's a fail-closed gate that cuts power when an invariant breaks.",
@@ -2180,31 +2223,23 @@
       dialogue.scrollTop = dialogue.scrollHeight;
     }
 
+    // Anti-Spam Gating Flag: Protect live Gemini API keys from arbitrary scrapers/bots
+    // Set to true for live VIP investor demonstrations
+    const ENABLE_LIVE_INFERENCE = false;
+
     async function querySwarmAdvocate(queryText) {
       const dialogue = document.getElementById('swarmDialogue');
       const adv = advocates[activeAdvocateKey];
       const btn = document.getElementById('swarmSendBtn');
       btn.disabled = true;
 
-      // Loading bubble
-      const loadingBubble = document.createElement('div');
-      loadingBubble.className = 'swarm-bubble';
-      loadingBubble.id = 'tempLoadingBubble';
-      loadingBubble.innerHTML = `
-        <div class="bubble-meta">
-          <span class="bubble-sender">${adv.handle}</span>
-          <span class="bubble-badge">Interrogating Invariants...</span>
-        </div>
-        <div class="bubble-text" style="color:var(--text-muted); font-style:italic;">Synthesizing response...</div>
-      `;
-      dialogue.appendChild(loadingBubble);
-      dialogue.scrollTop = dialogue.scrollHeight;
-
       let reply = '';
 
-      // Check pre-set fallback first for instant lightning speed if matching
+      // Check pre-set fallback first for instant lightning speed (<5ms)
+      const qLower = queryText.toLowerCase();
       for (const [key, map] of Object.entries(fallbackAnswers)) {
-        if (queryText.toLowerCase().includes(key.toLowerCase()) || key.toLowerCase().includes(queryText.toLowerCase())) {
+        const kLower = key.toLowerCase();
+        if (qLower.includes(kLower) || kLower.includes(qLower)) {
           if (map[activeAdvocateKey]) {
             reply = map[activeAdvocateKey];
             break;
@@ -2212,30 +2247,69 @@
         }
       }
 
-      // If not resolved from pre-set, query Google AI Studio
+      // Check keyword aliases if not resolved
       if (!reply) {
-        try {
-          const rawKey = atob('QVEuQWI4Uk42SXB1d01iM3NFLWlDT0F2UjBDQmZJNC1uc1JKb0RBaEwyMjR6TmNXaU9GaEE=');
-          const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-3.8-flash:generateContent?key=${rawKey}`;
-          const res = await fetch(url, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({
-              contents: [{
-                role: 'user',
-                parts: [{
-                  text: `${adv.systemPrompt}\n\nA visiting engineer or executive at https://www.stacklabsllc.com asks:\n"${queryText}"\n\nRespond directly in under 80 words in your authentic persona voice:`
-                }]
-              }]
-            })
-          });
+        if (qLower.includes('predatory') || qLower.includes('token dumping') || qLower.includes('starve')) {
+          reply = fallbackAnswers["Why can't Big AI starve StackLabs with predatory token dumping?"][activeAdvocateKey];
+        } else if (qLower.includes('pendulum') || qLower.includes('rudnicki') || qLower.includes('energy governor')) {
+          reply = fallbackAnswers["How does the Model-S implement Pawel Rudnicki's Pendulum thesis?"][activeAdvocateKey];
+        } else if (qLower.includes('heel') || qLower.includes('vaccine') || qLower.includes('machiavellian') || qLower.includes('adversarial')) {
+          reply = fallbackAnswers["Why does every enterprise AI council require an adversarial Heel?"][activeAdvocateKey];
+        } else if (qLower.includes('fence')) {
+          reply = fallbackAnswers["Explain the Pilot's Unbreakable Fence architectural edict."][activeAdvocateKey];
+        } else if (qLower.includes('polite') || qLower.includes('rlhf')) {
+          reply = fallbackAnswers["Why do polite RLHF models fail in enterprise workflows?"][activeAdvocateKey];
+        } else if (qLower.includes('cloud api') || qLower.includes('cloud token tax')) {
+          reply = fallbackAnswers["Why shouldn't I just call the cloud API every time?"][activeAdvocateKey];
+        } else if (qLower.includes('silicon attestation') || qLower.includes('attestation')) {
+          reply = fallbackAnswers["How does StackLabs prove physical silicon attestation?"][activeAdvocateKey];
+        }
+      }
 
-          if (res.ok) {
-            const data = await res.json();
-            reply = data.candidates?.[0]?.content?.parts?.[0]?.text;
+      // If not resolved from pre-set, check live inference flag
+      if (!reply) {
+        if (ENABLE_LIVE_INFERENCE) {
+          // Loading bubble
+          const loadingBubble = document.createElement('div');
+          loadingBubble.className = 'swarm-bubble';
+          loadingBubble.id = 'tempLoadingBubble';
+          loadingBubble.innerHTML = `
+            <div class="bubble-meta">
+              <span class="bubble-sender">${adv.handle}</span>
+              <span class="bubble-badge">Interrogating Invariants...</span>
+            </div>
+            <div class="bubble-text" style="color:var(--text-muted); font-style:italic;">Synthesizing response...</div>
+          `;
+          dialogue.appendChild(loadingBubble);
+          dialogue.scrollTop = dialogue.scrollHeight;
+
+          try {
+            const rawKey = atob('QVEuQWI4Uk42SXB1d01iM3NFLWlDT0F2UjBDQmZJNC1uc1JKb0RBaEwyMjR6TmNXaU9GaEE=');
+            const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-3.8-flash:generateContent?key=${rawKey}`;
+            const res = await fetch(url, {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({
+                contents: [{
+                  role: 'user',
+                  parts: [{
+                    text: `${adv.systemPrompt}\n\nA visiting engineer or executive at https://www.stacklabsllc.com asks:\n"${queryText}"\n\nRespond directly in under 80 words in your authentic persona voice:`
+                  }]
+                }]
+              })
+            });
+
+            if (res.ok) {
+              const data = await res.json();
+              reply = data.candidates?.[0]?.content?.parts?.[0]?.text;
+            }
+          } catch (err) {
+            console.warn('Live inference fallback:', err);
+          } finally {
+            loadingBubble.remove();
           }
-        } catch (err) {
-          console.warn('Live inference fallback:', err);
+        } else {
+          reply = "StackLabs MARD Swarm operates under strict air-gapped governance. Interactive live session access is restricted to authenticated nodes and verified enterprise partners. Select a verified architectural invariant above to inspect dialectic consensus.";
         }
       }
 
@@ -2243,8 +2317,6 @@
       if (!reply) {
         reply = "Invariant verified: StackLabs enforces fail-closed state machines and fixed-cost private edge compute ($64/mo COGS vs runaway cloud tokens). Systems do not flatter you—they enforce invariants.";
       }
-
-      loadingBubble.remove();
 
       // Render response bubble
       const responseBubble = document.createElement('div');

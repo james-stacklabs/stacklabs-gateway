@@ -23,7 +23,7 @@ export async function onRequestPost(context) {
       } catch (_) {}
     }
 
-    const event = body.event || "page_view";
+    const event = body.event || body.event_type || "page_view";
     const details = body.details || {};
 
     const payload = {
