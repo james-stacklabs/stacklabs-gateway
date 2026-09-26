@@ -2404,14 +2404,48 @@ DROP_HTML_CONTENT = r'''<!DOCTYPE html>
     }
 
     // Initial Load & Restore
-    if (document.readyState === 'loading') {
-      window.addEventListener('DOMContentLoaded', () => {
-        renderForgeJobsDock();
-        updateCharCount();
-      });
-    } else {
+    function initDropPage() {
+      // Test / Preview Seeder for Instant UAT Verification (?preview=jobs, ?preview=dock, ?preview=tracker)
+      if (urlParams.get('preview') === 'jobs' || urlParams.get('preview') === 'dock' || urlParams.get('preview') === 'tracker' || urlParams.get('test') === 'jobs') {
+        const existing = getStoredJobs();
+        if (existing.length === 0) {
+          const now = Date.now();
+          const demoJobs = [
+            {
+              id: `DROP_20260926173000_${partnerSuffix}`,
+              text: "Nightly CSV sync hangs between Metrc compliance ledger and dispensary POS. Need resilient local SQLite queue.",
+              timestamp: now - (25 * 60 * 1000),
+              targetEndTime: now + (3 * 3600 * 1000 + 35 * 60 * 1000),
+              status: 'active',
+              councilMemo: "[TARGET DOMAIN]: Supply Chain & Physical Inventory Sync\n\n[WHAT BROKE]:\nNightly batch CSV export locks the database file while cloud webhooks time out during inventory counts.\n\n[WHAT THE OTHER GUYS SELL YOU]:\n$400/mo cloud middleware connectors that still fail when Wi-Fi blinks.\n\n[WHAT WE RECOMMEND (WHY OURS WINS)]:\nAir-gapped 35W appliance running local SQLite WAL with instant barcode queries under 10ms and automatic idempotent sync.\n\n[WHAT WE SHIP BEFORE DINNER]:\nStandalone responsive inventory sync console deployed to test fleet in < 4 hours.",
+              domain: "Supply Chain & Physical Inventory Sync",
+              partner: partnerParam || 'public'
+            },
+            {
+              id: `DROP_20260926131500_${partnerSuffix}`,
+              text: "Tablets freeze when kitchen tickets queue up during peak rush hours. Cloud POS drops orders.",
+              timestamp: now - (5 * 3600 * 1000),
+              targetEndTime: now - (1 * 3600 * 1000),
+              status: 'delivered',
+              councilMemo: "[TARGET DOMAIN]: Hospitality Edge POS & Resilient Dispatch\n\n[WHAT BROKE]:\nCloud-only tablet client stalls on WAN jitter, causing dropped chits and kitchen deadlock.\n\n[WHAT WE RECOMMEND (WHY OURS WINS)]:\nLocal LAN SQLite queue with sub-15ms chit printing that runs 100% offline.\n\n[WHAT WE SHIP BEFORE DINNER]:\nHardened kitchen failover screen and local order printer daemon.",
+              domain: "Hospitality Edge POS",
+              partner: partnerParam || 'public'
+            }
+          ];
+          saveStoredJobs(demoJobs);
+          currentCredits = 1;
+          saveStoredCredits(1);
+        }
+      }
+
       renderForgeJobsDock();
       updateCharCount();
+    }
+
+    if (document.readyState === 'loading') {
+      window.addEventListener('DOMContentLoaded', initDropPage);
+    } else {
+      initDropPage();
     }
 
     const transcriptInputEl = document.getElementById('transcript-input');
