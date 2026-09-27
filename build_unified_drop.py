@@ -1365,7 +1365,7 @@ DROP_HTML_CONTENT = r'''<!DOCTYPE html>
   <!-- Footer -->
   <footer>
     <div>STACKLABS LLC &copy; 2026 &bull; SMYRNA, GEORGIA</div>
-    <div>LOCAL APPLIANCE CORE &bull; BARE METAL FORGE</div>
+    <div>STACKLABS LLC &copy; 2026 &bull; SMYRNA, GA</div>
   </footer>
 
   <!-- Credits Exhausted VIP Modal -->
