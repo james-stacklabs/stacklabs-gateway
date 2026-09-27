@@ -46,7 +46,7 @@ Schema:
   "identified_failure_mode": "1-2 sentences on what broke: the root-cause architectural failure in the user's current setup.",
   "what_the_other_guys_sell": "1-2 sharp sentences exposing what legacy cloud SaaS vendors or consultants sell (e.g. expensive $300/mo add-ons, 6-month migrations, and brittle cloud webhooks that still fail when Wi-Fi blinks).",
   "stacklabs_edge_vector": "2-3 crisp sentences detailing our exact recommendation and why our way is fundamentally better: off-the-shelf compact hardware (<35W mini-PC / counter tablet), local SQLite WAL on NVMe flash, zero cloud token tax, sub-15ms local execution, works even if internet is cut.",
-  "sprint_deliverable": "1-2 concrete sentences on what we ship before dinner: a tangible, working 4-hour prototype running on a local screen, tablet, or edge daemon.",
+  "sprint_deliverable": "1-2 concrete sentences on what we ship within 4 hours: a tangible, working 4-hour prototype running on a local screen, tablet, or edge daemon.",
   "verdict": "APPROVED or DENIED (Strict Rule: If user asks for physical airframes/drones, robotics manufacturing, multi-agency FAA/FCC waivers, or multi-week enterprise ERP bloat like SAP/Bloomberg integration, verdict MUST be DENIED. Otherwise APPROVED).",
   "denial_reason": "One concise sentence explaining why physical airframe fleet or multi-week enterprise ERP contracts cannot be built in a 4-hour rapid sprint, or null if approved.",
   "agents": [
